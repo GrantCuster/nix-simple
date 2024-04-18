@@ -34,6 +34,7 @@
     btop
     yt-dlp
     wezterm
+    gh
 
     # neovim lsp
     tree-sitter
@@ -46,6 +47,9 @@
     eslint_d
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
+    (writeShellScriptBin "smart_tmux" (builtins.readFile ./scripts/smart_tmux.sh))
+    (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -96,7 +100,7 @@
   #  /etc/profiles/per-user/ubuntu/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   # Neovim config use lazyvim
@@ -114,9 +118,11 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     shellAliases = {
       c = "clear";
+      t = "smart_tmux";
+      n = "smart_nvim";
     };
     # oh my zsh gets us substring search
     # the option for enabling it separately was not working for me
