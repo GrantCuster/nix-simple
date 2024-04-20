@@ -15,7 +15,7 @@ git clone https://github.com/GrantCuster/nix-simple.git
 Increase swap file size to make install work (probably only necessary on micro)
 
 ```
-sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048
 sudo chmod 600 /var/swap.1
 sudo /sbin/mkswap /var/swap.1
 sudo /sbin/swapon /var/swap.1
