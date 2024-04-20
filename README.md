@@ -1,15 +1,22 @@
 # AWS instance instructions
 
-Nix install multi user:
+Determinate nix install. Pinning older version until they fix mkoutofstoresymlink
 
 ```
-sh <(curl -L https://nixos.org/nix/install) --daemon
+VERSION="v0.12.0"
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/${VERSION} | sh -s -- install
+```
+
+Resource shell
+
+```
+. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 ```
 
 Clone nix-simple as nix
 
 ```
-git clone https://github.com/GrantCuster/nix-simple.git
+git clone https://github.com/GrantCuster/nix-simple.git nix
 ```
 
 Increase swap file size to make install work (probably only necessary on micro)
@@ -35,6 +42,28 @@ home-manager --flake . --extra-experimental-features "nix-command flakes" switch
 ```
 
 Enable swap by default after reboot, add this line to /etc/fstab:
+
 ```
 /var/swap.1   swap    swap    defaults        0   0
+```
+
+Switch shell to zsh.
+
+First set ubuntu password.
+
+```
+sudo su -
+passwd ubuntu
+```
+
+Exit and set shell
+
+```
+sudo chsh -s $(which zsh)
+```
+
+Switch to shell now
+
+```
+zsh
 ```
