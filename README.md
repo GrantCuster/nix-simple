@@ -17,6 +17,7 @@ Clone nix-simple as nix
 
 ```
 git clone https://github.com/GrantCuster/nix-simple.git nix
+
 ```
 
 Increase swap file size to make install work (probably only necessary on micro)
@@ -69,3 +70,20 @@ chsh -s $(which zsh)
 ```
 
 Exit and reconnect
+
+Setup github and switch to ssh
+
+```
+sh /nix/setup/github.sh
+```
+
+Add key to github
+
+```
+cd ~/nix
+git remote set-url origin git@github.com:GrantCuster/nix-simple.git
+```
+
+```
+
+
