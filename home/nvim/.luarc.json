@@ -1,0 +1,30 @@
+{
+    "diagnostics.globals": [
+        "vim"
+    ],
+    "workspace.library": [
+        "/home/grant/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/nix/store/54ac9c4f2g8sd2gyn63xn7d0yfhgfw6g-neovim-unwrapped-0.9.2/share/nvim/runtime/lua",
+        "/home/grant/.local/share/nvim/lazy/cmp-cmdline/lua",
+        "/home/grant/.local/share/nvim/lazy/neo-tree.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/nvim-cmp/lua",
+        "/home/grant/.local/share/nvim/lazy/cmp_luasnip/lua",
+        "/home/grant/.local/share/nvim/lazy/nvim-web-devicons/lua",
+        "/home/grant/.local/share/nvim/lazy/cmp-nvim-lsp/lua",
+        "/home/grant/.local/share/nvim/lazy/LuaSnip/lua",
+        "/home/grant/.local/share/nvim/lazy/nui.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/cmp-buffer/lua",
+        "/home/grant/.local/share/nvim/lazy/telescope.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/lualine.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/plenary.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/lazy.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/neodev.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/nvim-lspconfig/lua",
+        "/home/grant/.local/share/nvim/lazy/telescope-ui-select.nvim/lua",
+        "/home/grant/.local/share/nvim/lazy/nvim-treesitter/lua",
+        "/home/grant/.local/share/nvim/lazy/cmp-path/lua",
+        "/home/grant/.local/share/nvim/lazy/gruvbox.nvim/lua",
+        "${3rd}/luv/library",
+        "${3rd}/luassert/library"
+    ]
+}
