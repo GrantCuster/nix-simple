@@ -83,7 +83,3 @@ Add key to github
 cd ~/nix
 git remote set-url origin git@github.com:GrantCuster/nix-simple.git
 ```
-
-```
-
-
