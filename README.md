@@ -56,14 +56,16 @@ sudo su -
 passwd ubuntu
 ```
 
+Add shell
+
+```
+command -v zsh | sudo tee -a /etc/shells
+```
+
 Exit and set shell
 
 ```
-sudo chsh -s $(which zsh)
+chsh -s $(which zsh)
 ```
 
-Switch to shell now
-
-```
-zsh
-```
+Exit and reconnect
