@@ -97,6 +97,7 @@
       c = "clear";
       t = "smart_tmux";
       n = "smart_nvim";
+      neo = "neofetch --source ~/nix/home/extra/sloth.txt";
     };
     # oh my zsh gets us substring search
     # the option for enabling it separately was not working for me
