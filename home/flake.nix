@@ -20,13 +20,13 @@
           ./home.nix 
         ];
       };
-      };
+    };
 
     homeConfigurations = {
-      "rpi-deck" = home-manager.lib.homeConfigurations {
+      "rpi-deck" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         modules = [ 
-          ./aws-ubuntu.nix
+          ./rpi-deck.nix
           ./home.nix 
         ];
       };
