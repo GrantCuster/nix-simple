@@ -314,7 +314,13 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>ff", ":lua vim.lsp.buf.format()<CR>")
 		end,
 	},
-	-- lazy.nvim
+	{
+		"rcarriga/nvim-notify",
+    event = "VeryLazy",
+		opts = {
+			background_color = "#282828",
+		},
+	},
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -327,7 +333,7 @@ require("lazy").setup({
 			-- OPTIONAL:
 			--   `nvim-notify` is only needed, if you want to use the notification view.
 			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
+			-- "rcarriga/nvim-notify",
 		},
 		config = function()
 			require("noice").setup({
@@ -350,4 +356,9 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {}
+	}
 })
