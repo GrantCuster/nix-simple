@@ -38,7 +38,7 @@ nix-shell -p home-manager
 Run home-manager flake
 
 ```
-cd nix/home
+cd ~/nix/home
 home-manager --flake . --extra-experimental-features "nix-command flakes" switch
 ```
 
@@ -74,7 +74,7 @@ Exit and reconnect
 Setup github and switch to ssh
 
 ```
-sh /nix/setup/github.sh
+sh ~/nix/setup/github.sh
 ```
 
 Add key to github
