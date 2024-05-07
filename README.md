@@ -1,10 +1,15 @@
 # AWS instance instructions
 
-Determinate nix install. Pinning older version until they fix mkoutofstoresymlink
+Determinate nix install. Pinned version that works
 
 ```
-VERSION="v0.12.0"
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/${VERSION} | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/v0.19.0 | sh -s -- install
+```
+
+If user 300 uids are taken (cloudtop) use this before install
+
+```
+export NIX_INSTALLER_NIX_BUILD_USER_ID_BASE=400
 ```
 
 Resource shell
