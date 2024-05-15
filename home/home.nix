@@ -42,7 +42,6 @@
     tree-sitter
     lua-language-server
     nodePackages_latest.typescript-language-server
-    vimPlugins.nvim-treesitter-parsers.svelte
     nixd
     tailwindcss-language-server
     stylua

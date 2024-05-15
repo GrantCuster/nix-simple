@@ -185,7 +185,6 @@ require("lazy").setup({
       lspconfig.tsserver.setup({})
       lspconfig.nixd.setup({})
       lspconfig.tailwindcss.setup({})
-      lspconfig.svelteserver.setup({})
 
       vim.keymap.set("n", "I", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
@@ -251,7 +250,6 @@ require("lazy").setup({
       require("lspconfig")["lua_ls"].setup({ capabilities = capabilities })
       require("lspconfig")["tsserver"].setup({ capabilities = capabilities })
       require("lspconfig")["tailwindcss"].setup({ capabilities = capabilities })
-      require("lspconfig")["svelteserver"].setup({ capabilities = capabilities })
       require("lspconfig")["nixd"].setup({ capabilities = capabilities })
     end,
   },
