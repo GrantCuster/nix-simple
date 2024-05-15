@@ -21,7 +21,6 @@
         ];
       };
     };
-
     homeConfigurations = {
       "rpi-deck" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
@@ -31,7 +30,6 @@
         ];
       };
     };
-
     homeConfigurations = {
       "work-mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
@@ -41,6 +39,5 @@
         ];
       };
     };
-
   };
 }

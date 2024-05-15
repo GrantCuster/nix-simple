@@ -42,6 +42,7 @@
     tree-sitter
     lua-language-server
     nodePackages_latest.typescript-language-server
+    vimPlugins.nvim-treesitter-parsers.svelte
     nixd
     tailwindcss-language-server
     stylua
@@ -93,6 +94,8 @@
       t = "smart_tmux";
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
+      # work specific
+      gcloud = "~/google-cloud-sdk/bin/gcloud";
     };
     # oh my zsh gets us substring search
     # the option for enabling it separately was not working for me
