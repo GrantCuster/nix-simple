@@ -22,6 +22,15 @@
       };
     };
     homeConfigurations = {
+      "linux-x86" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [ 
+          ./linux-x86.nix
+          ./home.nix 
+        ];
+      };
+    };
+    homeConfigurations = {
       "rpi-deck" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         modules = [ 
