@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "ubuntu";
-  home.homeDirectory = "/home/ubuntu";
+  home.username = "grant";
+  home.homeDirectory = "/home/grant";
 }
 
 
