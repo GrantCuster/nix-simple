@@ -36,7 +36,7 @@
     ffmpeg
     yt-dlp
 
-    wezterm
+    pokemonsay
 
     # neovim lsp
     tree-sitter
@@ -52,6 +52,8 @@
 
     (writeShellScriptBin "smart_tmux" (builtins.readFile ./scripts/smart_tmux.sh))
     (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
+    (writeShellScriptBin "oblique" (builtins.readFile ./scripts/oblique.sh))
+    (writeShellScriptBin "welcome" (builtins.readFile ./scripts/welcome.sh))
   ];
 
   # Home Manager can also manage your environment variables through
