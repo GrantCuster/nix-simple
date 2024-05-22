@@ -27,6 +27,7 @@
         modules = [ 
           ./linux-x86.nix
           ./home.nix 
+          ./linux-gui.nix
         ];
       };
     };
