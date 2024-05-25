@@ -7,7 +7,8 @@
   home.homeDirectory = "/Users/gcuster";
 
   home.packages = with pkgs; [
-    uutils-coreutils-noprefix
+    bash
+    coreutils
   ];
 
 }

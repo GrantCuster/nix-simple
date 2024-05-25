@@ -1,1 +1,1 @@
-../../docs/automatic_start.md
+/nix/store/9bgvgd78r6gfkqgj0h4pg142s7l15syl-home-manager-files/.config/tmux/plugins/tmux-continuum/scripts/handle_tmux_automatic_start/README.md
