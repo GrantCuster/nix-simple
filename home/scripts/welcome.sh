@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# clean up old tmux sessions
+clean_tmux
+
 chosen_pokemon=$(pokemon)
 echo $chosen_pokemon
 

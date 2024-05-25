@@ -36,6 +36,8 @@
     ffmpeg
     yt-dlp
 
+    pandoc
+
     pokemonsay
 
     # neovim lsp
@@ -45,6 +47,7 @@
     nixd
     tailwindcss-language-server
     stylua
+    nodePackages_latest.prettier
     prettierd
     eslint_d
 

@@ -11,5 +11,6 @@
     libnotify
     gifsicle
     wl-clipboard
+    light
   ];
 }
