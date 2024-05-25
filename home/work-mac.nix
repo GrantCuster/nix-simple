@@ -5,6 +5,11 @@
   # manage.
   home.username = "gcuster";
   home.homeDirectory = "/Users/gcuster";
+
+  home.packages = with pkgs; [
+    uutils-coreutils-noprefix
+  ];
+
 }
 
 
