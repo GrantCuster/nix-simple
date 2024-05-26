@@ -13,4 +13,13 @@
     wl-clipboard
     light
   ];
+
+  xdg.configFile.sway = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/sway";
+    recursive = true;
+  };
+  xdg.configFile.foot = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/foot";
+    recursive = true;
+  };
 }

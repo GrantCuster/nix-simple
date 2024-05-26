@@ -38,6 +38,8 @@
 
     pandoc
 
+    cairo
+
     pokemonsay
 
     # neovim lsp
@@ -50,6 +52,7 @@
     nodePackages_latest.prettier
     prettierd
     eslint_d
+    pyright
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
@@ -100,8 +103,6 @@
       t = "smart_tmux";
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
-      # work specific
-      gcloud = "~/google-cloud-sdk/bin/gcloud";
     };
     # oh my zsh gets us substring search
     # the option for enabling it separately was not working for me
