@@ -1,9 +1,9 @@
 # AWS instance instructions
 
-Determinate nix install. Pinned version that works
+Determinate nix install. Pinned version that works. Symlink issue in newer versions that will hopefully be fixed soon.
 
 ```
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/v0.19.0 | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/v0.12.0 | sh -s -- install
 ```
 
 If user 300 uids are taken (cloudtop) use this before install
