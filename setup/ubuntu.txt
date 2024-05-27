@@ -1,0 +1,12 @@
+need to standardize this more someday
+
+bluetooth
+apt instal
+- bluez
+- blueman
+
+audio
+apt install
+- alsa
+- pulseudio
+- pavucontro
