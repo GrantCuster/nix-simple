@@ -7,3 +7,5 @@ Host dinotopia
 Host bix
   hostname 192.168.5.249
   User grant
+Host brokenhorn
+  hostname 192.168.6.74
