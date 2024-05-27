@@ -150,7 +150,7 @@ input type:keyboard {
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
     bindsym $mod+e splith
-    bindsym $mod+d splitv
+    # bindsym $mod+d splitv
 
     # Switch the current container between different layout styles
     # bindsym $mod+s layout stacking
@@ -164,7 +164,7 @@ input type:keyboard {
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    # bindsym $mod+space focus mode_toggle
+    bindsym $mod+d focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
