@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, zsh-fzf_tab, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -29,8 +29,6 @@
 
     neofetch
     htop
-
-    fzf
 
     imagemagick
     ffmpeg
@@ -104,9 +102,19 @@
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
     };
-    # oh my zsh gets us substring search
-    # the option for enabling it separately was not working for me
-    oh-my-zsh.enable = true;
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = zsh-fzf_tab;
+        }
+    ];
+ 
+  };
+
+  programs.fzf = {
+    enable = true;
+    defaultOptions = [ "--height 40%" "--reverse" ];
+    enableZshIntegration = true;
   };
 
   programs.starship = {

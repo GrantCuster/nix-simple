@@ -39,7 +39,24 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zsh-fzf_tab": "zsh-fzf_tab"
+      }
+    },
+    "zsh-fzf_tab": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714099824,
+        "narHash": "sha256-Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=",
+        "owner": "aloxaf",
+        "repo": "fzf-tab",
+        "rev": "c7fb028ec0bbc1056c51508602dbd61b0f475ac3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aloxaf",
+        "repo": "fzf-tab",
+        "type": "github"
       }
     }
   },
