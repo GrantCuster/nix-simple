@@ -60,7 +60,7 @@
     (writeShellScriptBin "welcome" (builtins.readFile ./scripts/welcome.sh))
     (writeShellScriptBin "pokemon" (builtins.readFile ./scripts/pokemon.sh))
     (writeShellScriptBin "clean_tmux" (builtins.readFile ./scripts/clean_tmux.sh))
-    (writeShellScriptBin "tmux_session" (builtins.readFile ./scripts/clean_tmux.sh))
+    (writeShellScriptBin "tmux_session" (builtins.readFile ./scripts/tmux_session.sh))
   ];
 
   # Home Manager can also manage your environment variables through
