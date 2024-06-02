@@ -24,7 +24,7 @@ include /etc/sway/config-vars.d/*
 
 output eDP-1 scale 1.333
 # Should make specific to widescreen monitor
-output DP-2 mode 3440x1440
+output DP-1 mode 3440x1440
 
 bindswitch lid:on output eDP-1 disable
 bindswitch lid:off output eDP-1 enable

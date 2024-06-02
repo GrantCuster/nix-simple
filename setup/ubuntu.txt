@@ -1,12 +1,38 @@
-need to standardize this more someday
+## bluetooth
 
-bluetooth
-apt instal
+apt install
 - bluez
 - blueman
 
-audio
+enable bluetooth auto start with
+```
+sudo systemctl enable bluetooth
+```
+## audio
+
 apt install
 - alsa
 - pulseudio
-- pavucontro
+- pavucontrol
+
+## wifi
+
+probably setup on install but in case of problems
+
+auto connecting to wifi will look something like this
+in /etc/netplan/50-cloud-init.yaml
+```
+# This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init's
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    version: 2
+    wifis:
+        wlp0s20f3:
+            access-points:
+                Verizon_3XLKSS:
+                    password: isle7-dit-coil
+            dhcp4: true
+```
