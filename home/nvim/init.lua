@@ -148,21 +148,21 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			require("neo-tree").setup({
-				filesystem = {
-					filtered_items = {
-						visible = true,
-					},
-					hijack_netrw_behavior = "open_current",
-				},
-				window = {
-					width = 32,
-				},
-			})
-			vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal left toggle<CR>", {})
-		end,
-	},
+	-- 	config = function()
+	-- 		require("neo-tree").setup({
+	-- 			filesystem = {
+	-- 				filtered_items = {
+	-- 					visible = true,
+	-- 				},
+	-- 				hijack_netrw_behavior = "open_current",
+	-- 			},
+	-- 			window = {
+	-- 				width = 32,
+	-- 			},
+	-- 		})
+	-- 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal left toggle<CR>", {})
+	-- 	end,
+	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
