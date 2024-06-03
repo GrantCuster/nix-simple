@@ -25,5 +25,9 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/foot";
     recursive = true;
   };
+  xdg.configFile.mako = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/mako";
+    recursive = true;
+  };
 
 }
