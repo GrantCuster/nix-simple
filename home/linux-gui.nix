@@ -26,8 +26,4 @@
     recursive = true;
   };
 
-  # Set XDG_SCREENSHOT_DIR to the directory where screenshots are saved 
-  environment.sessionVariables = {
-    XDG_SCREENSHOT_DIR = "${config.home.homeDirectory}/Screenshots";
-  };
 }
