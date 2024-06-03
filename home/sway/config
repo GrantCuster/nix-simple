@@ -7,6 +7,7 @@ exec_always mako
 
 # Mod1 for Alt
 set $mod Mod1
+set $cmd Mod4
 
 set $left h
 set $down j
@@ -92,6 +93,11 @@ input type:keyboard {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Screenshots
+    bindsym $cmd+7 exec screenshot screen
+    bindsym $cmd+8 exec screenshot window
+    bindsym $cmd+9 exec screenshot area
 #
 # Moving around:
 #
@@ -116,6 +122,7 @@ input type:keyboard {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
 #
 # Workspaces:
 #
@@ -235,7 +242,7 @@ bar {
     # The default just shows the current date and time.
 
 
-    status_command ./status.sh
+    status_command while ~/.config/sway/status.sh; do sleep 1; done
 
     colors {
         statusline $lightgray
