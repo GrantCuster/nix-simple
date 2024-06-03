@@ -17,5 +17,27 @@ fi
 current_dir="$(pwd)"
 
 chosen=$(tmux ls -F '#{session_name}' | grep -v '^[0-9]*$' | fzf)
-tmux switch-client -t "$chosen" 
 
+tmux info &>/dev/null
+if [ $? != 0 ]; then
+  tmux new-session -d -s "$chosen"
+  tmux attach -t "$chosen" 
+  exit 0
+fi
+
+if tmux has-session -t "$chosen" 2>/dev/null; then
+  tmux info &>/dev/null
+  if [ $? != 0 ]; then
+    tmux attach -t "$chosen"
+    exit 0
+  fi
+  tmux switch-client -t "$chosen" 
+else 
+  tmux new-session -d -s "$chosen"
+  tmux info &>/dev/null
+  if [ $? != 0 ]; then
+    tmux attach -t "$chosen"
+    exit 0
+  fi
+  tmux switch-client -t "$chosen"
+fi

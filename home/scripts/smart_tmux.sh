@@ -17,8 +17,7 @@ home_dir="$HOME"
 current_dir="$(pwd)"
 
 if [ "$current_dir" = "$home_dir" ]; then
-  chosen=$(tmux ls -F '#{session_name}' | grep -v '^[0-9]*$' | fzf)
-  tmux switch-client -t "$chosen" 
+  tmux_session
 else
   dir="$(basename "$current_dir")"
   echo "$dir"
