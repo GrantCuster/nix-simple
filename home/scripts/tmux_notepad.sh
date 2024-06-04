@@ -19,10 +19,9 @@ unset TMUX
 
 # Function to create a new tmux session and run nvim
 create_session() {
-  tmux new-session -d -s "$SESSION_NAME" -n "notepad" -c "$DIR"
+  tmux new-session -d -s "$SESSION_NAME" -n "notepad" 
   sleep 0
-  tmux send-keys -t "$SESSION_NAME:notepad" "nvim '$FILENAME'" C-m
-  tmux attach-session -t "$SESSION_NAME" >> "$LOGFILE"
+  tmux send-keys -t "$SESSION_NAME:notepad" "cd $DIR; nvim $FILENAME; tmux attach-session -t $SESSION_NAME"
 }
 #
 # Check if session exists
