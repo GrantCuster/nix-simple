@@ -15,6 +15,7 @@
     sway-contrib.grimshot
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
+    (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
   ];
 
   xdg.configFile.sway = {
