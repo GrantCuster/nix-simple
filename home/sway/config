@@ -95,14 +95,15 @@ input type:keyboard {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Gif
-    bindsym $cmd+4 exec gif screen
-    bindsym $cmd+5 exec gif window
-    bindsym $cmd+6 exec gif area
+    bindsym $cmd+7 exec gif screen
+    bindsym $cmd+8 exec gif window
+    bindsym $cmd+9 exec gif area
+    bindsym $cmd+x exec gif stop
 
     # Screenshots
-    bindsym $cmd+7 exec screenshot screen
-    bindsym $cmd+8 exec screenshot window
-    bindsym $cmd+9 exec screenshot area
+    bindsym $cmd+4 exec screenshot screen
+    bindsym $cmd+5 exec screenshot window
+    bindsym $cmd+6 exec screenshot area
 
 #
 # Moving around:

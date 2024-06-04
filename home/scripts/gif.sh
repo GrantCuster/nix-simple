@@ -21,7 +21,7 @@ is_recorder_running() {
 
 convert_to_gif() {
   ffmpeg -i "$TMP_MP4_FILE" -filter_complex "[0:v] palettegen" "$TMP_PALETTE_FILE"
-  ffmpeg -i "$TMP_MP4_FILE" -i "$TMP_PALETTE_FILE" -filter_complex "[0:v] fps=10,scale=1040:-1 [new];[new][1:v] paletteuse" "$TMP_FILE_UNOPTIMIZED"
+  ffmpeg -i "$TMP_MP4_FILE" -i "$TMP_PALETTE_FILE" -filter_complex "[0:v] fps=10,scale=1040:-1,setpts=0.666*PTS [new];[new][1:v] paletteuse" "$TMP_FILE_UNOPTIMIZED"
   if [ -f "$TMP_PALETTE_FILE" ]; then
     rm "$TMP_PALETTE_FILE"
   fi
@@ -31,11 +31,11 @@ convert_to_gif() {
 }
 
 notify() {
-  notify-send -a "$APP_NAME" "$1"
+  notify-send -a "$APP_NAME" "$1" -t 2000
 }
 
 optimize_gif() {
-  gifsicle -O3 --lossy=100 -i "$TMP_FILE_UNOPTIMIZED" -o "$TMP_FILE"
+  gifsicle -O3 --lossy=100 -i "$TMP_FILE_UNOPTIMIZED" -o "$FILENAME"
   if [ -f "$TMP_FILE_UNOPTIMIZED" ]; then
     rm "$TMP_FILE_UNOPTIMIZED"
   fi
@@ -68,7 +68,7 @@ stop() {
     optimize_gif
     wl-copy -t image/png < $FILENAME
     notify "GIF capture completed. GIF saved to clipboard and $FILENAME"
-    open $FILENAME
+    google-chrome-stable --new-window --ozone-platform=wayland $FILENAME
   fi
 }
 
