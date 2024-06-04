@@ -1,3 +1,20 @@
+## autologin
+
+```
+sudo apt install greetd
+sudo systemctl enable greetd
+sudo /home/grant/.nix-profile/bin/nvim /etc/greetd/config.toml
+```
+
+add
+```
+[initial_session]
+command = "sway"
+user = "grant"
+```
+
+look at archwiki greetdd if any issues
+
 ## bluetooth
 
 apt install
