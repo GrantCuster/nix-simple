@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- for obsidian plugin
-vim.opt.conceallevel = 1
+-- vim.opt.conceallevel = 1
 
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
