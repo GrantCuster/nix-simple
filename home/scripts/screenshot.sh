@@ -7,7 +7,7 @@ if [ ! -d "$XDG_SCREENSHOTS_DIR" ]; then
 fi
 
 screen() {
-  grimshot --notify savecopy active
+  grimshot --notify savecopy output
 }
 
 window() {

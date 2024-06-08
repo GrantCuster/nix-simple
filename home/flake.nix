@@ -29,6 +29,18 @@
       };
     };
     homeConfigurations = {
+      "linux-basic" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          zsh-fzf_tab = zsh-fzf_tab;
+        };
+        modules = [ 
+          ./linux-x86.nix
+          ./home.nix 
+        ];
+      };
+    };
+    homeConfigurations = {
       "linux-x86" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
