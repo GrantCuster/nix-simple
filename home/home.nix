@@ -105,6 +105,9 @@
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
+      # sudo use nix packages
+      s = "sudo --preserve-env=PATH env";
+      sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
       # reconnect nix on work mac
       rn = ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
     };
