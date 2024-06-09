@@ -53,3 +53,7 @@ network:
                     password: isle7-dit-coil
             dhcp4: true
 ```
+
+## Timezone
+
+sudo timedatectl set-timezone America/New_York
