@@ -66,6 +66,7 @@
     (writeShellScriptBin "tmux_session" (builtins.readFile ./scripts/tmux_session.sh))
     (writeShellScriptBin "pstrat" (builtins.readFile ./scripts/pokemon_strategy.sh))
     (writeShellScriptBin "tmux_notepad" (builtins.readFile ./scripts/tmux_notepad.sh))
+    (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commmit.sh))
   ];
 
   # Home Manager can also manage your environment variables through
@@ -108,11 +109,18 @@
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
+      # git helpers
+      ga = "git add .";
+      gc = "git_commit";
+      gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
+      gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
+      gs = "git status";
       # sudo use nix packages
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
-      # reconnect nix on work mac
+      # reconnect nix on work mac or refresh shell in general
       rn = ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+      rz = ". /nix/var/nix/profiles/default/etc/profile.d/nix.sh";
     };
     plugins = [
       {
