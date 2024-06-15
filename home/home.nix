@@ -41,6 +41,8 @@
 
     pokemonsay
 
+    nodePackages_latest.ts-node
+
     # neovim lsp
     tree-sitter
     lua-language-server
