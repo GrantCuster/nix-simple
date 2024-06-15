@@ -66,7 +66,7 @@
     (writeShellScriptBin "tmux_session" (builtins.readFile ./scripts/tmux_session.sh))
     (writeShellScriptBin "pstrat" (builtins.readFile ./scripts/pokemon_strategy.sh))
     (writeShellScriptBin "tmux_notepad" (builtins.readFile ./scripts/tmux_notepad.sh))
-    (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commmit.sh))
+    (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commit.sh))
   ];
 
   # Home Manager can also manage your environment variables through
