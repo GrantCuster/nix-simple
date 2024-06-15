@@ -13,6 +13,7 @@
     wl-clipboard
     light
     sway-contrib.grimshot
+    newsboat
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
