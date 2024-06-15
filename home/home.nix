@@ -26,7 +26,7 @@
 
     ripgrep
 
-    nodejs_20
+    nodejs_22
 
     neofetch
     htop
