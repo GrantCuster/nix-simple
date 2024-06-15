@@ -16,6 +16,7 @@
     neovim
     tmux
 
+    git
     lazygit
 
     wget
