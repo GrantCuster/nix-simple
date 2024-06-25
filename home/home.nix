@@ -143,6 +143,9 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = {
+      nodejs = false;
+    };
   };
 
   programs.git = {
