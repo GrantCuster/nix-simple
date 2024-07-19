@@ -76,6 +76,11 @@ vim.keymap.set("n", "<leader><enter>", function()
 	end
 end, { expr = true, replace_keycodes = true })
 
+-- jump to next diagnostic error
+vim.keymap.set("n", "]e", ":lua vim.diagnostic.goto_next()<CR>")
+-- jump to previous diagnostic error
+vim.keymap.set("n", "[e", ":lua vim.diagnostic.goto_prev()<CR>")
+
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 require("lazy").setup({
@@ -187,7 +192,7 @@ require("lazy").setup({
 			lspconfig.tsserver.setup({})
 			lspconfig.nixd.setup({})
 			lspconfig.tailwindcss.setup({})
-      lspconfig.pyright.setup({})
+			lspconfig.pyright.setup({})
 
 			vim.keymap.set("n", "I", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
@@ -253,7 +258,7 @@ require("lazy").setup({
 			require("lspconfig")["lua_ls"].setup({ capabilities = capabilities })
 			require("lspconfig")["tsserver"].setup({ capabilities = capabilities })
 			require("lspconfig")["tailwindcss"].setup({ capabilities = capabilities })
-      require("lspconfig")["pyright"].setup({ capabilities = capabilities })
+			require("lspconfig")["pyright"].setup({ capabilities = capabilities })
 			require("lspconfig")["nixd"].setup({ capabilities = capabilities })
 		end,
 	},
@@ -357,8 +362,18 @@ require("lazy").setup({
 	-- },
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics open focus=true<cr>",
+			},
+			{
+				"<leader>xz",
+				"<cmd>Trouble diagnostics close<cr>",
+			},
+		},
 	},
 	{
 		"stevearc/oil.nvim",

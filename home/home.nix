@@ -1,7 +1,7 @@
-{ config, pkgs, zsh-fzf_tab, ... }:
+{ config, pkgs, zsh-fzf_tab, neovim-nightly-overlay, ... }:
 
 {
-  # This value determines the Home Manager release that your configuration is
+ # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
   #
@@ -67,6 +67,7 @@
     (writeShellScriptBin "pstrat" (builtins.readFile ./scripts/pokemon_strategy.sh))
     (writeShellScriptBin "tmux_notepad" (builtins.readFile ./scripts/tmux_notepad.sh))
     (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commit.sh))
+    (writeShellScriptBin "toggle_trackpad" (builtins.readFile ./scripts/toggle_trackpad.sh))
   ];
 
   # Home Manager can also manage your environment variables through
@@ -121,11 +122,10 @@
       # reconnect nix on work mac or refresh shell in general
       rn = ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
       rz = ". /nix/var/nix/profiles/default/etc/profile.d/nix.sh";
-      # disable touchpad lg gram
-      dt = "sudo echo 1 > /sys/devices/pci0000:00/0000:00:15.0/i2c_designware.0/i2c-0/i2c-04CA00B1:00/0018:04CA:00B1.0001/input/input6/inhibited";
-      et = "sudo echo 0 > /sys/devices/pci0000:00/0000:00:15.0/i2c_designware.0/i2c-0/i2c-04CA00B1:00/0018:04CA:00B1.0001/input/input6/inhibited";
+      # disable touchpad lg gram not worki
+      tt = "s toggle_trackpad";
     };
-    plugins = [
+   plugins = [
       {
         name = "fzf-tab";
         src = zsh-fzf_tab;
@@ -134,18 +134,16 @@
  
   };
 
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = pkgs.lib.importTOML ./starship/starship.toml;
+  };
+
   programs.fzf = {
     enable = true;
     defaultOptions = [ "--height 40%" "--reverse" ];
     enableZshIntegration = true;
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      nodejs = false;
-    };
   };
 
   programs.git = {

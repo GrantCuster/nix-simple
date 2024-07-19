@@ -15,6 +15,9 @@
     sway-contrib.grimshot
     newsboat
 
+    # not actually gui but putting rust here for now
+    rustup
+
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
   ];
