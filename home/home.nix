@@ -129,7 +129,7 @@
       # disable touchpad lg gram not worki
       tt = "s toggle_trackpad";
       # dir by last modified
-      ld = "findlastdir";
+      fd = "findlastdir";
     };
    plugins = [
       {
