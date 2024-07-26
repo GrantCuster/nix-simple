@@ -41,6 +41,9 @@
 
     nom
 
+    # make sure gnu find
+    findutils
+
     nodePackages_latest.ts-node
 
     # neovim lsp
@@ -68,6 +71,7 @@
     (writeShellScriptBin "tmux_notepad" (builtins.readFile ./scripts/tmux_notepad.sh))
     (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commit.sh))
     (writeShellScriptBin "toggle_trackpad" (builtins.readFile ./scripts/toggle_trackpad.sh))
+    (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
   ];
 
   # Home Manager can also manage your environment variables through
@@ -124,6 +128,8 @@
       rz = ". /nix/var/nix/profiles/default/etc/profile.d/nix.sh";
       # disable touchpad lg gram not worki
       tt = "s toggle_trackpad";
+      # dir by last modified
+      ld = "findlastdir";
     };
    plugins = [
       {

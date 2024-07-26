@@ -35,6 +35,9 @@ vim.keymap.set("n", "<leader>n", ":set number!<CR>", {})
 vim.cmd("autocmd filetype markdown setlocal nonumber")
 vim.cmd("autocmd filetype markdown setlocal norelativenumber")
 
+-- copy all text in the buffer
+vim.keymap.set("n", "<leader>aa", "ggVGy", {})
+
 vim.filetype.add({
   pattern = { [".*/hyprland%.conf"] = "hyprlang" },
 })
