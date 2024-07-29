@@ -41,6 +41,8 @@
 
     nom
 
+    yazi
+
     # make sure gnu find
     findutils
 

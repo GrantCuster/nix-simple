@@ -15,6 +15,11 @@
     sway-contrib.grimshot
     newsboat
 
+    kitty
+
+    spotify
+    spicetify-cli
+
     # not actually gui but putting rust here for now
     rustup
 
