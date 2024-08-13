@@ -1,1 +1,1 @@
-/nix/store/p8q7ms3j7mgimki4zb3kk620x8lmnwlw-home-manager-files/.config/tmux/plugins/tmux-continuum/scripts/handle_tmux_automatic_start/README.md
+/nix/store/jlmcfy3iv9v8d7gasmdmb320p3ci66jq-home-manager-files/.config/tmux/plugins/tmux-continuum/scripts/handle_tmux_automatic_start/README.md

@@ -33,11 +33,12 @@
 
     imagemagick
     ffmpeg
-    yt-dlp
 
     pandoc
 
     pokemonsay
+
+    cbonsai
 
     nom
 
@@ -133,13 +134,19 @@
       # dir by last modified
       fd = "findlastdir";
     };
-   plugins = [
+    plugins = [
       {
         name = "fzf-tab";
         src = zsh-fzf_tab;
-        }
+      }
     ];
- 
+    initExtra = ''
+    precmd() {
+      precmd() {
+        echo
+      }
+    }
+    '';
   };
 
   programs.starship = {
