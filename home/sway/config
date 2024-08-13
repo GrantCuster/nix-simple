@@ -14,6 +14,7 @@ set $down j
 set $up k
 set $right l
 
+# set $term kitty
 set $term foot
 
 # Your preferred application launcher
@@ -75,6 +76,8 @@ input type:keyboard {
     # Start a terminal
     bindsym $mod+Return exec $term welcome
     bindsym $mod+Shift+Return exec $term
+
+    bindsym $mod+y exec $term -e yazi
 
     bindsym $mod+g exec google-chrome-stable --ozone-platform=wayland
 
@@ -241,6 +244,8 @@ client.focused          $lightgray $lightgray $lightgray $lightgray $lightgray
 client.focused_inactive        $darkgray $darkgray $darkgray $darkgray $darkgray
 client.unfocused        $darkgray $darkgray $darkgray $darkgray $darkgray
 client.urgent        $darkgray $darkgray $darkgray $darkgray $darkgray
+
+bindsym $mod+m bar mode toggle
 
 # Status Bar:
 #

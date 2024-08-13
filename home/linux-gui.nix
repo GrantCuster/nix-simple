@@ -15,10 +15,7 @@
     sway-contrib.grimshot
     newsboat
 
-    kitty
-
-    spotify
-    spicetify-cli
+    xdragon
 
     # not actually gui but putting rust here for now
     rustup
@@ -39,5 +36,4 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/mako";
     recursive = true;
   };
-
 }
