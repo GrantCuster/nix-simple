@@ -11,6 +11,7 @@
     libnotify
     gifsicle
     wl-clipboard
+    clipse
     light
     sway-contrib.grimshot
     newsboat
