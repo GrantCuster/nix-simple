@@ -18,6 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 
+vim.keymap.set("n", "t", ":pu=strftime('%c')<CR>o<CR><esc>", { noremap = true })
+
 vim.opt.scrolloff = 9999
 vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
