@@ -46,6 +46,7 @@ in /etc/netplan/50-cloud-init.yaml
 # network: {config: disabled}
 network:
     version: 2
+    renderer: NetworkManager
     wifis:
         wlp0s20f3:
             access-points:
@@ -53,6 +54,14 @@ network:
                     password: isle7-dit-coil
             dhcp4: true
 ```
+
+Install network-manager
+```
+sudo apt install network-manager
+```
+and add renderer `NetworkManager` to the above to switch to network manager
+
+Then to connect you probably want to use `nmtui`
 
 ## Timezone
 
