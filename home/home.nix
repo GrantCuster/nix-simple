@@ -135,6 +135,12 @@
       tt = "s toggle_trackpad";
       # dir by last modified
       fd = "findlastdir";
+      # better nvim pipe;
+      pv = "nvim -c 'read !pbpaste' -c 'setlocal buftype=nofile bufhidden=hide noswapfile'";
+      # pipe shell to nvim
+      sv = "nvim -c 'setlocal buftype=nofile bufhidden=hide noswapfile' -";
+      # open command history in neovim
+      vh = "nvim ~/.zsh_history";
     };
     plugins = [
       {
