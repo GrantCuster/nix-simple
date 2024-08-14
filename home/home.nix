@@ -75,6 +75,7 @@
     (writeShellScriptBin "git_commit" (builtins.readFile ./scripts/git_commit.sh))
     (writeShellScriptBin "toggle_trackpad" (builtins.readFile ./scripts/toggle_trackpad.sh))
     (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
+    (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
   ];
 
   # Home Manager can also manage your environment variables through
@@ -114,6 +115,7 @@
     shellAliases = {
       c = "clear";
       t = "smart_tmux";
+      b = "battery_status";
       n = "smart_nvim";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
@@ -140,14 +142,7 @@
         src = zsh-fzf_tab;
       }
     ];
-    initExtra = ''
-    precmd() {
-      precmd() {
-        echo
-      }
-    }
-    '';
-  };
+ };
 
   programs.starship = {
     enable = true;

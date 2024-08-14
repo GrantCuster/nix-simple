@@ -18,6 +18,7 @@ set $right l
 set $term foot
 
 
+
 exec clipse -listen
 bindsym $mod+V exec $term -e sh -c "swaymsg floating enable, move position center; swaymsg resize set 80ppt 80ppt && clipse"
 
@@ -78,8 +79,8 @@ input type:keyboard {
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term welcome
-    bindsym $mod+Shift+Return exec $term
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term nvim +":Oil"
 
     bindsym $mod+y exec $term -e yazi
 
@@ -174,6 +175,7 @@ input type:keyboard {
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
     bindsym $mod+e splith
+
     # bindsym $mod+d splitv
 
     # Switch the current container between different layout styles
@@ -259,8 +261,6 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-
-
     status_command while ~/.config/sway/status.sh; do sleep 1; done
 
     colors {
@@ -269,6 +269,13 @@ bar {
         focused_workspace $lightgray $lightgray $darkgray
         inactive_workspace $bg $bg $lightgray
     }
+
+    mode invisible
 }
+
+
+seat * hide_cursor 4000
+
+exec $term
 
 include /etc/sway/config.d/*

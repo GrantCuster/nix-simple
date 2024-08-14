@@ -5,7 +5,7 @@ TMP_PALETTE_FILE="/tmp/palette.png"
 TMP_MP4_FILE="/tmp/recording.mp4"
 APP_NAME="GIF recorder"
 
-gif_dir="$HOME/Gifs"
+gif_dir="$HOME/visuals/gifs"
 filename=$(date +"%Y-%m-%d_%H-%M-%S")
 FILENAME="$gif_dir/$filename.gif"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export XDG_SCREENSHOTS_DIR="$HOME/Screenshots"
+export XDG_SCREENSHOTS_DIR="$HOME/visuals/screenshots"
 
 if [ ! -d "$XDG_SCREENSHOTS_DIR" ]; then
     mkdir -p "$XDG_SCREENSHOTS_DIR"
