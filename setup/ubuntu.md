@@ -1,4 +1,4 @@
-## autologin
+## Sway autologin
 
 ```
 sudo apt install greetd
@@ -7,32 +7,70 @@ sudo /home/grant/.nix-profile/bin/nvim /etc/greetd/config.toml
 ```
 
 add
+
 ```
 [initial_session]
 command = "sway"
 user = "grant"
 ```
 
+You can put it above the default session section
+
 look at archwiki greetdd if any issues
 
-## bluetooth
+## Bluetooth
 
 apt install
 - bluez
 - blueman
 
 enable bluetooth auto start with
+
 ```
 sudo systemctl enable bluetooth
 ```
-## audio
+
+## Audio
 
 apt install
 - alsa
 - pulseudio
 - pavucontrol
 
-## wifi
+## Wifi
+
+Install network-manager
+
+```
+sudo apt install network-manager
+```
+
+In `/etc/netplan` make file `01-er-netplan-fix.yaml`
+
+In file put:
+
+```
+network:
+    version: 2
+    renderer: NetworkManager
+```
+
+To stop from waiting for network to boot:
+
+```
+systemctl disable systemd-networkd-wait-online.service
+```
+
+## Timezone
+
+sudo timedatectl set-timezone America/New_York
+
+## Additional programs
+
+sudo apt install mpv
+(should try with nix sometime but i know ubuntu install works)
+
+## Archive (deprecated instructions might be useful for something)
 
 probably setup on install but in case of problems
 
@@ -63,6 +101,6 @@ and add renderer `NetworkManager` to the above to switch to network manager
 
 Then to connect you probably want to use `nmtui`
 
-## Timezone
 
-sudo timedatectl set-timezone America/New_York
+
+
