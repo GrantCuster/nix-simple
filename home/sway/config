@@ -20,7 +20,9 @@ set $term foot
 
 
 exec clipse -listen
-bindsym $mod+V exec $term -e sh -c "swaymsg floating enable, move position center; swaymsg resize set 80ppt 80ppt && clipse"
+bindsym $mod+c exec $term -e sh -c "swaymsg floating enable, move position center; swaymsg resize set 80ppt 80ppt && clipse"
+
+bindsym $mod+v exec pavucontrol
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened

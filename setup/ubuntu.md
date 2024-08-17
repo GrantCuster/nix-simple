@@ -18,6 +18,13 @@ You can put it above the default session section
 
 look at archwiki greetdd if any issues
 
+## Zsh default shell
+
+```
+command -v zsh | sudo tee -a /etc/shells
+chsh -s $(which zsh)
+```
+
 ## Bluetooth
 
 apt install
