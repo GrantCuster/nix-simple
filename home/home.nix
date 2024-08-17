@@ -22,6 +22,8 @@
     wget
     unzip
 
+    socat
+
     jq
 
     ripgrep
