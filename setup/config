@@ -1,0 +1,11 @@
+Host github.com
+  IdentityFile /home/grant/.ssh/github_rsa
+Host brokenhorn
+  hostname 192.168.6.107
+  User grant
+Host ptero
+  hostname 192.168.6.63
+  User grant
+Host droplet
+  hostname 209.38.184.201
+  User grant

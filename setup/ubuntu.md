@@ -25,6 +25,12 @@ command -v zsh | sudo tee -a /etc/shells
 chsh -s $(which zsh)
 ```
 
+## GCC for neovim (and probably other things)
+
+```
+sudo apt install build-essential
+```
+
 ## Bluetooth
 
 apt install
