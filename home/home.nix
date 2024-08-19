@@ -150,6 +150,10 @@
         src = zsh-fzf_tab;
       }
     ];
+    initExtra = ''
+      # Add .local/bin to PATH
+      export PATH=$HOME/.local/bin:$PATH
+    '';
  };
 
   programs.starship = {

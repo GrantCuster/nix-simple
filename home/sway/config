@@ -17,9 +17,10 @@ set $right l
 # set $term kitty
 set $term foot
 
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
 
-
-exec clipse -listen
 bindsym $mod+c exec $term -e sh -c "swaymsg floating enable, move position center; swaymsg resize set 80ppt 80ppt && clipse"
 
 bindsym $mod+v exec pavucontrol
@@ -279,5 +280,8 @@ bar {
 seat * hide_cursor 4000
 
 exec $term
+
+# for tv
+bindsym XF86TouchpadToggle exec /home/grant/desktop/tv/play
 
 include /etc/sway/config.d/*
