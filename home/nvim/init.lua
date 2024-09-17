@@ -15,6 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 -- for obsidian plugin
 -- vim.opt.conceallevel = 1
 
+vim.keymap.set("i", "jk", "<esc>", { noremap = true })
+
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 
@@ -25,6 +27,9 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = true
 vim.opt.equalalways = false
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
@@ -46,6 +51,11 @@ vim.filetype.add({
 
 vim.cmd("set ignorecase")
 vim.keymap.set("n", "<escape>", ":noh<CR>")
+
+vim.keymap.set("n", "j", "gjj", {})
+vim.keymap.set("n", "k", "gkk", {})
+vim.keymap.set("v", "j", "gj", {})
+vim.keymap.set("v", "k", "gk", {})
 
 -- jump back to previous
 vim.keymap.set("n", "<leader>bb", ":edit #<CR>")
@@ -379,28 +389,28 @@ require("lazy").setup({
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	{
-		"3rd/time-tracker.nvim",
-		config = function()
-			require("time-tracker").setup({})
-			vim.keymap.set("n", "<leader>t", ":TimeTracker<CR>")
-		end,
-	},
-	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("chatgpt").setup()
-			vim.keymap.set("n", "<leader>cc", "<cmd>ChatGPT<CR>", {})
-			vim.keymap.set({ "n", "v" }, "<leader>ce", "<cmd>ChatGPTEditWithInstructions<CR>", {})
-			vim.keymap.set({ "n", "v" }, "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {})
-			vim.keymap.set({ "n", "v" }, "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {})
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"folke/trouble.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
+	-- {
+	-- 	"3rd/time-tracker.nvim",
+	-- 	config = function()
+	-- 		require("time-tracker").setup({})
+	-- 		vim.keymap.set("n", "<leader>t", ":TimeTracker<CR>")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"jackMort/ChatGPT.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("chatgpt").setup()
+	-- 		vim.keymap.set("n", "<leader>cc", "<cmd>ChatGPT<CR>", {})
+	-- 		vim.keymap.set({ "n", "v" }, "<leader>ce", "<cmd>ChatGPTEditWithInstructions<CR>", {})
+	-- 		vim.keymap.set({ "n", "v" }, "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {})
+	-- 		vim.keymap.set({ "n", "v" }, "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {})
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"folke/trouble.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- },
 })
