@@ -12,17 +12,12 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- for obsidian plugin
--- vim.opt.conceallevel = 1
-
-vim.keymap.set("i", "jk", "<esc>", { noremap = true })
-
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 
-vim.keymap.set("n", "t", ":pu=strftime('%c')<CR>o<CR><esc>", { noremap = true })
+vim.keymap.set("n", "tt", ":pu=strftime('%c')<CR>o<CR><esc>", { noremap = true })
 
--- down wrapped lines
+-- up/down wrapped lines
 vim.keymap.set("n", "<down>", "gj", { noremap = true })
 vim.keymap.set("n", "<up>", "gk", { noremap = true })
 vim.keymap.set("v", "<down>", "gj", { noremap = true })
@@ -166,29 +161,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	--{
-	--	"nvim-neo-tree/neo-tree.nvim",
-	--	branch = "v3.x",
-	--	dependencies = {
-	--		"nvim-lua/plenary.nvim",
-	--		"nvim-tree/nvim-web-devicons",
-	--		"MunifTanjim/nui.nvim",
-	--	},
-	-- 	config = function()
-	-- 		require("neo-tree").setup({
-	-- 			filesystem = {
-	-- 				filtered_items = {
-	-- 					visible = true,
-	-- 				},
-	-- 				hijack_netrw_behavior = "open_current",
-	-- 			},
-	-- 			window = {
-	-- 				width = 32,
-	-- 			},
-	-- 		})
-	-- 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal left toggle<CR>", {})
-	-- 	end,
-	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
@@ -413,28 +385,5 @@ require("lazy").setup({
 		keys = {
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
-	}, -- {
-	-- 	"3rd/time-tracker.nvim",
-	-- 	config = function()
-	-- 		require("time-tracker").setup({})
-	-- 		vim.keymap.set("n", "<leader>t", ":TimeTracker<CR>")
-	-- 	end,
-	-- },
-	-- {
-	-- 	"jackMort/ChatGPT.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("chatgpt").setup()
-	-- 		vim.keymap.set("n", "<leader>cc", "<cmd>ChatGPT<CR>", {})
-	-- 		vim.keymap.set({ "n", "v" }, "<leader>ce", "<cmd>ChatGPTEditWithInstructions<CR>", {})
-	-- 		vim.keymap.set({ "n", "v" }, "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {})
-	-- 		vim.keymap.set({ "n", "v" }, "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {})
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"folke/trouble.nvim",
-	-- 		"nvim-telescope/telescope.nvim",
-	-- 	},
-	-- },
+	},
 })
