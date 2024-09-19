@@ -113,7 +113,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
+    # autosuggestion.enable = true;
     shellAliases = {
       c = "clear";
       t = "smart_tmux";
