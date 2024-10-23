@@ -1,4 +1,4 @@
-{ config, pkgs, zsh-fzf_tab, neovim-nightly-overlay, ... }:
+ config, pkgs, zsh-fzf_tab, neovim-nightly-overlay, ... }:
 
 {
  # This value determines the Home Manager release that your configuration is
