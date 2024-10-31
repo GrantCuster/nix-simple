@@ -1,4 +1,4 @@
- config, pkgs, zsh-fzf_tab, neovim-nightly-overlay, ... }:
+{ config, pkgs, zsh-fzf_tab, ... }:
 
 {
  # This value determines the Home Manager release that your configuration is
@@ -45,6 +45,9 @@
     nom
 
     yazi
+
+    fzf
+    bat
 
     # make sure gnu find
     findutils

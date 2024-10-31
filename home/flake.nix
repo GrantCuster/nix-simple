@@ -14,15 +14,10 @@
       url = "github:aloxaf/fzf-tab";
       flake = false;
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, ... } @ inputs:
-  let
-    overlays = [
-      inputs.neovim-nightly-overlay.overlays.default
-      ];
-  in {
+{
     homeConfigurations = {
       "aws-ubuntu" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -30,10 +25,7 @@
           zsh-fzf_tab = zsh-fzf_tab;
         };
         modules = [ 
-        {
-          nixpkgs.overlays = overlays;
-          }
-          ./aws-ubuntu.nix
+         ./aws-ubuntu.nix
           ./home.nix 
         ];
       };
@@ -45,10 +37,7 @@
           zsh-fzf_tab = zsh-fzf_tab;
         };
         modules = [ 
-        {
-          nixpkgs.overlays = overlays;
-          }
- 
+
           ./linux-x86.nix
           ./home.nix 
         ];
@@ -61,10 +50,7 @@
           zsh-fzf_tab = zsh-fzf_tab;
         };
         modules = [ 
-        {
-          nixpkgs.overlays = overlays;
-          }
- 
+
           ./linux-x86.nix
           ./home.nix 
           ./linux-gui.nix
@@ -78,10 +64,7 @@
           zsh-fzf_tab = zsh-fzf_tab;
         };
        modules = [ 
-        {
-          nixpkgs.overlays = overlays;
-          }
- 
+
           ./rpi-deck.nix
           ./home.nix 
         ];
@@ -95,10 +78,7 @@
         };
  
         modules = [ 
-        {
-          nixpkgs.overlays = overlays;
-          }
-          ./work-mac.nix
+         ./work-mac.nix
           ./home.nix 
         ];
       };
