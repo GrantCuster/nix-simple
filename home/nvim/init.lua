@@ -51,6 +51,9 @@ vim.cmd("autocmd filetype markdown setlocal norelativenumber")
 -- copy all text in the buffer
 vim.keymap.set("n", "<leader>aa", "ggVGy", {})
 
+-- neoclip
+vim.keymap.set("n", "<leader>cc", ":Telescope neoclip<CR>", {})
+
 vim.filetype.add({
 	pattern = { [".*/hyprland%.conf"] = "hyprlang" },
 })
@@ -71,7 +74,7 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
-vim.keymap.set("n", "<leader>w", ":w<CR>", {})
+vim.keymap.set("n", "<leader>w", ":wa<CR>", {})
 vim.keymap.set("n", "<leader>q", ":q<CR>", {})
 
 -- task item for obsidian
@@ -167,13 +170,43 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
+			local function cwd()
+				local full_path = vim.loop.cwd()
+				return full_path:match("([^/]+)$") -- Extract the last part of the string after "/"
+			end
+			local custom_oil = {
+				sections = {
+					lualine_a = {
+						function()
+							local ok, oil = pcall(require, "oil")
+							if ok then
+								return vim.fn.fnamemodify(oil.get_current_dir(), ":~")
+							else
+								return ""
+							end
+						end,
+					},
+					lualine_b = { "branch" },
+					lualine_z = { cwd },
+				},
+				filetypes = { "oil" },
+			}
 			require("lualine").setup({
 				options = {
 					theme = "gruvbox",
-					icons_enabled = false,
+					icons_enabled = true,
 					section_separators = { left = "", right = "" },
 					component_separators = { left = "", right = "" },
 				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { cwd, "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+				extensions = { custom_oil },
 			})
 		end,
 	},
@@ -335,11 +368,11 @@ require("lazy").setup({
 	{
 		"stevearc/oil.nvim",
 		opts = {
-      default_file_explorer = true,
-      skip_confirm_for_simple_edits = true,
-      view_options = {
-        show_hidden = true
-      },
+			default_file_explorer = true,
+			skip_confirm_for_simple_edits = true,
+			view_options = {
+				show_hidden = true,
+			},
 			keymaps = {
 				["g?"] = "actions.show_help",
 				["<CR>"] = "actions.select",
@@ -393,31 +426,95 @@ require("lazy").setup({
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
+	-- {
+	--   "ThePrimeagen/harpoon",
+	--   branch = "harpoon2",
+	--   dependencies = { "nvim-lua/plenary.nvim" },
+	--   config = function()
+	--     local harpoon = require("harpoon")
+	--     harpoon.setup()
+	--     vim.keymap.set("n", "<leader>ha", function()
+	--       harpoon:list():add()
+	--     end)
+	--     vim.keymap.set("n", "<leader>hh", function()
+	--       harpoon.ui:toggle_quick_menu(harpoon:list())
+	--     end)
+	--     vim.keymap.set("n", "<leader>1", function()
+	--       harpoon:list():select(1)
+	--     end)
+	--     vim.keymap.set("n", "<leader>2", function()
+	--       harpoon:list():select(2)
+	--     end)
+	--     vim.keymap.set("n", "<leader>3", function()
+	--       harpoon:list():select(3)
+	--     end)
+	--     vim.keymap.set("n", "<leader>4", function()
+	--       harpoon:list():select(4)
+	--     end)
+	--   end,
+	-- },
 	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+			bigfile = { enabled = true },
+			dashboard = { enabled = true },
+			indent = { enabled = false },
+			input = { enabled = true },
+			notifier = { enabled = true },
+			quickfile = { enabled = true },
+			scroll = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+			zen = { enabled = true },
+		},
+	},
+	{
+		"AckslD/nvim-neoclip.lua",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+		},
 		config = function()
-		local harpoon = require("harpoon")
-			harpoon.setup()
-			vim.keymap.set("n", "<leader>ha", function()
-				harpoon:list():add()
-			end)
-			vim.keymap.set("n", "<leader>hh", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end)
-			vim.keymap.set("n", "<leader>1", function()
-				harpoon:list():select(1)
-			end)
-			vim.keymap.set("n", "<leader>2", function()
-				harpoon:list():select(2)
-			end)
-			vim.keymap.set("n", "<leader>3", function()
-				harpoon:list():select(3)
-			end)
-			vim.keymap.set("n", "<leader>4", function()
-				harpoon:list():select(4)
-			end)
+			require("neoclip").setup({
+				continuous_sync = true,
+			})
 		end,
 	},
 })
