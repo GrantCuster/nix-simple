@@ -65,6 +65,7 @@
     prettierd
     eslint_d
     pyright
+    svelte-language-server
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 

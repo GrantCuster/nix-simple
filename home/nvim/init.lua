@@ -219,6 +219,7 @@ require("lazy").setup({
 			lspconfig.nixd.setup({})
 			lspconfig.tailwindcss.setup({})
 			lspconfig.pyright.setup({})
+			lspconfig.svelte.setup({})
 
 			vim.keymap.set("n", "I", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
