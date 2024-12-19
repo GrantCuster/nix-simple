@@ -157,6 +157,13 @@
     initExtra = ''
       # Add .local/bin to PATH
       export PATH=$HOME/.local/bin:$PATH
+      if [[ $(uname) == "Darwin" ]]; then
+        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+      if [ -z "$TMUX" ]
+      then
+        tmux attach -t TMUX || tmux new -s TMUX
+      fi   
     '';
  };
 

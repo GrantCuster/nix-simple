@@ -466,60 +466,59 @@ require("lazy").setup({
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
-  },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
-  },
-  -- {
-  -- 	"folke/snacks.nvim",
-  -- 	priority = 1000,
-  -- 	lazy = false,
-  -- 	opts = {
-  -- 		-- your configuration comes here
-  -- 		-- or leave it empty to use the default settings
-  -- 		-- refer to the configuration section below
-  -- 		bigfile = { enabled = true },
-  -- 		dashboard = { enabled = true },
-  -- 		indent = { enabled = false },
-  -- 		input = { enabled = true },
-  -- 		notifier = { enabled = true },
-  -- 		quickfile = { enabled = true },
-  -- 		scroll = { enabled = true },
-  -- 		statuscolumn = { enabled = true },
-  -- 		words = { enabled = true },
-  -- 		zen = { enabled = true },
-  -- 	},
-  -- },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
     opts = {},
   },
-  {
-    "AckslD/nvim-neoclip.lua",
-    dependencies = {
-      { "nvim-telescope/telescope.nvim" },
-      { "kkharji/sqlite.lua",           module = "sqlite" },
-    },
-    config = function()
-      require("neoclip").setup({
-        continuous_sync = true,
-      })
-    end,
-  },
+{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
+	-- {
+	-- 	"folke/snacks.nvim",
+	-- 	priority = 1000,
+	-- 	lazy = false,
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		-- or leave it empty to use the default settings
+	-- 		-- refer to the configuration section below
+	-- 		bigfile = { enabled = true },
+	-- 		dashboard = { enabled = true },
+	-- 		indent = { enabled = false },
+	-- 		input = { enabled = true },
+	-- 		notifier = { enabled = true },
+	-- 		quickfile = { enabled = true },
+	-- 		scroll = { enabled = true },
+	-- 		statuscolumn = { enabled = true },
+	-- 		words = { enabled = true },
+	-- 		zen = { enabled = true },
+	-- 	},
+	-- },
+	{
+		"AckslD/nvim-neoclip.lua",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+		},
+		config = function()
+			require("neoclip").setup({
+				continuous_sync = true,
+			})
+		end,
+	},
 })
