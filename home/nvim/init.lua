@@ -4,8 +4,8 @@ if not vim.loop.fs_stat(lazypath) then
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
+    "https://github.com/folke/lazy.nvim.git",
     lazypath,
   })
 end
@@ -426,34 +426,7 @@ require("lazy").setup({
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
   },
-  -- {
-  --   "ThePrimeagen/harpoon",
-  --   branch = "harpoon2",
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   config = function()
-  --     local harpoon = require("harpoon")
-  --     harpoon.setup()
-  --     vim.keymap.set("n", "<leader>ha", function()
-  --       harpoon:list():add()
-  --     end)
-  --     vim.keymap.set("n", "<leader>hh", function()
-  --       harpoon.ui:toggle_quick_menu(harpoon:list())
-  --     end)
-  --     vim.keymap.set("n", "<leader>1", function()
-  --       harpoon:list():select(1)
-  --     end)
-  --     vim.keymap.set("n", "<leader>2", function()
-  --       harpoon:list():select(2)
-  --     end)
-  --     vim.keymap.set("n", "<leader>3", function()
-  --       harpoon:list():select(3)
-  --     end)
-  --     vim.keymap.set("n", "<leader>4", function()
-  --       harpoon:list():select(4)
-  --     end)
-  --   end,
-  -- },
-  {
+ {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
@@ -489,26 +462,6 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- {
-	-- 	"folke/snacks.nvim",
-	-- 	priority = 1000,
-	-- 	lazy = false,
-	-- 	opts = {
-	-- 		-- your configuration comes here
-	-- 		-- or leave it empty to use the default settings
-	-- 		-- refer to the configuration section below
-	-- 		bigfile = { enabled = true },
-	-- 		dashboard = { enabled = true },
-	-- 		indent = { enabled = false },
-	-- 		input = { enabled = true },
-	-- 		notifier = { enabled = true },
-	-- 		quickfile = { enabled = true },
-	-- 		scroll = { enabled = true },
-	-- 		statuscolumn = { enabled = true },
-	-- 		words = { enabled = true },
-	-- 		zen = { enabled = true },
-	-- 	},
-	-- },
 	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
@@ -521,4 +474,4 @@ require("lazy").setup({
 			})
 		end,
 	},
-})
+}})
