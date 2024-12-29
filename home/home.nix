@@ -54,6 +54,8 @@
 
     nodePackages_latest.ts-node
 
+    neovim-remote
+
     # neovim lsp
     tree-sitter
     lua-language-server
@@ -69,7 +71,6 @@
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
-    (writeShellScriptBin "smart_tmux" (builtins.readFile ./scripts/smart_tmux.sh))
     (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
     (writeShellScriptBin "oblique" (builtins.readFile ./scripts/oblique.sh))
     (writeShellScriptBin "welcome" (builtins.readFile ./scripts/welcome.sh))
@@ -109,8 +110,23 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/nvim";
     recursive = true;
   };
+  # Generally easier to use these symlinks
   xdg.configFile.tmux = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/tmux";
+    recursive = true;
+  };
+  xdg.configFile.ghostty = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/ghostty";
+    recursive = true;
+  };
+
+  # Mac stuff
+  xdg.configFile.aerospace = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/aerospace";
+    recursive = true;
+  };
+  xdg.configFile.sketchybar = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/sketchybar";
     recursive = true;
   };
 
@@ -120,9 +136,10 @@
     # autosuggestion.enable = true;
     shellAliases = {
       c = "clear";
-      t = "smart_tmux";
+      t = "~/.config/tmux/smart_tmux.sh";
       b = "battery_status";
-      n = "smart_nvim";
+      # n = "smart_nvim";
+      n = "nvr .";
       neo = "neofetch --source ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
       # git helpers
@@ -159,13 +176,15 @@
       export PATH=$HOME/.local/bin:$PATH
       if [[ $(uname) == "Darwin" ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        clear
       fi
-      if [ -z "$TMUX" ]
-      then
-        tmux attach -t TMUX || tmux new -s TMUX
-      fi   
-    '';
+  '';
  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.starship = {
     enable = true;

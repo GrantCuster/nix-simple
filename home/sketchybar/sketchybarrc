@@ -1,0 +1,83 @@
+# A simple sketchybar config for aerospace users to get started with
+# Not too different from the base starting config!
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top padding_left=8 padding_right=8 height=28 color=0xff1d2021
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  icon.font="JetBrainsMonoNL Nerd Font:Bold:12.0"
+  label.font="JetBrainsMonoNL Nerd Font:Bold:12.0"
+  icon.color=0xfffebdbb2
+  label.color=0xffebdbb2
+  icon.padding_left=8
+  icon.padding_right=6
+  label.padding_left=0
+  label.padding_right=8
+  background.padding_left=0
+  background.padding_right=0
+  updates=on
+)
+sketchybar --default "${default[@]}"
+
+##### Adding aeropsace layouts #####
+
+# Add the aerospace_workspace_change event we specified in aerospace.toml
+sketchybar --add event aerospace_workspace_change
+
+# This only works for single monitor configs!
+for sid in $(aerospace list-workspaces --monitor 1); do
+  #for sid in "${SPACE_IDS[@]}"; do
+  sketchybar --add item space.$sid left \
+    --set space.$sid \
+    drawing=off \
+    icon="$sid" \
+    click_script="aerospace workspace $sid"
+done
+
+sketchybar --set space.1 label="main"
+sketchybar --set space.2 label="work"
+sketchybar --set space.3 label="comms"
+sketchybar --set space.5 label="music"
+
+# Add a blank item to the left side, which will be used to refresh aerospace
+sketchybar --add item blank left \
+  --subscribe blank aerospace_workspace_change \
+  --set blank script="$PLUGIN_DIR/aerospace.sh"
+
+##### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+# Some items refresh on a fixed cycle, e.g. the clock runs its script once
+# every 10s. Other gititems respond to events they subscribe to, e.g. the
+# volume.sh script is only executed once an actual change in system audio
+# volume is registered. More info about the event system can be found here:
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add item clock right \
+  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+  --add item date right \
+  --set date update_freq=100 script="$PLUGIN_DIR/date.sh" \
+  --add item volume right \
+  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change \
+  --add item battery right \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
