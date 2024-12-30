@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Function to start or switch to a tmux session
 tmux_session() {
