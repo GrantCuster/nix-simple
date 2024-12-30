@@ -14,10 +14,20 @@
       url = "github:aloxaf/fzf-tab";
       flake = false;
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ghostty, zsh-fzf_tab, ... } @ inputs:
 {
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./nixos/configuration.nix
+      ];
+    };
+ 
     homeConfigurations = {
       "aws-ubuntu" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -25,8 +35,8 @@
           zsh-fzf_tab = zsh-fzf_tab;
         };
         modules = [ 
-         ./aws-ubuntu.nix
-          ./home.nix 
+         ./home/aws-ubuntu.nix
+          ./home/home.nix 
         ];
       };
     };
@@ -38,8 +48,8 @@
         };
         modules = [ 
 
-          ./linux-x86.nix
-          ./home.nix 
+          ./home/linux-x86.nix
+          ./home/home.nix 
         ];
       };
     };
@@ -48,12 +58,12 @@
         pkgs = import nixpkgs { system = "x86_64-linux"; config = { allowUnfree = true;}; };
         extraSpecialArgs = {
           zsh-fzf_tab = zsh-fzf_tab;
+          ghostty = ghostty;
         };
         modules = [ 
-
-          ./linux-x86.nix
-          ./home.nix 
-          ./linux-gui.nix
+          ./home/linux-x86.nix
+          ./home/home.nix 
+          ./home/linux-gui.nix
         ];
       };
     };
@@ -65,8 +75,8 @@
         };
        modules = [ 
 
-          ./rpi-deck.nix
-          ./home.nix 
+          ./home/rpi-deck.nix
+          ./home/home.nix 
         ];
       };
     };
@@ -76,10 +86,9 @@
         extraSpecialArgs = {
           zsh-fzf_tab = zsh-fzf_tab;
         };
- 
         modules = [ 
-         ./work-mac.nix
-          ./home.nix 
+         ./home/work-mac.nix
+          ./home/home.nix 
         ];
       };
     };

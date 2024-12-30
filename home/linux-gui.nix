@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ghostty, ... }:
 
 {
   home.packages = with pkgs; [
@@ -15,11 +15,14 @@
     light
     sway-contrib.grimshot
     newsboat
+    waybar
 
     xdragon
 
     # not actually gui but putting rust here for now
     rustup
+
+    ghostty.packages.x86_64-linux.default
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
@@ -41,4 +44,9 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/mako";
     recursive = true;
   };
+  xdg.configFile.waybar = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/waybar";
+    recursive = true;
+  };
+ 
 }

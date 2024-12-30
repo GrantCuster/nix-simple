@@ -1,0 +1,27 @@
+* {
+  font-size: 14px;
+  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF";
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+window#waybar {
+  background: #282828;
+  color: #ebdbb2;
+  padding: 0;
+  margin: 0;
+}
+#custom-clock, #custom-date {
+  padding: 2px 8px;
+}
+#workspaces button {
+  color: #ebdbb2;
+  border-radius: 0;
+  padding: 0px 8px;
+  border: none;
+  margin: 0;
+}
+#workspaces button.active {
+  background: #ebdbb2;
+  color: #282828;
+}

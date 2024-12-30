@@ -44,6 +44,8 @@
 
     nom
 
+    bash
+
     yazi
 
     fzf

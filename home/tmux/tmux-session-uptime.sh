@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 uptime=$(( $(date +%s) - $(tmux display-message -p '#{session_created}') ))
 days=$((uptime / 86400))
 hours=$(( (uptime % 86400) / 3600 ))
