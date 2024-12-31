@@ -11,7 +11,7 @@ window#waybar {
   padding: 0;
   margin: 0;
 }
-#custom-clock, #custom-date {
+#custom-clock, #custom-date, #battery {
   padding: 4px 8px;
 }
 #workspaces button {
