@@ -21,11 +21,23 @@
 
   outputs = { self, nixpkgs, home-manager, ghostty, zsh-fzf_tab, ... } @ inputs:
 {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./nixos/configuration.nix
-      ];
+    nixosConfigurations = {
+	    "mele" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/skybax.nix
+		./nixos/configuration.nix
+	      ];
+	    };
+
+	    "gram" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/bix.nix
+		./nixos/configuration.nix
+	      ];
+	    };
+
     };
  
     homeConfigurations = {
