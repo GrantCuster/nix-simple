@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of ubuntu";
+  description = "Nix os and home manager config";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.

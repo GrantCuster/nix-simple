@@ -6,13 +6,13 @@
   margin: 0;
 }
 window#waybar {
-  background: #282828;
+  background: #1d2021;
   color: #a89984;
   padding: 0;
   margin: 0;
 }
 #custom-clock, #custom-date {
-  padding: 2px 8px;
+  padding: 4px 8px;
 }
 #workspaces button {
   color: #a89984;
