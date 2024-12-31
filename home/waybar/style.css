@@ -7,7 +7,7 @@
 }
 window#waybar {
   background: #282828;
-  color: #ebdbb2;
+  color: #a89984;
   padding: 0;
   margin: 0;
 }
@@ -15,13 +15,13 @@ window#waybar {
   padding: 2px 8px;
 }
 #workspaces button {
-  color: #ebdbb2;
+  color: #a89984;
   border-radius: 0;
   padding: 0px 8px;
   border: none;
   margin: 0;
 }
 #workspaces button.active {
-  background: #ebdbb2;
-  color: #282828;
+  background: #504945;
+  color: #fbf1c7;
 }

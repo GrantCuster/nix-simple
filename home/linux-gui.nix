@@ -16,6 +16,7 @@
     sway-contrib.grimshot
     newsboat
     waybar
+    spotify-player
 
     xdragon
 
@@ -48,5 +49,10 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/waybar";
     recursive = true;
   };
+  xdg.configFile.hypr = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/hypr";
+    recursive = true;
+  };
+ 
  
 }
