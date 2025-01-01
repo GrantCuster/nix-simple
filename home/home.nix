@@ -10,6 +10,7 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -58,6 +59,9 @@
 
     neovim-remote
 
+
+    nerd-fonts.jetbrains-mono
+
     # neovim lsp
     tree-sitter
     lua-language-server
@@ -70,8 +74,6 @@
     eslint_d
     pyright
     svelte-language-server
-
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
     (writeShellScriptBin "oblique" (builtins.readFile ./scripts/oblique.sh))
