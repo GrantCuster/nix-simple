@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]])
 
 -- vim.keymap.set("n", "tt", ":pu=strftime('%c')<CR>o<CR><esc>", { noremap = true })
 
@@ -20,7 +21,7 @@ vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-.>", [[clear<CR>]], { noremap = true })
-vim.keymap.set({ "n", "t" }, "<C-x>", [[<Cmd>q<CR>]], { noremap = true })
+vim.keymap.set({ "n", "t" }, "<C-w>", [[<Cmd>q<CR>]], { noremap = true, nowait = true })
 vim.keymap.set({ "n", "t" }, "<C-->", [[<Cmd>Oil<CR>]], { noremap = true })
 vim.keymap.set({ "n", "t" }, "<C-q>", ":qa<CR>", {})
 vim.keymap.set("n", "<C-s>", ":w<CR>", {})
@@ -127,9 +128,19 @@ vim.keymap.set("n", "<leader><enter>", function()
 	local winwidth = vim.fn.winwidth(0) * 0.5
 	local winheight = vim.fn.winheight(0)
 	if winwidth > winheight then
-		return ":vsplit<CR><C-W>l"
+		return "<CMD>vsplit<CR><CMD>wincmd l<CR>"
 	else
-		return ":split<CR><C-W>j"
+		return "<CMD>split<CR><CMD>wincmd j<CR>"
+	end
+end, { expr = true, replace_keycodes = true })
+
+vim.keymap.set({ "n", "t" }, "<C-t>", function()
+	local winwidth = vim.fn.winwidth(0) * 0.5
+	local winheight = vim.fn.winheight(0)
+	if winwidth > winheight then
+		return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>term<CR>"
+	else
+		return "<CMD>split<CR><CMD>wincmd j<CR><CMD>term<CR>"
 	end
 end, { expr = true, replace_keycodes = true })
 
