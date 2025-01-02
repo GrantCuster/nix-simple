@@ -36,6 +36,8 @@ vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
 vim.api.nvim_command('autocmd VimResized * wincmd =')
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
+vim.opt.showmode = false
+
 vim.keymap.set("n", "<C-enter>", function()
 	local vim_dir = vim.fn.expand("%:p:h")
 	vim_dir = vim_dir:gsub("^oil://", "")
