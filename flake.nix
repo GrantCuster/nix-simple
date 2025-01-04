@@ -38,6 +38,16 @@
 	      ];
 	    };
 
+	    "nuc" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/brokenhorn.nix
+		./nixos/configuration.nix
+	      ];
+	    };
+
+
+
     };
  
     homeConfigurations = {
