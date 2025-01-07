@@ -176,6 +176,9 @@
       }
     ];
     initExtra = ''
+      # Add /usr/local/bin to PATH - maybe only needed on mac
+      export PATH=/usr/local/bin:$PATH
+      export PATH=$HOME/.local/bin:$PATH
       # Add .local/bin to PATH
       export PATH=$HOME/.local/bin:$PATH
       if [[ $(uname) == "Darwin" ]]; then

@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
-vim.keymap.set('t', 'jk', [[<C-\><C-n>]])
+vim.keymap.set("t", "jk", [[<C-\><C-n>]])
 
 -- vim.keymap.set("n", "tt", ":pu=strftime('%c')<CR>o<CR><esc>", { noremap = true })
 
@@ -28,24 +28,26 @@ vim.keymap.set("n", "<C-s>", ":w<CR>", {})
 -- reload base
 vim.keymap.set("n", "<leader>rb", ":luafile ~/.config/nvim/lua/base.lua<CR>", {})
 
+vim.keymap.set({ "n" }, "<C-i>", "<C-d>", { noremap = true })
+
 vim.keymap.set({ "n", "t" }, "<C-e>", [[<Cmd>split<CR><Cmd>wincmd j<CR><Cmd>Oil<CR>]], {})
 vim.keymap.set({ "n", "t" }, "<C-d>", [[<Cmd>vsplit<CR><Cmd>wincmd l<CR><Cmd>Oil<CR>]], {})
 
 vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
 
-vim.api.nvim_command('autocmd VimResized * wincmd =')
+vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
 vim.opt.showmode = false
 
 vim.keymap.set("n", "<C-enter>", function()
-	local vim_dir = vim.fn.expand("%:p:h")
-	vim_dir = vim_dir:gsub("^oil://", "")
-	vim.fn.setenv("VIM_DIR", vim_dir)
-	vim.cmd("terminal")
-	vim.schedule(function()
-		vim.fn.chansend(vim.b.terminal_job_id, "cd " .. vim_dir .. " && clear\n")
-	end)
+  local vim_dir = vim.fn.expand("%:p:h")
+  vim_dir = vim_dir:gsub("^oil://", "")
+  vim.fn.setenv("VIM_DIR", vim_dir)
+  vim.cmd("terminal")
+  vim.schedule(function()
+    vim.fn.chansend(vim.b.terminal_job_id, "cd " .. vim_dir .. " && clear\n")
+  end)
 end, { noremap = true })
 -- vim.keymap.set("n", "<enter>", ":term", {})
 -- vim.keymap.set("t", "<enter>", "i", {})
@@ -96,7 +98,7 @@ vim.keymap.set("n", "<leader>aa", "ggVGy", {})
 vim.keymap.set("n", "<leader>cc", ":Telescope neoclip<CR>", {})
 
 vim.filetype.add({
-	pattern = { [".*/hyprland%.conf"] = "hyprlang" },
+  pattern = { [".*/hyprland%.conf"] = "hyprlang" },
 })
 
 vim.cmd("set ignorecase")
@@ -127,23 +129,23 @@ vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":move '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<leader><enter>", function()
-	local winwidth = vim.fn.winwidth(0) * 0.5
-	local winheight = vim.fn.winheight(0)
-	if winwidth > winheight then
-		return "<CMD>vsplit<CR><CMD>wincmd l<CR>"
-	else
-		return "<CMD>split<CR><CMD>wincmd j<CR>"
-	end
+  local winwidth = vim.fn.winwidth(0) * 0.5
+  local winheight = vim.fn.winheight(0)
+  if winwidth > winheight then
+    return "<CMD>vsplit<CR><CMD>wincmd l<CR>"
+  else
+    return "<CMD>split<CR><CMD>wincmd j<CR>"
+  end
 end, { expr = true, replace_keycodes = true })
 
 vim.keymap.set({ "n", "t" }, "<C-t>", function()
-	local winwidth = vim.fn.winwidth(0) * 0.5
-	local winheight = vim.fn.winheight(0)
-	if winwidth > winheight then
-		return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>term<CR>"
-	else
-		return "<CMD>split<CR><CMD>wincmd j<CR><CMD>term<CR>"
-	end
+  local winwidth = vim.fn.winwidth(0) * 0.5
+  local winheight = vim.fn.winheight(0)
+  if winwidth > winheight then
+    return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>term<CR>"
+  else
+    return "<CMD>split<CR><CMD>wincmd j<CR><CMD>term<CR>"
+  end
 end, { expr = true, replace_keycodes = true })
 
 -- jump to next diagnostic error
@@ -158,35 +160,51 @@ local group_id = vim.api.nvim_create_augroup("ToggleLineNumbers", { clear = true
 
 -- Turn off line numbers when entering a terminal
 vim.api.nvim_create_autocmd("BufEnter", {
-	group = group_id,
-	pattern = "term://*",
-	callback = function()
-		vim.opt.spell = false
-		vim.opt.number = false
-		vim.opt.relativenumber = false
-		vim.cmd("startinsert")
-	end,
+  group = group_id,
+  pattern = "term://*",
+  callback = function()
+    vim.opt.spell = false
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd("startinsert")
+  end,
 })
 vim.api.nvim_create_autocmd("TermOpen", {
-	group = group_id,
-	pattern = "term://*",
-	callback = function()
-		vim.opt.spell = false
-		vim.opt.number = false
-		vim.opt.relativenumber = false
-		vim.cmd("startinsert")
-	end,
+  group = group_id,
+  pattern = "term://*",
+  callback = function()
+    vim.opt.spell = false
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd("startinsert")
+  end,
 })
 
 -- Turn on line numbers when entering a regular file buffer
 vim.api.nvim_create_autocmd("BufEnter", {
-	group = group_id,
-	pattern = "*",
-	callback = function()
-		if not vim.bo.buftype == "terminal" then
-			vim.opt.spell = true
-			vim.opt.number = true
-			vim.opt.relativenumber = true
-		end
-	end,
+  group = group_id,
+  pattern = "*",
+  callback = function()
+    if not vim.bo.buftype == "terminal" then
+      vim.opt.spell = true
+      vim.opt.number = true
+      vim.opt.relativenumber = true
+    end
+  end,
 })
+
+vim.keymap.set({ "n" }, "<C-c>", function()
+  -- Get the current line
+  local current_line = vim.fn.getline(".")
+  -- Get the current line number
+  local line_number = vim.fn.line(".")
+  if current_line:find("%- %[ %]") then
+    local new_line = current_line:gsub("%- %[ %]", "- [x]")
+    vim.fn.setline(line_number, new_line)
+  elseif current_line:find("%- %[x%]") then
+    local new_line = current_line:gsub("%- %[x%] ", "")
+    vim.fn.setline(line_number, new_line)
+  else
+    vim.fn.setline(line_number, "- [ ] " .. current_line)
+  end
+end, { desc = "Toggle task done or not" })
