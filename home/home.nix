@@ -62,6 +62,10 @@
 
     nerd-fonts.jetbrains-mono
 
+    chafa
+    viu
+    ascii-image-converter
+
     # neovim lsp
     tree-sitter
     lua-language-server
