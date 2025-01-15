@@ -1,4 +1,4 @@
-{ config, pkgs, ghostty, ... }:
+{ config, pkgs, lib, ghostty, ... }:
 
 {
   home.packages = with pkgs; [
@@ -53,6 +53,9 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/hypr";
     recursive = true;
   };
- 
- 
+  xdg.configFile = {
+    "hyprscroller/hyprscroller.conf".text = ''
+      plugin = ${lib.getLib pkgs.hyprlandPlugins.hyprscroller}/lib/libhyprscroller.so 
+    '';
+  };
 }
