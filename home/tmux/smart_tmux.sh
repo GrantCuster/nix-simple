@@ -9,7 +9,7 @@ tmux_session() {
       tmux attach-session -t "$1"
     fi
   else
-    tmux new-session -d -s "$1" "nvim ."
+    tmux new-session -d -s "$1" "nvim -c :term"
     if [ -n "$TMUX" ]; then
       tmux switch-client -t "$1"
     else

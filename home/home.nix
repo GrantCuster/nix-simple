@@ -31,7 +31,7 @@
 
     nodejs_22
 
-    neofetch
+    fastfetch
     htop
 
     imagemagick
@@ -148,7 +148,7 @@
       b = "battery_status";
       # n = "smart_nvim";
       n = "nvr .";
-      neo = "neofetch --source ~/nix/home/extra/sloth.txt";
+      stat = "fastfetch --source ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
       # git helpers
       ga = "git add .";

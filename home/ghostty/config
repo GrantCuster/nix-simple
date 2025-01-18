@@ -4,6 +4,7 @@ macos-titlebar-style = hidden
 confirm-close-surface = false
 quit-after-last-window-closed = true
 font-feature = -calt
+window-padding-balance = true
 
 keybind = ctrl+comma=unbind
 keybind = ctrl+page_down=unbind

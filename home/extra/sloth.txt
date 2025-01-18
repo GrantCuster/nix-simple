@@ -1,12 +1,12 @@
 
-              MMMM        MMMM
-MMMMMMMMMMMMMM    MMMMMMMM    MMMMMM
-            MM    MM    MM    MM
-MMMMMMMMMMMMMM    MMMMMMMM    MMMMMM
-            MM    MM    MM    MM
-    MMMMMM  MM    MMMMMM      MM
-  MM      MMMM                MM
-  MM  MM    MM                MM
-  MM                          MM
-    MM                      MM
-      MMMMMMMMMMMMMMMMMMMMMM
+              ████        ████
+██████████████    ████████    ██████
+            ██    ██    ██    ██
+██████████████    ████████    ██████
+            ██    ██    ██    ██
+    ██████  ██    ██████      ██
+  ██      ████                ██
+  ██  ██    ██                ██
+  ██                          ██
+    ██                      ██
+      ██████████████████████
