@@ -11,13 +11,13 @@ window#waybar {
   padding: 0;
   margin: 0;
 }
-#custom-clock, #custom-date, #battery {
-  padding: 4px 8px;
+#custom-clock, #custom-date, #battery, #niri-count {
+  padding: 5px 8px;
 }
 #workspaces button {
   color: #a89984;
   border-radius: 0;
-  padding: 0px 8px;
+  padding: 4px 4px;
   border: none;
   margin: 0;
 }

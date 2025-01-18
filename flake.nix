@@ -14,12 +14,9 @@
       url = "github:aloxaf/fzf-tab";
       flake = false;
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-  };
+ };
 
-  outputs = { self, nixpkgs, home-manager, ghostty, zsh-fzf_tab, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, ... } @ inputs:
 {
     nixosConfigurations = {
 	    "mele" = nixpkgs.lib.nixosSystem {
@@ -80,7 +77,6 @@
         pkgs = import nixpkgs { system = "x86_64-linux"; config = { allowUnfree = true;}; };
         extraSpecialArgs = {
           zsh-fzf_tab = zsh-fzf_tab;
-          ghostty = ghostty;
         };
         modules = [ 
           ./home/linux-x86.nix

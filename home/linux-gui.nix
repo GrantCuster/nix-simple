@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ghostty, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -23,7 +23,7 @@
     # not actually gui but putting rust here for now
     rustup
 
-    ghostty.packages.x86_64-linux.default
+    ghostty
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
@@ -51,6 +51,10 @@
   };
   xdg.configFile.hypr = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/hypr";
+    recursive = true;
+  };
+  xdg.configFile.niri = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/niri";
     recursive = true;
   };
   xdg.configFile = {

@@ -20,6 +20,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.extraHosts = "192.0.0.0 twitter";
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -55,7 +57,7 @@
   services.printing.enable = true;
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     openFirewall = true;
   };
 
@@ -110,7 +112,8 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  programs.hyprland.enable = true;
+  # programs.hyprland.enable = true;
+  programs.niri.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

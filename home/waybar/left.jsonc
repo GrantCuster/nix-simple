@@ -1,10 +1,10 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "left",
   // "modules-left": ["hyprland/workspaces"],
-  "modules-left": ["niri/niri-count"],
-  "modules-center": [],
-  "modules-right": ["battery", "custom/date", "custom/clock"],
+  "modules-left": [],
+  "modules-center": ["niri/workspaces"],
+  "modules-right": [],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "hyprland/workspaces": {},
@@ -27,7 +27,7 @@
   },
   "custom/niri-count": {
     "exec": "sh ~/.config/waybar/scripts/niri-test.sh",
-    "interval": 1,
+    "interval": 2,
   },
   "custom/clock": {
     "exec": "date '+%l:%M %p' | sed 's/^ //'",
