@@ -96,7 +96,7 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
    
-  background-color "#504945"
+  background-color "#0f0f0f"
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -104,7 +104,7 @@ output "eDP-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 0
+    gaps 16
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -217,8 +217,8 @@ layout {
     struts {
         left 12
         right 12
-        top 8
-        bottom 8
+        top 0
+        bottom 0
     }
 }
 
@@ -226,6 +226,7 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
+// spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 spawn-at-startup "waybar" 
 spawn-at-startup "ghostty" "-e" "~/.config/tmux/launch.sh"
 
@@ -267,6 +268,10 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+}
+window-rule {
+  match app-id="ghostty"
+  draw-border-with-background false
 }
 
 // Example: block out two password managers from screen capture.

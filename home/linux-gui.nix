@@ -18,6 +18,8 @@
     waybar
     spotify-player
 
+    swaybg
+
     xdragon
 
     # not actually gui but putting rust here for now

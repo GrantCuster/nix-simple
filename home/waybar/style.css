@@ -6,15 +6,25 @@
   margin: 0;
 }
 window#waybar {
-  background: #282828;
+  /* background: #282828; */
+  background: transparent;
   color: #a89984;
   padding: 0;
   margin: 0;
 }
-#custom-clock, #custom-date, #battery, #custom-niri-count {
+#custom-clock,
+#custom-date,
+#battery,
+#custom-niri-count {
+  /* background: rgba(29, 32, 33, 0.95); */
   padding: 5px 8px;
+  background: transparent;
 }
+
+
 #workspaces button {
+  /* background: rgba(29, 32, 33, 0.95); */
+  background: transparent;
   color: #a89984;
   border-radius: 0;
   padding: 4px 4px;
@@ -22,6 +32,7 @@ window#waybar {
   margin: 0;
 }
 #workspaces button.active {
-  background: #504945;
-  color: #fbf1c7;
+  background: #928374;
+  color: black;
+  font-weight: 700;
 }

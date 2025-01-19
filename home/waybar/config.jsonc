@@ -1,5 +1,5 @@
 {
-  "layer": "top",
+  "layer": "bottom",
   "position": "bottom",
   // "modules-left": ["hyprland/workspaces"],
   "modules-left": ["niri/workspaces"],

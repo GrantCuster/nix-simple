@@ -1,6 +1,7 @@
-theme = GruvboxDark
+theme = GruvboxDarkHard
 window-decoration = false
 macos-titlebar-style = hidden
+window-theme = system
 confirm-close-surface = false
 quit-after-last-window-closed = true
 font-feature = -calt
