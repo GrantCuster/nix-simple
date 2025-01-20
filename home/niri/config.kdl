@@ -131,7 +131,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.3333; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -331,6 +331,7 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     Alt+Q { close-window; }
+    Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
