@@ -96,7 +96,7 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
    
-  background-color "#0f0f0f"
+  background-color "#1d2021"
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -149,7 +149,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        off
+        // off
 
         // How many logical pixels the ring extends out from the windows.
         width 1
@@ -228,7 +228,7 @@ layout {
 // See the binds section below for more spawn examples.
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 spawn-at-startup "waybar" 
-spawn-at-startup "ghostty" "-e" "~/.config/tmux/launch.sh"
+spawn-at-startup "ghostty" "--title=launch" "-e" "~/.config/tmux/launch.sh"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -273,6 +273,12 @@ window-rule {
   match app-id="ghostty"
   draw-border-with-background false
 }
+window-rule {
+  match title="launch"
+  default-column-width { proportion 1.0; }
+}
+
+
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
