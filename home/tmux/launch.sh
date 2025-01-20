@@ -12,7 +12,7 @@ session_count=$(tmux list-sessions 2>/dev/null | wc -l)
 # tmux has-session -t console 2>/dev/null || tmux new-session -s console 'cd; nvim -c "terminal neofetch --source ~/nix/home/extra/sloth.txt && zsh"';
 
 if [ "$session_count" -eq 0 ]; then
-  tmux new-session -s launch 'cd; nvim -c "terminal fastfetch --file ~/nix/home/extra/sloth.txt && zsh"';
+  tmux new-session -s launch 'cd; nvim -c "terminal fastfetch --file ~/nix/home/extra/sloth.txt --logo-color-1 white && zsh"';
 else
   tmux new-session 'nvim -c :term';
 fi
