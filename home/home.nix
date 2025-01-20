@@ -148,7 +148,7 @@
       b = "battery_status";
       # n = "smart_nvim";
       n = "nvr .";
-      stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
+      stat = "fastfetch --file ~/nix/home/extra/sloth.txt --logo-color-1 white";
       ts = "tmux_session";
       # git helpers
       ga = "git add .";

@@ -98,6 +98,12 @@ output "eDP-1" {
    
   background-color "#1d2021"
 }
+output "DP-1" {
+  background-color "#1d2021"
+}
+output "DP-3" {
+  background-color "#1d2021"
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
