@@ -27,6 +27,7 @@ vim.keymap.set({ "n", "t" }, "<C-q>", ":qa<CR>", {})
 vim.keymap.set("n", "<C-s>", ":w<CR>", {})
 -- reload base
 vim.keymap.set("n", "<leader>rb", ":luafile ~/.config/nvim/lua/base.lua<CR>", {})
+vim.keymap.set("n", "<leader>rs", ":luafile ~/.config/nvim/lua/config/luasnip.lua<CR>", {})
 
 vim.keymap.set({ "n" }, "<C-i>", "<C-d>", { noremap = true })
 
@@ -142,9 +143,9 @@ vim.keymap.set({ "n", "t" }, "<C-t>", function()
 	local winwidth = vim.fn.winwidth(0) * 0.5
 	local winheight = vim.fn.winheight(0)
 	if winwidth > winheight then
-		return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>term<CR>"
+		return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>e ~/dev/TODO.md<CR>"
 	else
-		return "<CMD>split<CR><CMD>wincmd j<CR><CMD>term<CR>"
+		return "<CMD>split<CR><CMD>wincmd j<CR><CMD>e ~/dev/TODO.md<CR>"
 	end
 end, { expr = true, replace_keycodes = true })
 
@@ -158,7 +159,12 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Create an autocmd group
 local group_id = vim.api.nvim_create_augroup("ToggleLineNumbers", { clear = true })
 
+vim.diagnostic.config({
+	virtual_text = false,
+})
+
 -- Turn off line numbers when entering a terminal
+-- TODO this doesn't work if i rename the buffer files i thin
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = group_id,
 	pattern = "term://*",
@@ -193,7 +199,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
-vim.keymap.set({ "n" }, "<C-c>", function()
+vim.keymap.set({ "n", "i" }, "<C-c>", function()
 	-- Get the current line
 	local current_line = vim.fn.getline(".")
 	-- Get the current line number

@@ -15,6 +15,7 @@ keybind = ctrl+zero=unbind
 keybind = ctrl+enter=unbind
 keybind = ctrl+page_up=unbind
 keybind = ctrl+tab=unbind
+keybind = ctrl+t=unbind
 keybind = ctrl+plus=unbind
 keybind = super+ctrl+shift+up=unbind
 keybind = super+ctrl+shift+equal=unbind

@@ -6,8 +6,8 @@
 
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
+
 
 # Run Sketchybar together with AeroSpace
 # sketchbar has a built-in detection of already running process,
@@ -67,7 +67,7 @@ inner.horizontal = 0
 inner.vertical =   0
 outer.left =       0
 outer.bottom =     0
-outer.top = [{ monitor."main" = 0 }, 32]
+outer.top = [{ monitor."built-in" = 0 }, 28]
 outer.right =      0
 
 # 'main' binding mode declaration
