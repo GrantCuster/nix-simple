@@ -137,7 +137,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.3333; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -524,9 +524,9 @@ binds {
     Alt+Shift+V { toggle-window-floating; }
     Alt+V { switch-focus-between-floating-and-tiling; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Alt+Shift+4 { screenshot; }
+    Alt+Shift+5 { screenshot-window; }
+    Alt+Shift+6 { screenshot-screen; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Alt+Shift+E { quit; }

@@ -192,6 +192,44 @@
   '';
  };
 
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
+    shellAliases = {
+      c = "clear";
+      t = "~/.config/tmux/smart_tmux.sh";
+      b = "battery_status";
+      # n = "smart_nvim";
+      n = "nvr .";
+      stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
+      ts = "tmux_session";
+      # git helpers
+      ga = "git add .";
+      gc = "git_commit";
+      gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
+      gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
+      gs = "git status";
+      # sudo use nix packages
+      s = "sudo --preserve-env=PATH env";
+      sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
+      # reconnect nix on work mac or refresh shell in general
+      rn = ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+      rz = ". /nix/var/nix/profiles/default/etc/profile.d/nix.sh";
+      # disable touchpad lg gram not worki
+      tt = "s toggle_trackpad";
+      # dir by last modified
+      fd = "findlastdir";
+      # better nvim pipe;
+      pv = "nvim -c 'read !pbpaste' -c 'setlocal buftype=nofile bufhidden=hide noswapfile'";
+      # pipe shell to nvim
+      sv = "nvim -c 'setlocal buftype=nofile bufhidden=hide noswapfile' -";
+      # open command history in neovim
+      vh = "nvim ~/.zsh_history";
+    };
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
