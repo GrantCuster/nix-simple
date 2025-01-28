@@ -1,4 +1,4 @@
-theme = GruvboxDarkHard
+theme = GruvboxDark
 window-decoration = false
 macos-titlebar-style = hidden
 window-theme = system

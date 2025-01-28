@@ -50,7 +50,6 @@
     yazi
 
     fzf
-    bat
 
     # make sure gnu find
     findutils

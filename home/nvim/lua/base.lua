@@ -40,40 +40,62 @@ vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
 vim.opt.showmode = false
 
+-- Auto reload files
+vim.o.updatetime = 1000
+vim.o.autoread = true
+vim.api.nvim_create_autocmd("CursorHold", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})
+vim.api.nvim_create_autocmd("FocusGained", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})
+
 vim.keymap.set("n", "<C-enter>", function()
-	local vim_dir = vim.fn.expand("%:p:h")
-	vim_dir = vim_dir:gsub("^oil://", "")
-	vim.fn.setenv("VIM_DIR", vim_dir)
-	vim.cmd("terminal fish")
-	vim.schedule(function()
-		vim.fn.chansend(vim.b.terminal_job_id, "cd " .. vim_dir .. " && clear\n")
-	end)
+  local vim_dir = vim.fn.expand("%:p:h")
+  vim_dir = vim_dir:gsub("^oil://", "")
+  vim.fn.setenv("VIM_DIR", vim_dir)
+  vim.cmd("terminal fish")
+  vim.schedule(function()
+    vim.fn.chansend(vim.b.terminal_job_id, "cd " .. vim_dir .. " && clear\n")
+  end)
 end, { noremap = true })
 
 -- terminal styling
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-	callback = function()
-		if vim.bo[0].buftype == "terminal" then
-			vim.opt.number = false
-			vim.opt.relativenumber = false
-			vim.opt.spell = false
-			vim.cmd("startinsert")
-		else
-			vim.opt.number = true
-			vim.opt.relativenumber = true
-			vim.opt.spell = true
-		end
-	end,
+  callback = function()
+    if vim.bo[0].buftype == "terminal" then
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+      vim.opt.spell = false
+      vim.cmd("startinsert")
+    else
+      vim.opt.number = true
+      vim.opt.relativenumber = true
+      vim.opt.spell = true
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
-	pattern = "term://*",
-	callback = function()
-		vim.opt.number = false
-		vim.opt.relativenumber = false
-		vim.opt.spell = false
-		vim.cmd("startinsert")
-	end,
+  pattern = "term://*",
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.opt.spell = false
+    vim.cmd("startinsert")
+  end,
 })
 
 vim.keymap.set("n", "<leader>ev", ":e ~/.config/nvim/base.lua<cr>", { noremap = true })
@@ -105,7 +127,7 @@ vim.keymap.set("n", "<leader>aa", "ggVGy", {})
 vim.keymap.set("n", "<leader>cc", ":Telescope neoclip<CR>", {})
 
 vim.filetype.add({
-	pattern = { [".*/hyprland%.conf"] = "hyprlang" },
+  pattern = { [".*/hyprland%.conf"] = "hyprlang" },
 })
 
 vim.cmd("set ignorecase")
@@ -133,23 +155,23 @@ vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":move '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<leader><enter>", function()
-	local winwidth = vim.fn.winwidth(0) * 0.5
-	local winheight = vim.fn.winheight(0)
-	if winwidth > winheight then
-		return "<CMD>vsplit<CR><CMD>wincmd l<CR>"
-	else
-		return "<CMD>split<CR><CMD>wincmd j<CR>"
-	end
+  local winwidth = vim.fn.winwidth(0) * 0.5
+  local winheight = vim.fn.winheight(0)
+  if winwidth > winheight then
+    return "<CMD>vsplit<CR><CMD>wincmd l<CR>"
+  else
+    return "<CMD>split<CR><CMD>wincmd j<CR>"
+  end
 end, { expr = true, replace_keycodes = true })
 
 vim.keymap.set({ "n", "t" }, "<C-t>", function()
-	local winwidth = vim.fn.winwidth(0) * 0.5
-	local winheight = vim.fn.winheight(0)
-	if winwidth > winheight then
-		return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>e ~/dev/TODO.md<CR>"
-	else
-		return "<CMD>split<CR><CMD>wincmd j<CR><CMD>e ~/dev/TODO.md<CR>"
-	end
+  local winwidth = vim.fn.winwidth(0) * 0.5
+  local winheight = vim.fn.winheight(0)
+  if winwidth > winheight then
+    return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>e ~/dev/TODO.md<CR>"
+  else
+    return "<CMD>split<CR><CMD>wincmd j<CR><CMD>e ~/dev/TODO.md<CR>"
+  end
 end, { expr = true, replace_keycodes = true })
 
 -- jump to next diagnostic error
@@ -160,99 +182,99 @@ vim.keymap.set("n", "[e", ":lua vim.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.diagnostic.config({
-	virtual_text = false,
+  virtual_text = false,
 })
 
 vim.keymap.set({ "n", "i" }, "<C-c>", function()
-	-- Get the current line
-	local current_line = vim.fn.getline(".")
-	-- Get the current line number
-	local line_number = vim.fn.line(".")
-	if current_line:find("%- %[ %]") then
-		local new_line = current_line:gsub("%- %[ %]", "- [x]")
-		vim.fn.setline(line_number, new_line)
-	elseif current_line:find("%- %[x%]") then
-		local new_line = current_line:gsub("%- %[x%] ", "")
-		vim.fn.setline(line_number, new_line)
-	else
-		vim.fn.setline(line_number, "- [ ] " .. current_line)
-	end
+  -- Get the current line
+  local current_line = vim.fn.getline(".")
+  -- Get the current line number
+  local line_number = vim.fn.line(".")
+  if current_line:find("%- %[ %]") then
+    local new_line = current_line:gsub("%- %[ %]", "- [x]")
+    vim.fn.setline(line_number, new_line)
+  elseif current_line:find("%- %[x%]") then
+    local new_line = current_line:gsub("%- %[x%] ", "")
+    vim.fn.setline(line_number, new_line)
+  else
+    vim.fn.setline(line_number, "- [ ] " .. current_line)
+  end
 end, { desc = "Toggle task done or not" })
 
 vim.api.nvim_create_augroup("ImageBuffers", { clear = true })
 
 -- Add an autocmd to detect opening of .jpg, .jpeg, and .png files
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = "ImageBuffers",
-	pattern = "*.jpg,*.jpeg,*.png,*.gif,*.avif,*.webp",
-	callback = function()
-		-- Get the full path of the file
-		local filepath = vim.fn.expand("%:p")
-		-- Run the viu command and capture its output
-		local viu_output = vim.fn.system("viu --blocks --static " .. vim.fn.shellescape(filepath))
-		-- Remove carriage return characters (^M)
-		viu_output = viu_output:gsub("\r", "")
-		local baleia = require("baleia").setup({})
-		baleia.buf_set_lines(0, 0, -1, true, vim.split(viu_output, "\n", { plain = true }))
-		-- Mark the buffer as unmodifiable and unlisted
-		vim.bo.modifiable = false
-		vim.bo.buflisted = false
-		-- Turn off line numbers
-		vim.wo.number = false
-		vim.wo.relativenumber = false
-	end,
+  group = "ImageBuffers",
+  pattern = "*.jpg,*.jpeg,*.png,*.gif,*.avif,*.webp",
+  callback = function()
+    -- Get the full path of the file
+    local filepath = vim.fn.expand("%:p")
+    -- Run the viu command and capture its output
+    local viu_output = vim.fn.system("viu --blocks --static " .. vim.fn.shellescape(filepath))
+    -- Remove carriage return characters (^M)
+    viu_output = viu_output:gsub("\r", "")
+    local baleia = require("baleia").setup({})
+    baleia.buf_set_lines(0, 0, -1, true, vim.split(viu_output, "\n", { plain = true }))
+    -- Mark the buffer as unmodifiable and unlisted
+    vim.bo.modifiable = false
+    vim.bo.buflisted = false
+    -- Turn off line numbers
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  end,
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		local buf_ft = vim.bo.filetype -- Get the current buffer's filetype
+  callback = function()
+    local buf_ft = vim.bo.filetype -- Get the current buffer's filetype
 
-		-- Skip if the buffer is a Telescope buffer
-		if buf_ft == "TelescopePrompt" then
-			return
-		end
+    -- Skip if the buffer is a Telescope buffer
+    if buf_ft == "TelescopePrompt" then
+      return
+    end
 
-		if buf_ft == "oil" then
-			-- The buffer is an Oil buffer
-			local oil = require("oil")
-			local oil_path = oil.get_current_dir() -- Get the directory associated with the Oil buffer
-			if oil_path then
-				-- Check if this directory or its parents contain a .project or .git directory
-				local project_dir = vim.fn.finddir(".project", oil_path .. ";")
-				local git_dir = vim.fn.finddir(".git", oil_path .. ";")
+    if buf_ft == "oil" then
+      -- The buffer is an Oil buffer
+      local oil = require("oil")
+      local oil_path = oil.get_current_dir() -- Get the directory associated with the Oil buffer
+      if oil_path then
+        -- Check if this directory or its parents contain a .project or .git directory
+        local project_dir = vim.fn.finddir(".project", oil_path .. ";")
+        local git_dir = vim.fn.finddir(".git", oil_path .. ";")
 
-				if project_dir ~= "" then
-					local target_dir = vim.fn.fnamemodify(project_dir, ":h")
-					vim.api.nvim_set_current_dir(target_dir)
-				elseif git_dir ~= "" then
-					local target_dir = vim.fn.fnamemodify(git_dir, ":h")
-					vim.api.nvim_set_current_dir(target_dir)
-				else
-					-- Default to Oil's path if neither .project nor .git is found
-					vim.api.nvim_set_current_dir(oil_path)
-				end
-			end
-		else
-			-- Handle non-Oil buffers
-			local project_dir = vim.fn.finddir(".project", ".;")
-			local git_dir = vim.fn.finddir(".git", ".;")
+        if project_dir ~= "" then
+          local target_dir = vim.fn.fnamemodify(project_dir, ":h")
+          vim.api.nvim_set_current_dir(target_dir)
+        elseif git_dir ~= "" then
+          local target_dir = vim.fn.fnamemodify(git_dir, ":h")
+          vim.api.nvim_set_current_dir(target_dir)
+        else
+          -- Default to Oil's path if neither .project nor .git is found
+          vim.api.nvim_set_current_dir(oil_path)
+        end
+      end
+    else
+      -- Handle non-Oil buffers
+      local project_dir = vim.fn.finddir(".project", ".;")
+      local git_dir = vim.fn.finddir(".git", ".;")
 
-			if project_dir ~= "" then
-				local target_dir = vim.fn.fnamemodify(project_dir, ":h")
-				vim.api.nvim_set_current_dir(target_dir)
-			elseif git_dir ~= "" then
-				local target_dir = vim.fn.fnamemodify(git_dir, ":h")
-				vim.api.nvim_set_current_dir(target_dir)
-			else
-				-- Set the parent directory as the working directory if no .project or .git directory is found
-				local bufname = vim.api.nvim_buf_get_name(0) -- Get the buffer's name (path)
-				if bufname ~= "" then
-					local parent_dir = vim.fn.fnamemodify(bufname, ":h")
-					if parent_dir ~= "" then
-						vim.api.nvim_set_current_dir(parent_dir)
-					end
-				end
-			end
-		end
-	end,
+      if project_dir ~= "" then
+        local target_dir = vim.fn.fnamemodify(project_dir, ":h")
+        vim.api.nvim_set_current_dir(target_dir)
+      elseif git_dir ~= "" then
+        local target_dir = vim.fn.fnamemodify(git_dir, ":h")
+        vim.api.nvim_set_current_dir(target_dir)
+      else
+        -- Set the parent directory as the working directory if no .project or .git directory is found
+        local bufname = vim.api.nvim_buf_get_name(0) -- Get the buffer's name (path)
+        if bufname ~= "" then
+          local parent_dir = vim.fn.fnamemodify(bufname, ":h")
+          if parent_dir ~= "" then
+            vim.api.nvim_set_current_dir(parent_dir)
+          end
+        end
+      end
+    end
+  end,
 })

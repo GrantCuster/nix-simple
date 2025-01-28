@@ -96,13 +96,13 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
    
-  background-color "#1d2021"
+  background-color "#282828"
 }
 output "DP-1" {
-  background-color "#1d2021"
+  background-color "#282828"
 }
 output "DP-3" {
-  background-color "#1d2021"
+  background-color "#282828"
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -110,7 +110,8 @@ output "DP-3" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 16
+    // gaps 16
+    gaps 0
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -205,7 +206,7 @@ layout {
         active-color "#928374"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#3c3836"
+        inactive-color "#504945"
 
         // width 4
         // active-color "#ffc87f"
@@ -221,8 +222,10 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        left 12
-        right 12
+        // left 12
+        // right 12
+        left 0
+        right 0
         top 0
         bottom 0
     }
