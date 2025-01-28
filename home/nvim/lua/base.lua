@@ -207,28 +207,44 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		local buf_ft = vim.bo.filetype -- Get the current buffer's filetype
 
+		-- Skip if the buffer is a Telescope buffer
+		if buf_ft == "TelescopePrompt" then
+			return
+		end
+
 		if buf_ft == "oil" then
 			-- The buffer is an Oil buffer
 			local oil = require("oil")
 			local oil_path = oil.get_current_dir() -- Get the directory associated with the Oil buffer
 			if oil_path then
-				-- Check if this directory or its parents contain a .git directory
+				-- Check if this directory or its parents contain a .project or .git directory
+				local project_dir = vim.fn.finddir(".project", oil_path .. ";")
 				local git_dir = vim.fn.finddir(".git", oil_path .. ";")
-				if git_dir ~= "" then
+
+				if project_dir ~= "" then
+					local target_dir = vim.fn.fnamemodify(project_dir, ":h")
+					vim.api.nvim_set_current_dir(target_dir)
+				elseif git_dir ~= "" then
 					local target_dir = vim.fn.fnamemodify(git_dir, ":h")
 					vim.api.nvim_set_current_dir(target_dir)
 				else
-					vim.api.nvim_set_current_dir(oil_path) -- Default to Oil's path if not in a Git repo
+					-- Default to Oil's path if neither .project nor .git is found
+					vim.api.nvim_set_current_dir(oil_path)
 				end
 			end
 		else
 			-- Handle non-Oil buffers
-			local dot_git_path = vim.fn.finddir(".git", ".;")
-			if dot_git_path ~= "" then
-				local target_dir = vim.fn.fnamemodify(dot_git_path, ":h")
+			local project_dir = vim.fn.finddir(".project", ".;")
+			local git_dir = vim.fn.finddir(".git", ".;")
+
+			if project_dir ~= "" then
+				local target_dir = vim.fn.fnamemodify(project_dir, ":h")
+				vim.api.nvim_set_current_dir(target_dir)
+			elseif git_dir ~= "" then
+				local target_dir = vim.fn.fnamemodify(git_dir, ":h")
 				vim.api.nvim_set_current_dir(target_dir)
 			else
-				-- Set the parent directory as the working directory if no .git directory is found
+				-- Set the parent directory as the working directory if no .project or .git directory is found
 				local bufname = vim.api.nvim_buf_get_name(0) -- Get the buffer's name (path)
 				if bufname ~= "" then
 					local parent_dir = vim.fn.fnamemodify(bufname, ":h")
