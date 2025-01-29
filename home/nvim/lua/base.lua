@@ -181,10 +181,6 @@ vim.keymap.set("n", "[e", ":lua vim.diagnostic.goto_prev()<CR>")
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-vim.diagnostic.config({
-  virtual_text = false,
-})
-
 vim.keymap.set({ "n", "i" }, "<C-c>", function()
   -- Get the current line
   local current_line = vim.fn.getline(".")
