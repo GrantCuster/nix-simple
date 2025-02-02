@@ -1,5 +1,4 @@
 { config, pkgs, zsh-fzf_tab, ... }:
-
 {
  # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -195,6 +194,12 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      function __sync_nvim_cwd --on-variable PWD --description "Sync Neovim working directory with Fish"
+        status --is-command-substitution; and return  # Prevent running in subshells
+        nvr -c "cd $PWD"  # Change Neovim's working directory
+        set timestamp (date +%s)
+        nvr -c "file term://$PWD::$timestamp"  # Change Neovim's terminal name
+      end
     '';
     shellAliases = {
       c = "clear";

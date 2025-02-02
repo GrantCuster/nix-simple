@@ -1,6 +1,5 @@
 theme = GruvboxDark
 window-decoration = false
-macos-titlebar-style = hidden
 window-theme = system
 confirm-close-surface = false
 quit-after-last-window-closed = true
