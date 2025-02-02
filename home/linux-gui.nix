@@ -18,6 +18,8 @@
     waybar
     spotify-player
 
+    mpv
+
     swaybg
 
     xdragon

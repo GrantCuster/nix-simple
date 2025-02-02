@@ -204,16 +204,6 @@ vim.keymap.set("n", "<leader><enter>", function()
   end
 end, {})
 
--- vim.keymap.set({ "n", "t" }, "<C-t>", function()
---   local winwidth = vim.fn.winwidth(0) * 0.5
---   local winheight = vim.fn.winheight(0)
---   if winwidth > winheight then
---     return "<CMD>vsplit<CR><CMD>wincmd l<CR><CMD>e ~/dev/TODO.md<CR>"
---   else
---     return "<CMD>split<CR><CMD>wincmd j<CR><CMD>e ~/dev/TODO.md<CR>"
---   end
--- end, { expr = true, replace_keycodes = true })
-
 local todo_win_id = nil -- Store the floating window ID
 
 vim.keymap.set({ "n", "t" }, "<C-t>", function()

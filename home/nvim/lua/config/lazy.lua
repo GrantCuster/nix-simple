@@ -402,7 +402,7 @@ require("lazy").setup({
         return full_path:match("([^/]+)$") -- Extract the last part of the string after "/"
       end
       local function first_unchecked_task()
-        local filepath = vim.fn.expand("/Users/gcuster/dev/TODO.md")
+        local filepath = vim.fn.expand("~/dev/TODO.md")
         local file = io.open(filepath, "r")
         if file then
           for line in file:lines() do
