@@ -44,8 +44,8 @@ require("lazy").setup({
     config = function()
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-      vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
+      vim.keymap.set("n", "<leader>fd", builtin.buffers, {})
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
     end,
   },
   {
@@ -434,28 +434,44 @@ require("lazy").setup({
       }
       require("lualine").setup({
         options = {
-          theme = "gruvbox",
           icons_enabled = false,
           section_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
           draw_empty = false,
           globalstatus = true,
+          theme = require("config/lualine_custom_gruvbox"),
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = { {
+            "mode",
+            padding = { left = 0, right = 1 },
+          } },
           lualine_b = { "branch", "diff" },
-          lualine_c = { { "filename" } },
+          lualine_c = { { "filename", path = 4 } },
           lualine_x = {},
           lualine_y = {},
-          lualine_z = { "filetype" },
+          lualine_z = { { "filetype", padding = { left = 1, right = 0 } } },
         },
         tabline = {
-          lualine_a = { cwd },
+          lualine_a = {
+            {
+              cwd,
+              padding = { left = 0, right = 1 },
+            },
+          },
           lualine_b = {
-            first_unchecked_task,
+            {
+              first_unchecked_task,
+            },
           },
         },
       })
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
     end,
   },
 })

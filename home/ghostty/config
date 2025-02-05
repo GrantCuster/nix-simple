@@ -4,6 +4,8 @@ window-theme = system
 confirm-close-surface = false
 quit-after-last-window-closed = true
 font-feature = -calt
+window-padding-x = 8
+window-padding-y = 4
 window-padding-balance = true
 
 keybind = ctrl+comma=unbind
