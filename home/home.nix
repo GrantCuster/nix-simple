@@ -89,6 +89,7 @@
     (writeShellScriptBin "toggle_trackpad" (builtins.readFile ./scripts/toggle_trackpad.sh))
     (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
     (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
+    (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
   ];
 
   # Home Manager can also manage your environment variables through

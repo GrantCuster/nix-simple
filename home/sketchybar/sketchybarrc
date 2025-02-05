@@ -47,11 +47,6 @@ for sid in $(aerospace list-workspaces --monitor 1); do
     click_script="aerospace workspace $sid"
 done
 
-sketchybar --set space.1 label="main"
-sketchybar --set space.2 label="work"
-sketchybar --set space.3 label="comms"
-sketchybar --set space.5 label="music"
-
 # Add a blank item to the left side, which will be used to refresh aerospace
 sketchybar --add item blank left \
   --subscribe blank aerospace_workspace_change \
