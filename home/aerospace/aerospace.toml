@@ -107,7 +107,7 @@ alt-comma = 'layout accordion horizontal vertical'
 
 # You can uncomment this line to open up terminal with alt + enter shortcut
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-alt-enter = 'exec-and-forget open -a ghostty.app ~/.config/tmux/launch.sh'
+alt-enter = 'exec-and-forget open -a ghostty.app --new ~/.config/tmux/launch.sh'
 alt-shift-enter = 'exec-and-forget kitty ~'
 alt-g = 'exec-and-forget open -a Google\ Chrome --new --args --profile-directory=Profile\ 2'
 alt-shift-g = 'exec-and-forget open -a Google\ Chrome --new --args --profile-directory=Profile\ 1'
@@ -140,6 +140,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -151,8 +152,11 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
 
 alt-shift-c = "reload-config"
+
+alt-b = 'workspace-back-and-forth'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'

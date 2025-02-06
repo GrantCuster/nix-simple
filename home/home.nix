@@ -90,6 +90,7 @@
     (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
     (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
     (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
+    (writeShellScriptBin "refresh_nix_mac" (builtins.readFile ./scripts/refresh_nix_mac.sh))
   ];
 
   # Home Manager can also manage your environment variables through
@@ -159,7 +160,7 @@
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
       # reconnect nix on work mac or refresh shell in general
-      rn = ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+      rn = "refresh_nix_mac";
       rz = ". /nix/var/nix/profiles/default/etc/profile.d/nix.sh";
       # disable touchpad lg gram not worki
       tt = "s toggle_trackpad";
