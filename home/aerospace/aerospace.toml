@@ -14,8 +14,8 @@ after-login-command = []
 # so it won't be run twice on AeroSpace restart
 after-startup-command = [
     'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-  'exec-and-forget borders active_color=0xffbdae93 inactive_color=0xff504945 width=5.0'
 ]
+  # 'exec-and-forget borders active_color=0xff282828 inactive_color=0xff282828 width=5.0'
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -153,6 +153,9 @@ alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
+
+alt-shift-s = 'exec-and-forget ~/.config/aerospace/scripts/sendToScratchpad.sh'
+alt-s = 'exec-and-forget ~/.config/aerospace/scripts/toggleScratchpad.sh'
 
 alt-shift-c = "reload-config"
 

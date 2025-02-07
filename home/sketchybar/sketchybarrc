@@ -36,28 +36,18 @@ sketchybar --default "${default[@]}"
 
 # Add the aerospace_workspace_change event we specified in aerospace.toml
 sketchybar --add event aerospace_workspace_change
+sketchybar --add item aerospace left \
+  --subscribe aerospace aerospace_workspace_change \
+  --set aerospace label="test" \
+  --set aerospace icon.padding_right=0 \
+  --set aerospace label.color=0xffb8bb26 \
+  --set aerospace script="$PLUGIN_DIR/aerospace.sh" \
 
-# This only works for single monitor configs!
-for sid in $(aerospace list-workspaces --all); do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color=0xffd5c4a1 \
-        background.height=28 \
-        icon.padding_left=8 \
-        icon.padding_right=0 \
-        label.padding_left=8 \
-        label.padding_right=8 \
-        background.drawing=off \
-        icon="$sid" \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
-done
-
-# Add a blank item to the left side, which will be used to refresh aerospace
-sketchybar --add item blank left \
-  --subscribe blank aerospace_workspace_change \
-  --set blank script="$PLUGIN_DIR/aerospace.sh"
+sketchybar --add item todo left \
+  --set todo script="$PLUGIN_DIR/todo.sh" \
+  --set todo label.padding_left=0 \
+  --set todo icon.padding_left=0 \
+  --set todo update_freq=1 \
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -81,10 +71,10 @@ sketchybar --add item clock right \
   --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
   --subscribe battery system_woke power_source_change \
 
-sketchybar --add item todo center \
-  --set todo script="$PLUGIN_DIR/todo.sh" \
-  --set todo label.color=0xffb8bb26 \
-  --set todo update_freq=1 \
+# Add a blank item to the left side, which will be used to refresh aerospace
+# sketchybar --add item blank left \
+#   --subscribe blank aerospace_workspace_change \
+#   --set blank script="$PLUGIN_DIR/aerospace.sh" \
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
