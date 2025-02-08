@@ -154,8 +154,11 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
 
-alt-shift-s = 'exec-and-forget ~/.config/aerospace/scripts/sendToScratchpad.sh'
-alt-s = 'exec-and-forget ~/.config/aerospace/scripts/toggleScratchpad.sh'
+alt-shift-s = 'exec-and-forget ~/.config/aerospace/scripts/sendToScratchpad.sh aerospace'
+alt-s = 'exec-and-forget ~/.config/aerospace/scripts/toggleScratchpad.sh aerospace'
+
+alt-shift-t = 'exec-and-forget ~/.config/aerospace/scripts/sendToScratchpad.sh todo'
+alt-t = 'exec-and-forget ~/.config/aerospace/scripts/toggleScratchpad.sh todo'
 
 alt-shift-c = "reload-config"
 

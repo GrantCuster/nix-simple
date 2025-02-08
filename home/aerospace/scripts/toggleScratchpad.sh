@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-APP_ID=$(cat /tmp/scratchpad-window)
+STEMP_DIR=$1
+APP_ID=$(cat "/tmp/$STEMP_DIR-window")
 CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
 
 main() {
