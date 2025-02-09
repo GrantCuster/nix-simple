@@ -7,6 +7,8 @@
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
+  workspace-auto-back-and-forth
+
     keyboard {
         xkb {
             // You can set rules, Altel, layout, variant and options.
@@ -17,12 +19,14 @@ input {
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
             options "ctrl:nocaps"
         }
+      repeat-delay 300
+      repeat-rate 30
     }
 
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
-    touchpad {
-        // off
+// formatted to single line for bash script toggle
+touchpad { off
         tap
         dwt
         dwtp
@@ -79,7 +83,7 @@ output "eDP-1" {
     // Alte "1920x1080@120.030"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 1.333
+    scale 1.5
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -103,6 +107,11 @@ output "DP-1" {
 }
 output "DP-3" {
   background-color "#282828"
+}
+
+cursor {
+  hide-when-typing
+  hide-after-inactive-ms 2000
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -156,10 +165,10 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
-        width 1
+        width 0
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -170,7 +179,8 @@ layout {
         active-color "#928374"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#504945"
+        // inactive-color "#282828"
+        inactive-color "#3c3836"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -206,7 +216,8 @@ layout {
         active-color "#928374"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#504945"
+        // inactive-color "#282828"
+        inactive-color "#3c3836"
 
         // width 4
         // active-color "#ffc87f"
@@ -237,7 +248,7 @@ layout {
 // See the binds section below for more spawn examples.
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 spawn-at-startup "waybar" 
-spawn-at-startup "ghostty" "--title=launch" "-e" "~/.config/tmux/launch.sh"
+spawn-at-startup "ghostty" "--title=todo" "-e" "~/.config/niri/scripts/center_floating_window.sh && nvim ~/dev/TODO.md"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -259,10 +270,13 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    // off
+    off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
+  workspace-switch {
+    off
+  }
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -308,6 +322,9 @@ window-rule {
     clip-to-geometry true
 }
 
+// named workspaces
+workspace "todo"
+
 binds {
     // Keys consist of Modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -341,6 +358,15 @@ binds {
 
     Alt+Q { close-window; }
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
+    Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
+    // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh todo"; }
+    Alt+T { focus-workspace "todo"; }
+    Alt+Shift+C { spawn "sh" "-c" "~/.config/niri/scripts/center_floating_window.sh"; }
+
+    // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
+    Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
+
+    Alt+N { spawn "sh" "-c" "~/.config/niri/scripts/new_workspace.sh"; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
@@ -456,30 +482,30 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    // Alt+1 { focus-workspace 1; }
-    // Alt+2 { focus-workspace 2; }
-    // Alt+3 { focus-workspace 3; }
-    // Alt+4 { focus-workspace 4; }
-    // Alt+5 { focus-workspace 5; }
-    // Alt+6 { focus-workspace 6; }
-    // Alt+7 { focus-workspace 7; }
-    // Alt+8 { focus-workspace 8; }
-    // Alt+9 { focus-workspace 9; }
-    // Alt+Ctrl+1 { move-column-to-workspace 1; }
-    // Alt+Ctrl+2 { move-column-to-workspace 2; }
-    // Alt+Ctrl+3 { move-column-to-workspace 3; }
-    // Alt+Ctrl+4 { move-column-to-workspace 4; }
-    // Alt+Ctrl+5 { move-column-to-workspace 5; }
-    // Alt+Ctrl+6 { move-column-to-workspace 6; }
-    // Alt+Ctrl+7 { move-column-to-workspace 7; }
-    // Alt+Ctrl+8 { move-column-to-workspace 8; }
-    // Alt+Ctrl+9 { move-column-to-workspace 9; }
+    Alt+1 { focus-workspace 1; }
+    Alt+2 { focus-workspace 2; }
+    Alt+3 { focus-workspace 3; }
+    Alt+4 { focus-workspace 4; }
+    Alt+5 { focus-workspace 5; }
+    Alt+6 { focus-workspace 6; }
+    Alt+7 { focus-workspace 7; }
+    Alt+8 { focus-workspace 8; }
+    Alt+9 { focus-workspace 9; }
+    Alt+Ctrl+1 { move-column-to-workspace 1; }
+    Alt+Ctrl+2 { move-column-to-workspace 2; }
+    Alt+Ctrl+3 { move-column-to-workspace 3; }
+    Alt+Ctrl+4 { move-column-to-workspace 4; }
+    Alt+Ctrl+5 { move-column-to-workspace 5; }
+    Alt+Ctrl+6 { move-column-to-workspace 6; }
+    Alt+Ctrl+7 { move-column-to-workspace 7; }
+    Alt+Ctrl+8 { move-column-to-workspace 8; }
+    Alt+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Alt+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Alt+Tab { focus-workspace-previous; }
+    Alt+B { focus-workspace-previous; }
 
     // Consume one window from the right into the focused column.
     Alt+Comma  { consume-window-into-column; }
@@ -493,10 +519,10 @@ binds {
     Alt+R { switch-preset-column-width; }
     Alt+Shift+R { switch-preset-window-height; }
     Alt+Ctrl+R { reset-window-height; }
-    Alt+1 { set-column-width "33.3333%"; }
-    Alt+2 { set-column-width "50%"; }
-    Alt+3 { set-column-width "66.6667%"; }
-    Alt+4 { set-column-width "100%"; }
+    // Alt+1 { set-column-width "33.3333%"; }
+    // Alt+2 { set-column-width "50%"; }
+    // Alt+3 { set-column-width "66.6667%"; }
+    // Alt+4 { set-column-width "100%"; }
     Alt+F { maximize-column; }
     Alt+Shift+F { fullscreen-window; }
     Alt+C { center-column; }
@@ -524,8 +550,8 @@ binds {
     // Alt+Space       { switch-layout "next"; }
     // Alt+Shift+Space { switch-layout "prev"; }
 
-    Alt+Shift+V { toggle-window-floating; }
-    Alt+V { switch-focus-between-floating-and-tiling; }
+    Alt+Shift+Space { toggle-window-floating; }
+    Alt+Space { switch-focus-between-floating-and-tiling; }
 
     Alt+Shift+4 { screenshot; }
     Alt+Shift+5 { screenshot-window; }
@@ -537,7 +563,7 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Alt+Shift+P { power-off-monitors; }
+    // Alt+Shift+P { power-off-monitors; }
 }
 
 hotkey-overlay {

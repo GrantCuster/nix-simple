@@ -209,6 +209,8 @@
       b = "battery_status";
       # n = "smart_nvim";
       n = "nvr .";
+      name = "niri msg action set-workspace-name";
+      done = "niri msg action unset-workspace-name && niri msg action close-window";
       stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
       # git helpers

@@ -482,11 +482,5 @@ require("lazy").setup({
 		config = function()
 			require("mini.ai").setup()
 		end,
-	},
-	{
-		"arnamak/stay-centered.nvim",
-		config = function()
-			require("stay-centered").setup()
-		end,
-	},
+	}
 })

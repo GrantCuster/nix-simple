@@ -1,8 +1,12 @@
 {
   "layer": "top",
   "position": "left",
+  "mode": "overlay",
+  "name": "side",
   // "modules-left": ["hyprland/workspaces"],
-  "modules-left": [],
+  // "modules-left": ["niri/workspaces"],
+  // "modules-left": ["niri/workspaces"],
+  // "modules-center": ["custom/niri-count"],
   "modules-center": ["niri/workspaces"],
   "modules-right": [],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
@@ -21,13 +25,20 @@
   "hyprland/window": {
     "format": "( {class} )",
   },
+  "niri/workspaces": {
+    "format": "{index} {name}",
+  },
   "tray": {
     "icon-size": 14,
     "spacing": 10,
   },
+  "custom/todo": {
+    "exec": "sh ~/.config/waybar/scripts/todo.sh",
+    "interval": 1,
+  },
   "custom/niri-count": {
     "exec": "sh ~/.config/waybar/scripts/niri-test.sh",
-    "interval": 2,
+    "interval": 1,
   },
   "custom/clock": {
     "exec": "date '+%l:%M %p' | sed 's/^ //'",
@@ -50,7 +61,7 @@
     "interval": 1,
   },
   "custom/date": {
-    "exec": "date '+%a-%b-%d'",
+    "exec": "date '+%Y-%m-%d'",
     "interval": 10,
   },
   "custom/clipboard": {
@@ -202,11 +213,11 @@
       "critical": 20,
     },
     "tooltip": true,
-    "format": "B-{time}",
+    "format": "{time}",
     "format-time": "{H}h{M}m",
     "tooltip": "{capacity}",
-    "format-charging": "C-{capacity}",
-    "format-plugged": "C-{capacity}%",
+    "format-charging": "+{capacity}",
+    "format-plugged": "+{capacity}%",
     // "format-alt": "{time} {icon}",
     "format-icons": ["󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
   },

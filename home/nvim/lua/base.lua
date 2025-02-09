@@ -132,7 +132,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 vim.keymap.set("n", "<leader>ev", ":e ~/.config/nvim/base.lua<cr>", { noremap = true })
 vim.keymap.set("n", "<leader>en", ":e ~/nix/home/home.nix<cr>", { noremap = true })
 
--- vim.opt.scrolloff = 9999
+vim.opt.scrolloff = 9999
 vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = true

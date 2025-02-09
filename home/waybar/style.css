@@ -7,32 +7,55 @@
 }
 window#waybar {
   /* background: #282828; */
-  background: transparent;
+  background: #282828;
   color: #a89984;
   padding: 0;
   margin: 0;
+  border: none;
+}
+window#waybar.side {
+  background: transparent;
+  /* border: none; */
 }
 #custom-clock,
 #custom-date,
 #battery,
 #custom-niri-count {
   /* background: rgba(29, 32, 33, 0.95); */
-  padding: 5px 8px;
+  padding: 4px 8px;
   background: transparent;
 }
 
+.side #workspaces {
+  border: solid 2px #a89984;
+  background: #282828;
+  padding: 4px 0;
+}
+
+.side #workspaces button {
+  background: #282828;
+  border-radius: 0;
+  padding: 2px 8px;
+}
+
+#custom-todo {
+  color: #ebdbb2;
+}
 
 #workspaces button {
-  /* background: rgba(29, 32, 33, 0.95); */
-  background: transparent;
+  padding: 4px 8px;
   color: #a89984;
-  border-radius: 0;
-  padding: 4px 4px;
-  border: none;
-  margin: 0;
+  /* background: rgba(29, 32, 33, 0.95); */
+  /* background: transparent; */
+  /* color: #a89984; */
+  /* border-radius: 0; */
+  /* padding: 4px 4px; */
+  /* border: none; */
+  /* margin: 0; */
 }
 #workspaces button.active {
-  background: #928374;
-  color: black;
-  font-weight: 700;
+  color: #b8bb26;
+  /* background: #928374; */
+  /* color: black; */
+  /* font-weight: 700; */
 }

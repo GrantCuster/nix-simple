@@ -5,7 +5,7 @@
 get_window_count() {
     idfocused="$(niri msg -j workspaces | jq ".[] | select(.is_focused == true ) | .id")"
     num="$(niri msg -j windows | jq "[.[] | select(.workspace_id == $idfocused)] | length")"
-    echo "{\"text\": \"$num\", \"tooltip\": \"Windows in focused workspace: $num\"}"
+    echo "{\"text\": \"w$num\", \"tooltip\": \"Windows in focused workspace: $num\"}"
 }
 
 # Initial output
