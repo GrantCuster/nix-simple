@@ -18,6 +18,9 @@
     waybar
     spotify-player
 
+    # ttyimage attempt
+    go
+
     mpv
 
     swaybg

@@ -26,7 +26,7 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
 // formatted to single line for bash script toggle
-touchpad { off
+touchpad { // off
         tap
         dwt
         dwtp
@@ -248,7 +248,7 @@ layout {
 // See the binds section below for more spawn examples.
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 spawn-at-startup "waybar" 
-spawn-at-startup "ghostty" "--title=todo" "-e" "~/.config/niri/scripts/center_floating_window.sh && nvim ~/dev/TODO.md"
+spawn-at-startup "ghostty" "--title=todo" "-e" "sleep 0.1 && niri msg action center-column && nvim ~/todo/TODO.md"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -341,7 +341,7 @@ binds {
     Alt+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Alt+Return { spawn "ghostty" "-e" "~/.config/tmux/launch.sh"; }
+    Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
     Alt+Shift+Return { spawn "ghostty"; }
     Alt+G { spawn "google-chrome-stable"; }
 
@@ -367,6 +367,7 @@ binds {
     Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
 
     Alt+N { spawn "sh" "-c" "~/.config/niri/scripts/new_workspace.sh"; }
+    Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }

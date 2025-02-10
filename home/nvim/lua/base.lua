@@ -68,6 +68,8 @@ vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
 vim.opt.showmode = false
 
+vim.opt.splitright = true
+
 -- Auto reload files
 vim.o.updatetime = 1000
 vim.o.autoread = true
@@ -303,28 +305,6 @@ end, { desc = "Toggle task done or not" })
 
 vim.api.nvim_create_augroup("ImageBuffers", { clear = true })
 
--- Add an autocmd to detect opening of .jpg, .jpeg, and .png files
-vim.api.nvim_create_autocmd("BufReadPost", {
-	group = "ImageBuffers",
-	pattern = "*.jpg,*.jpeg,*.png,*.gif,*.avif,*.webp",
-	callback = function()
-		-- Get the full path of the file
-		local filepath = vim.fn.expand("%:p")
-		-- Run the viu command and capture its output
-		local viu_output = vim.fn.system("viu --blocks --static " .. vim.fn.shellescape(filepath))
-		-- Remove carriage return characters (^M)
-		viu_output = viu_output:gsub("\r", "")
-		local baleia = require("baleia").setup({})
-		baleia.buf_set_lines(0, 0, -1, true, vim.split(viu_output, "\n", { plain = true }))
-		-- Mark the buffer as unmodifiable and unlisted
-		vim.bo.modifiable = false
-		vim.bo.buflisted = false
-		-- Turn off line numbers
-		vim.wo.number = false
-		vim.wo.relativenumber = false
-	end,
-})
-
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		local buf_ft = vim.bo.filetype -- Get the current buffer's filetype
@@ -397,4 +377,3 @@ vim.api.nvim_create_autocmd("BufRead", {
 		end, { buffer = true, noremap = true, silent = true })
 	end,
 })
-

@@ -185,6 +185,7 @@
       export PATH=$HOME/.local/bin:$PATH
       # Add .local/bin to PATH
       export PATH=$HOME/.local/bin:$PATH
+      export PATH=$HOME/go/bin:$PATH
       if [[ $(uname) == "Darwin" ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         clear
@@ -202,6 +203,7 @@
         set timestamp (date +%s)
         nvr -c "file term://$PWD::$timestamp"  # Change Neovim's terminal name
       end
+      set -x PATH $HOME/go/bin $PATH
     '';
     shellAliases = {
       c = "clear";
