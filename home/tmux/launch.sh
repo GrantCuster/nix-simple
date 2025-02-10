@@ -13,6 +13,12 @@ fi
 
 # tmux new-session 'nvim -c "terminal fish"';
 #
-# necessary for neo image neovim image viewer (uses ttyimg from go)
-export PATH="$HOME/go/bin:$PATH"
-ghostty -e "nvim -c 'terminal fish'"
+if [[ $(uname) == "Darwin" ]]; then
+  export PATH="$HOME/go/bin:$PATH"
+  cd;
+  nvim -c 'terminal fish'
+else
+  # necessary for neo image neovim image viewer (uses ttyimg from go)
+  export PATH="$HOME/go/bin:$PATH"
+  ghostty -e "nvim -c 'terminal fish'"
+fi
