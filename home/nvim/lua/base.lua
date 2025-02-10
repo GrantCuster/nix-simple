@@ -33,6 +33,8 @@ vim.keymap.set("n", "<leader>rs", ":luafile ~/.config/nvim/lua/config/luasnip.lu
 
 vim.keymap.set({ "n" }, "<C-i>", "<C-d>", { noremap = true })
 
+vim.keymap.set("n", "zz", "za", { noremap = true })
+
 vim.keymap.set({ "n", "t" }, "<C-e>", function()
 	vim.cmd("split")
 	vim.cmd("wincmd j")
@@ -57,6 +59,8 @@ vim.keymap.set({ "n", "t" }, "<C-d>", function()
 end, {})
 
 vim.o.foldenable = true -- Enable folding by default
+vim.o.foldmethod = "expr" -- Set foldmethod to "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()" -- Set foldexpr to use treesitter
 vim.o.foldlevelstart = 99 -- Start with all folds open
 vim.o.foldnestmax = 3 -- Maximum nested folds
 vim.o.foldminlines = 1
@@ -69,6 +73,8 @@ vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 vim.opt.showmode = false
 
 vim.opt.splitright = true
+
+vim.opt.fillchars:append { eob = " " }
 
 -- Auto reload files
 vim.o.updatetime = 1000
@@ -152,6 +158,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.keymap.set("n", "<leader>n", ":set number!<CR>:set relativenumber!<CR>", {})
+vim.keymap.set("n", "<leader>m", ":set nonumber<CR>:set norelativenumber<CR>:set nospell<CR>:set signcolumn=no<CR>:set laststatus=0<CR>:set noruler<CR>:set noshowcmd<CR>:echo ''<CR>", {})
 
 -- copy all text in the buffer
 vim.keymap.set("n", "<leader>aa", "ggVGy", {})
