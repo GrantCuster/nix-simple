@@ -172,6 +172,7 @@
       sv = "nvim -c 'setlocal buftype=nofile bufhidden=hide noswapfile' -";
       # open command history in neovim
       vh = "nvim ~/.zsh_history";
+      gsync = "git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main";
     };
     plugins = [
       {
@@ -237,6 +238,7 @@
       sv = "nvim -c 'setlocal buftype=nofile bufhidden=hide noswapfile' -";
       # open command history in neovim
       vh = "nvim ~/.zsh_history";
+      gsync = "git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main";
     };
   };
 
