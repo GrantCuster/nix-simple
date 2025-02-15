@@ -26,7 +26,7 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
 // formatted to single line for bash script toggle
-touchpad { // off
+touchpad { off
         tap
         dwt
         dwtp

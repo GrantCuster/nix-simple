@@ -216,7 +216,7 @@
     "format-time": "{H}h{M}m",
     "format-time": "{H}h{M}m",
     "tooltip": "{capacity}",
-    "format-charging": "+{capacity}",
+    "format-charging": "+{capacity}%",
     "format-plugged": "+{capacity}%",
     // "format-alt": "{time} {icon}",
     "format-icons": ["󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
