@@ -67,6 +67,11 @@ vim.o.foldminlines = 1
 
 vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
 
+vim.api.nvim_create_user_command("Gsync", function()
+	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
+end, {})
+vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
+
 vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
@@ -74,7 +79,7 @@ vim.opt.showmode = false
 
 vim.opt.splitright = true
 
-vim.opt.fillchars:append { eob = " " }
+vim.opt.fillchars:append({ eob = " " })
 
 -- Auto reload files
 vim.o.updatetime = 1000
@@ -158,7 +163,12 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.keymap.set("n", "<leader>n", ":set number!<CR>:set relativenumber!<CR>", {})
-vim.keymap.set("n", "<leader>m", ":set nonumber<CR>:set norelativenumber<CR>:set nospell<CR>:set signcolumn=no<CR>:set laststatus=0<CR>:set noruler<CR>:set noshowcmd<CR>:echo ''<CR>", {})
+vim.keymap.set(
+	"n",
+	"<leader>m",
+	":set nonumber<CR>:set norelativenumber<CR>:set nospell<CR>:set signcolumn=no<CR>:set laststatus=0<CR>:set noruler<CR>:set noshowcmd<CR>:echo ''<CR>",
+	{}
+)
 
 -- copy all text in the buffer
 vim.keymap.set("n", "<leader>aa", "ggVGy", {})
@@ -382,5 +392,32 @@ vim.api.nvim_create_autocmd("BufRead", {
 			-- Run a shell command with the line as an argument
 			vim.cmd("silent !aerospace workspace " .. vim.fn.shellescape(first_word))
 		end, { buffer = true, noremap = true, silent = true })
+	end,
+})
+
+-- Attempt to restore folds
+local view_group = vim.api.nvim_create_augroup("auto_view", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
+	desc = "Save view with mkview for real files",
+	group = view_group,
+	callback = function(args)
+		if vim.b[args.buf].view_activated then
+			vim.cmd.mkview({ mods = { emsg_silent = true } })
+		end
+	end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	desc = "Try to load file view if available and enable view saving for real files",
+	group = view_group,
+	callback = function(args)
+		if not vim.b[args.buf].view_activated then
+			local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+			local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+			local ignore_filetypes = { "gitcommit", "gitrebase", "svg", "hgcommit" }
+			if buftype == "" and filetype and filetype ~= "" and not vim.tbl_contains(ignore_filetypes, filetype) then
+				vim.b[args.buf].view_activated = true
+				vim.cmd.loadview({ mods = { emsg_silent = true } })
+			end
+		end
 	end,
 })
