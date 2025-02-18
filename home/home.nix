@@ -22,6 +22,8 @@
     wget
     unzip
 
+    bat
+
     socat
 
     jq
@@ -213,7 +215,7 @@
       # n = "smart_nvim";
       n = "nvr .";
       name = "niri msg action set-workspace-name";
-      done = "niri msg action unset-workspace-name && niri msg action close-window";
+      done = "niri msg action unset-workspace-name && niri msg action close-window && niri msg action focus-workspace 1";
       stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";
       # git helpers

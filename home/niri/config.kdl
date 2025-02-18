@@ -26,7 +26,7 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
 // formatted to single line for bash script toggle
-touchpad { off
+touchpad { // off
         tap
         dwt
         dwtp
@@ -147,7 +147,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.3333; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
