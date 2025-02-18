@@ -147,7 +147,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.3333; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -404,8 +404,8 @@ binds {
     Alt+Shift+Up    { focus-monitor-up; }
     Alt+Shift+Right { focus-monitor-right; }
     Alt+Shift+H     { focus-monitor-left; }
-    Alt+Shift+J     { focus-monitor-down; }
-    Alt+Shift+K     { focus-monitor-up; }
+    Alt+Shift+J     { focus-monitor-right; }
+    Alt+Shift+K     { focus-monitor-left; }
     Alt+Shift+L     { focus-monitor-right; }
 
     Alt+Shift+Ctrl+Left  { move-column-to-monitor-left; }
