@@ -42,25 +42,35 @@ require("lazy").setup({
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      require("telescope").setup({
+        defaults = {
+          layout_strategy = "flex",
+          layout_config = {
+            width = 0.9,
+            height = 0.9,
+          },
+        },
+      })
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader><Space>", builtin.find_files, {})
       vim.keymap.set("n", "<leader>fd", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+      vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
     end,
   },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    config = function()
-      require("telescope").setup({
-        extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown({}),
-          },
-        },
-      })
-      require("telescope").load_extension("ui-select")
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope-ui-select.nvim",
+  --   config = function()
+  --     require("telescope").setup({
+  --       extensions = {
+  --         ["ui-select"] = {
+  --           require("telescope.themes").get_dropdown({}),
+  --         },
+  --       },
+  --     })
+  --     require("telescope").load_extension("ui-select")
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -87,6 +97,8 @@ require("lazy").setup({
       lspconfig.nixd.setup({})
       lspconfig.tailwindcss.setup({})
       lspconfig.pyright.setup({})
+      lspconfig.marksman.setup({})
+      lspconfig.gleam.setup({})
 
       vim.keymap.set("n", "I", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
@@ -144,9 +156,9 @@ require("lazy").setup({
         }),
       })
 
-      cmp.setup.filetype("markdown", {
-        sources = cmp.config.sources({}),
-      })
+      -- cmp.setup.filetype("markdown", {
+      --   sources = cmp.config.sources({}),
+      -- })
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       require("lspconfig")["lua_ls"].setup({ capabilities = capabilities })
@@ -154,6 +166,8 @@ require("lazy").setup({
       require("lspconfig")["tailwindcss"].setup({ capabilities = capabilities })
       require("lspconfig")["pyright"].setup({ capabilities = capabilities })
       require("lspconfig")["nixd"].setup({ capabilities = capabilities })
+      require("lspconfig")["marksman"].setup({ capabilities = capabilities })
+      require("lspconfig")["gleam"].setup({ capabilities = capabilities })
     end,
   },
   { "folke/neodev.nvim",             opts = {} },
@@ -502,6 +516,19 @@ require("lazy").setup({
         provider_selector = function()
           return { "treesitter", "indent" }
         end,
+      })
+    end,
+  },
+  {
+    "lucamot/chrome-dev-console.nvim",
+    dependencies = { "lucamot/chrome-remote.nvim" },
+    config = function()
+      require("chrome-dev-console").setup({
+        console_window = {
+          height = 10,      -- Height of the split window
+          placement = "below", -- 'left', 'right', 'above', 'below'
+        },
+        auto_close_page = true, -- Close webpage when console buffer is deleted
       })
     end,
   },

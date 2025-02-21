@@ -78,6 +78,7 @@
     eslint_d
     pyright
     svelte-language-server
+    marksman
 
     (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
     (writeShellScriptBin "oblique" (builtins.readFile ./scripts/oblique.sh))
