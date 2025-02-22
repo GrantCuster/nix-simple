@@ -249,6 +249,7 @@ layout {
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 spawn-at-startup "waybar" 
 spawn-at-startup "ghostty" "--title=todo" "-e" "sleep 0.1 && niri msg action center-column && nvim ~/todo/TODO.md"
+spawn-at-startup "gammastep"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
