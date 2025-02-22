@@ -20,6 +20,7 @@ vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-.>", [[clear<CR>]], { noremap = true })
 vim.keymap.set({ "n", "t" }, "<C-w>", [[<Cmd>q<CR>]], { noremap = true, nowait = true })
+vim.keymap.set({ "n", "t" }, "<C-W>", "<Cmd>bd!<CR>", { noremap = true, nowait = true })
 vim.keymap.set({ "n", "t" }, "<C-->", function()
   local cwd = vim.fn.getcwd()
   vim.cmd("edit " .. cwd)
@@ -45,7 +46,7 @@ vim.keymap.set({ "n", "t" }, "<C-e>", function()
     local cwd = vim.fn.getcwd()
     vim.cmd("terminal fish -C 'cd " .. cwd .. "'")
   elseif buf_ft ~= "oil" then
-    vim.cmd("Oil")
+    -- vim.cmd("Oil")
   end
 end, {})
 vim.keymap.set({ "n", "t" }, "<C-d>", function()
@@ -56,7 +57,7 @@ vim.keymap.set({ "n", "t" }, "<C-d>", function()
     local cwd = vim.fn.getcwd()
     vim.cmd("terminal fish -C 'cd " .. cwd .. "'")
   elseif buf_ft ~= "oil" then
-    vim.cmd("Oil")
+    -- vim.cmd("Oil")
   end
 end, {})
 
@@ -70,7 +71,7 @@ vim.o.foldminlines = 1
 vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
 
 vim.api.nvim_create_user_command("Gsync", function()
-	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
+  vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
 end, {})
 vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
 
@@ -166,7 +167,7 @@ vim.opt.relativenumber = true
 
 vim.keymap.set("n", "<leader>n", ":set number!<CR>:set relativenumber!<CR>", {})
 vim.keymap.set(
- "n",
+  "n",
   "<leader>m",
   ":set nonumber<CR>:set norelativenumber<CR>:set nospell<CR>:set signcolumn=no<CR>:set laststatus=0<CR>:set noruler<CR>:set noshowcmd<CR>:echo ''<CR>",
   {}
@@ -326,6 +327,10 @@ end, { desc = "Toggle task done or not" })
 
 vim.api.nvim_create_augroup("ImageBuffers", { clear = true })
 
+vim.keymap.set({ "n", "v", "t" }, "<C-a>", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<Leader>cc", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local buf_ft = vim.bo.filetype -- Get the current buffer's filetype
@@ -402,28 +407,28 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- Attempt to restore folds
 local view_group = vim.api.nvim_create_augroup("auto_view", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
-	desc = "Save view with mkview for real files",
-	group = view_group,
-	callback = function(args)
-		if vim.b[args.buf].view_activated then
-			vim.cmd.mkview({ mods = { emsg_silent = true } })
-		end
-	end,
+  desc = "Save view with mkview for real files",
+  group = view_group,
+  callback = function(args)
+    if vim.b[args.buf].view_activated then
+      vim.cmd.mkview({ mods = { emsg_silent = true } })
+    end
+  end,
 })
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	desc = "Try to load file view if available and enable view saving for real files",
-	group = view_group,
-	callback = function(args)
-		if not vim.b[args.buf].view_activated then
-			local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-			local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-			local ignore_filetypes = { "gitcommit", "gitrebase", "svg", "hgcommit" }
-			if buftype == "" and filetype and filetype ~= "" and not vim.tbl_contains(ignore_filetypes, filetype) then
-				vim.b[args.buf].view_activated = true
-				vim.cmd.loadview({ mods = { emsg_silent = true } })
-			end
-		end
-	end,
+  desc = "Try to load file view if available and enable view saving for real files",
+  group = view_group,
+  callback = function(args)
+    if not vim.b[args.buf].view_activated then
+      local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+      local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+      local ignore_filetypes = { "gitcommit", "gitrebase", "svg", "hgcommit" }
+      if buftype == "" and filetype and filetype ~= "" and not vim.tbl_contains(ignore_filetypes, filetype) then
+        vim.b[args.buf].view_activated = true
+        vim.cmd.loadview({ mods = { emsg_silent = true } })
+      end
+    end
+  end,
 })
 
 function OpenFileInRightWindow()
