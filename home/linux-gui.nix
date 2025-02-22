@@ -25,6 +25,8 @@
 
     swaybg
 
+    gammastep
+
     xdragon
 
     # not actually gui but putting rust here for now

@@ -52,6 +52,12 @@
 
     fzf
 
+    gh
+
+    gleam
+
+    llm
+
     # make sure gnu find
     findutils
 
