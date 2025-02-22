@@ -567,13 +567,11 @@ require("lazy").setup({
 			bufdelete = { enabled = true },
 			image = { enabled = true },
 		},
-		keys = {
-			{
-				"<C-x>",
-				function()
-					Snacks.bufdelete()
-				end,
-			},
-		},
+		config = function()
+			Snacks = require("snacks")
+			vim.keymap.set({ "n", "t" }, "<C-x>", function()
+				Snacks.bufdelete()
+			end, {})
+		end,
 	},
 })
