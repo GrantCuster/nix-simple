@@ -369,6 +369,8 @@ binds {
     Alt+N { spawn "sh" "-c" "~/.config/niri/scripts/new_workspace.sh"; }
     Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
 
+    Alt+Z { spawn "sh" "-c" ""; }
+
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
     Alt+Up    { focus-window-up; }

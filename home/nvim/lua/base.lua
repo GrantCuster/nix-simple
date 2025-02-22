@@ -303,6 +303,8 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "]e", ":lua vim.diagnostic.goto_next()<CR>")
 -- jump to previous diagnostic error
 vim.keymap.set("n", "[e", ":lua vim.diagnostic.goto_prev()<CR>")
+vim.keymap.set("n", "<leader>cd", ":lua vim.diagnostic.open_float()<CR>")
+
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 

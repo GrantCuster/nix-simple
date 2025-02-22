@@ -27,6 +27,11 @@
 
     gammastep
 
+    # for gleam
+    erlang
+    beamMinimal26Packages.rebar3
+    watchexec
+
     xdragon
 
     # not actually gui but putting rust here for now
@@ -64,6 +69,10 @@
   };
   xdg.configFile.niri = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/niri";
+    recursive = true;
+  };
+  xdg.configFile.gammastep = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/gammastep";
     recursive = true;
   };
   xdg.configFile = {
