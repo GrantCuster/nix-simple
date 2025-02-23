@@ -42,9 +42,6 @@
 		./nixos/configuration.nix
 	      ];
 	    };
-
-
-
     };
  
     homeConfigurations = {
