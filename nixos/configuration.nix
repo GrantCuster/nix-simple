@@ -125,6 +125,10 @@
     wget
     google-chrome
     pavucontrol
+
+    # nighshift
+    gammastep
+
     # need a c compiler for neovim plugins
     zig
     # hyprland extras

@@ -25,8 +25,6 @@
 
     swaybg
 
-    gammastep
-
     # for gleam
     erlang
     beamMinimal26Packages.rebar3

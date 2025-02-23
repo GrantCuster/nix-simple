@@ -1,3 +1,4 @@
 home/tmux/plugins/*
 home/nvim/lazy-lock.json
 result
+openai_api_key

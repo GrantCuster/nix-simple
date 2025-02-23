@@ -1,41 +1,60 @@
+-- LEADER and ESCAPE
 vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 vim.keymap.set("t", "jk", [[<C-\><C-n>]])
 
--- up/down wrapped lines
+-- LINE NAVIGATION
 vim.keymap.set("n", "<down>", "gj", { noremap = true })
 vim.keymap.set("n", "<up>", "gk", { noremap = true })
 vim.keymap.set("v", "<down>", "gj", { noremap = true })
 vim.keymap.set("v", "<up>", "gk", { noremap = true })
-
 vim.keymap.set("n", "j", "gj", { noremap = true })
 vim.keymap.set("n", "k", "gk", { noremap = true })
 vim.keymap.set("v", "j", "gj", { noremap = true })
 vim.keymap.set("v", "k", "gk", { noremap = true })
 
-vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", { noremap = true })
+-- CONTROL KEYBINDINGS
+-- usually for things I want to do across modes (normal, terminal, insert)
+
+-- terminal match
 vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
+
+-- terminal clear
 vim.keymap.set("t", "<C-.>", [[clear<CR>]], { noremap = true })
-vim.keymap.set({ "n", "t" }, "<C-w>", [[<Cmd>q<CR>]], { noremap = true, nowait = true })
-vim.keymap.set({ "n", "t" }, "<C-W>", "<Cmd>bd!<CR>", { noremap = true, nowait = true })
-vim.keymap.set({ "n", "t" }, "<C-->", function()
+
+-- Open oil - match - in normal
+vim.keymap.set({ "n", "t", "i" }, "<C-->", function()
 	local cwd = vim.fn.getcwd()
 	vim.cmd("edit " .. cwd)
 end, { noremap = true })
-vim.keymap.set({ "n", "t" }, "<C-q>", ":qa<CR>", {})
-vim.keymap.set("n", "<C-s>", ":w<CR>", {})
 
--- reload base
+-- Close window - handle codecompanion special
+local function quit_or_toggle()
+  local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+  if buftype == 'codecompanion' then
+    vim.cmd('CodeCompanion Toggle')
+  else
+    vim.cmd('q')
+  end
+end
+vim.keymap.set({ "n", "t", "i" }, "<C-w>", quit_or_toggle, { noremap = true, nowait = true })
+
+-- Save
+vim.keymap.set({ "n", "i"}, "<C-s>", ":wa<CR>", {})
+
+-- Reload base config
 vim.keymap.set("n", "<leader>rb", ":luafile ~/.config/nvim/lua/base.lua<CR>", {})
 vim.keymap.set("n", "<leader>rs", ":luafile ~/.config/nvim/lua/config/luasnip.lua<CR>", {})
 
+-- Copy current path
 vim.keymap.set("n", "<leader>cf", ":let @+ = expand('%')<CR>", {})
 
 vim.keymap.set({ "n" }, "<C-i>", "<C-d>", { noremap = true })
 
+-- Fold current
 vim.keymap.set("n", "zz", "za", { noremap = true })
 
 vim.keymap.set({ "n", "t" }, "<C-e>", function()
@@ -199,8 +218,8 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
-vim.keymap.set("n", "<leader>w", ":wa<CR>", {})
-vim.keymap.set("n", "<leader>q", ":qa<CR>", {})
+-- vim.keymap.set("n", "<leader>w", ":wa<CR>", {})
+-- vim.keymap.set("n", "<leader>q", ":qa<CR>", {})
 
 vim.keymap.set("n", "J", ":move .+1<CR>==")
 vim.keymap.set("n", "K", ":move .-2<CR>==")
