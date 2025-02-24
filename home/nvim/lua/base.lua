@@ -218,7 +218,7 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
--- vim.keymap.set("n", "<leader>w", ":wa<CR>", {})
+vim.keymap.set("n", "<leader>w", ":wa<CR>", {})
 -- vim.keymap.set("n", "<leader>q", ":qa<CR>", {})
 
 vim.keymap.set("n", "J", ":move .+1<CR>==")

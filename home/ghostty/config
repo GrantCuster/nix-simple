@@ -7,7 +7,7 @@ font-feature = -calt
 font-size = 12
 window-padding-x = 8
 window-padding-y = 4
-window-padding-balance = true
+window-padding-balance = false
 
 keybind = ctrl+comma=unbind
 keybind = ctrl+page_down=unbind
