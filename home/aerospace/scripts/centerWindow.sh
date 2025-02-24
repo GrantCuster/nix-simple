@@ -36,8 +36,8 @@ centralize-focused-window() {
   local screen_width=$(echo "${screen_size}" | cut -d ' ' -f 1)
   local screen_height=$(echo "${screen_size}" | cut -d ' ' -f 2)
   osascript <<EOF
-set w to ${screen_width} / 3 * 1
-set h to ${screen_height} / 5 * 3
+set w to ${screen_width} / 2 * 1
+set h to ${screen_height} / 4 * 3
 set x to (${screen_width} - w) / 2
 set y to (${screen_height} - h) / 2
 

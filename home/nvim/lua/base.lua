@@ -137,7 +137,6 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	callback = function()
 		vim.opt.number = false
 		vim.opt.relativenumber = false
-		vim.opt.spell = false
 		vim.cmd("startinsert")
 	end,
 })
@@ -148,17 +147,14 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		if vim.bo[0].buftype == "terminal" then
 			vim.opt.number = false
 			vim.opt.relativenumber = false
-			vim.opt.spell = false
 			vim.cmd("startinsert")
 		else
 			if vim.bo[0].filetype == "oil" then
 				vim.opt.number = true
 				vim.opt.relativenumber = true
-				vim.opt.spell = false
 			else
 				vim.opt.number = true
 				vim.opt.relativenumber = true
-				vim.opt.spell = true
 			end
 		end
 	end,
@@ -173,8 +169,8 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = true
 vim.opt.equalalways = false
 
-vim.opt.spelllang = "en_us"
-vim.opt.spell = true
+-- vim.opt.spelllang = "en_us"
+-- vim.opt.spell = true
 
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")

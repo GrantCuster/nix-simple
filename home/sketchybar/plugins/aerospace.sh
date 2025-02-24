@@ -19,7 +19,7 @@
 # focused workspace
 # sketchybar_commands+="--set space.$FOCUSED_WORKSPACE background.color=0xffd5c4a1 icon.color=0xff000000 label.color=0xff000000 drawing=on "
 
-file="$HOME/dev/aerospace.txt"
+file="$HOME/.config/aerospace/aerospace.txt"
 result=$(grep "^$FOCUSED_WORKSPACE " "$file" | cut -d ' ' -f2-)
 
 if [ -z "$result" ]; then
