@@ -66,19 +66,19 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
     end,
   },
-  -- {
-  --   "nvim-telescope/telescope-ui-select.nvim",
-  --   config = function()
-  --     require("telescope").setup({
-  --       extensions = {
-  --         ["ui-select"] = {
-  --           require("telescope.themes").get_dropdown({}),
-  --         },
-  --       },
-  --     })
-  --     require("telescope").load_extension("ui-select")
-  --   end,
-  -- },
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      require("telescope").setup({
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({}),
+          },
+        },
+      })
+      require("telescope").load_extension("ui-select")
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -226,6 +226,13 @@ require("lazy").setup({
   -- },
   {
     "github/copilot.vim",
+    -- does not work
+    -- config = function()
+    -- 	vim.keymap.set("i", "<S-Space>", function()
+    --       vim.fn.feedkeys(vim.fn["copilot#Accept"](), "n")
+    --     end, {})
+    -- 	vim.g.copilot_no_tab_map = true
+    -- end,
   },
   {
     "nvimtools/none-ls.nvim",
@@ -587,5 +594,8 @@ require("lazy").setup({
         Snacks.bufdelete()
       end, {})
     end,
+  },
+  {
+    "sindrets/diffview.nvim",
   },
 })

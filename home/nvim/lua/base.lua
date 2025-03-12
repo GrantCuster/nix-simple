@@ -33,17 +33,17 @@ end, { noremap = true })
 
 -- Close window - handle codecompanion special
 local function quit_or_toggle()
-  local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
-  if buftype == 'codecompanion' then
-    vim.cmd('CodeCompanion Toggle')
-  else
-    vim.cmd('q')
-  end
+	local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+	if buftype == "codecompanion" then
+		vim.cmd("CodeCompanion Toggle")
+	else
+		vim.cmd("q")
+	end
 end
 vim.keymap.set({ "n", "t", "i" }, "<C-w>", quit_or_toggle, { noremap = true, nowait = true })
 
 -- Save
-vim.keymap.set({ "n", "i"}, "<C-s>", ":wa<CR>", {})
+vim.keymap.set({ "n", "i" }, "<C-s>", ":wa<CR>", {})
 
 -- Reload base config
 vim.keymap.set("n", "<leader>rb", ":luafile ~/.config/nvim/lua/base.lua<CR>", {})
@@ -88,11 +88,6 @@ vim.o.foldnestmax = 3 -- Maximum nested folds
 vim.o.foldminlines = 1
 
 vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
-
-vim.api.nvim_create_user_command("Gsync", function()
-	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
-end, {})
-vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
@@ -321,7 +316,6 @@ vim.keymap.set("n", "]e", ":lua vim.diagnostic.goto_next()<CR>")
 vim.keymap.set("n", "[e", ":lua vim.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "<leader>cd", ":lua vim.diagnostic.open_float()<CR>")
 
-
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set({ "n", "i" }, "<C-c>", function()
@@ -345,6 +339,10 @@ vim.api.nvim_create_augroup("ImageBuffers", { clear = true })
 vim.keymap.set({ "n", "v", "t" }, "<C-a>", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<Leader>cc", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
 vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+vim.keymap.set("i", "<S-SPACE>", function()
+	vim.fn.feedkeys(vim.fn["copilot#Accept"](), "n")
+end, { desc = "Copilot accept" })
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
@@ -523,3 +521,36 @@ function Toggle_terminal_buffers()
 end
 
 vim.keymap.set({ "n", "t" }, "<C-t>", "<Cmd>lua Toggle_terminal_buffers()<CR>", { noremap = true, silent = true })
+
+vim.opt.fillchars:append { diff = "╱" }
+
+vim.keymap.set("n", "<leader>gg", function()
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd("DiffviewOpen")
+  else
+    vim.cmd("DiffviewClose")
+  end
+end)
+
+vim.keymap.set("n", "<leader>gh", function()
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd("DiffviewFileHistory")
+  else
+    vim.cmd("DiffviewClose")
+  end
+end)
+
+vim.keymap.set("n", "<leader>gf", function()
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd("DiffviewFileHistory %")
+  else
+    vim.cmd("DiffviewClose")
+  end
+end)
+
+vim.api.nvim_create_user_command("Gsync", function()
+	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
+end, {})
+vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
+
+
