@@ -102,6 +102,13 @@
     };
   };
 
+   services.cron = {
+     enable = true;
+     systemCronJobs = [
+       "0 6 * * *  root /home/grant/morning_routine.sh"
+     ];
+   };
+
   services.blueman.enable = true;
 
   # Enable automatic login for the user.
@@ -128,6 +135,8 @@
 
     # nighshift
     gammastep
+
+    espeak
 
     # need a c compiler for neovim plugins
     zig

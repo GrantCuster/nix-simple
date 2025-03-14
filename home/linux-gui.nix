@@ -37,6 +37,9 @@
 
     ghostty
 
+
+    espeak
+
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
   ];
