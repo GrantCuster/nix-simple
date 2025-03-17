@@ -32,6 +32,8 @@
 
     xdragon
 
+    inotify-tools
+
     # not actually gui but putting rust here for now
     rustup
 
