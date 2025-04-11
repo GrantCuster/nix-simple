@@ -42,6 +42,16 @@
 		./nixos/configuration.nix
 	      ];
 	    };
+
+
+	    "bosgame" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/bosgame.nix
+		./nixos/configuration.nix
+	      ];
+	    };
+
     };
  
     homeConfigurations = {
