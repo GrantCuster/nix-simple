@@ -49,7 +49,7 @@
 	      modules = [
 		./nixos/bosgame.nix
 		./nixos/configuration.nix
-		./nixos/jellfyin.nix
+		./nixos/jellyfin.nix
 	      ];
 	    };
 
