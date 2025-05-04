@@ -6,7 +6,7 @@
   "modules-left": ["niri/workspaces", "custom/niri-count"],
   // "modules-center": ["custom/niri-count"],
   "modules-center": ["custom/todo"],
-  "modules-right": ["battery", "custom/date", "custom/clock"],
+  "modules-right": ["custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "hyprland/workspaces": {},
@@ -37,6 +37,14 @@
   },
   "custom/niri-count": {
     "exec": "sh ~/.config/waybar/scripts/niri-test.sh",
+    "interval": 1,
+  },
+  "custom/niri-count": {
+    "exec": "sh ~/.config/waybar/scripts/niri-test.sh",
+    "interval": 1,
+  },
+  "custom/recording-status": {
+    "exec": "sh ~/.config/waybar/scripts/recording_status.sh",
     "interval": 1,
   },
   "custom/clock": {

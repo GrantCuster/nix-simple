@@ -34,6 +34,8 @@
 
     inotify-tools
 
+    obs-studio
+
     # not actually gui but putting rust here for now
     rustup
 

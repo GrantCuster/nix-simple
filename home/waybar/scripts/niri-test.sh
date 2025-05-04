@@ -6,5 +6,5 @@ num="$(niri msg -j windows | jq "[.[] | select(.workspace_id == $idfocused)] | l
  
 
 if [ "$num" -gt 2 ]; then
-    echo "$num"
+    echo "${num}w"
 fi

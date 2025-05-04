@@ -151,7 +151,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.3333; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -374,7 +374,7 @@ binds {
     Alt+N { spawn "sh" "-c" "~/.config/niri/scripts/new_workspace.sh"; }
     Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
 
-    Alt+Z { spawn "sh" "-c" ""; }
+    // Alt+Z { spawn "sh" "-c" ""; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
@@ -561,9 +561,13 @@ binds {
     Alt+Shift+Space { toggle-window-floating; }
     Alt+Space { switch-focus-between-floating-and-tiling; }
 
-    Alt+Shift+4 { screenshot; }
-    Alt+Shift+5 { screenshot-window; }
-    Alt+Shift+6 { screenshot-screen; }
+    Alt+Shift+3 { screenshot-screen; }
+    Alt+Shift+4 { screenshot-window; }
+    Alt+Shift+5 { screenshot; }
+    Alt+Shift+6 { spawn "sh" "-c" "~/.config/niri/scripts/record.sh screen"; }
+    Alt+Shift+7 { spawn "sh" "-c" "~/.config/niri/scripts/record.sh window"; }
+    Alt+Shift+8 { spawn "sh" "-c" "~/.config/niri/scripts/record.sh area"; }
+    Alt+Shift+9 { spawn "sh" "-c" "~/.config/niri/scripts/record.sh stop"; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Alt+Shift+E { quit; }

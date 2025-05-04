@@ -9,7 +9,7 @@ disabled = true
 # Use nerd fonts for icons
 
 [aws]
-symbol = "  "
+symbol = " "
 
 [buf]
 symbol = " "
