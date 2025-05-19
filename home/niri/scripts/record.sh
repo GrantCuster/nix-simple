@@ -30,7 +30,7 @@ is_recorder_running() {
 convert_to_gif() {
   FILE="$(cat "$TMP_ACTIVE_FILE_REF")"
   ffmpeg -i "$FILE" -filter_complex "[0:v] palettegen" "$TMP_PALETTE_FILE"
-  ffmpeg -i "$FILE" -i "$TMP_PALETTE_FILE" -filter_complex "[0:v] fps=10,scale=1280:-1,setpts=0.5*PTS [new];[new][1:v] paletteuse" "$TMP_FILE_UNOPTIMIZED"
+  ffmpeg -i "$FILE" -i "$TMP_PALETTE_FILE" -filter_complex "[0:v] fps=10,scale=-1:720,setpts=0.5*PTS [new];[new][1:v] paletteuse" "$TMP_FILE_UNOPTIMIZED"
   if [ -f "$TMP_PALETTE_FILE" ]; then
     rm "$TMP_PALETTE_FILE"
   fi

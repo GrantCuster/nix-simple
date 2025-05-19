@@ -30,6 +30,8 @@
     beamMinimal26Packages.rebar3
     watchexec
 
+    yt-dlp
+
     xdragon
 
     inotify-tools

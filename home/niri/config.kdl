@@ -112,6 +112,12 @@ output "DP-3" {
   background-color "#282828"
   transform "90"
 }
+output "DP-5" {
+  background-color "#282828"
+  transform "90"
+}
+
+
 
 cursor {
   hide-when-typing
