@@ -53,6 +53,16 @@
 	      ];
 	    };
 
+	    "framework" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/framework.nix
+		./nixos/configuration.nix
+	      ];
+	    };
+
+
+
     };
  
     homeConfigurations = {
