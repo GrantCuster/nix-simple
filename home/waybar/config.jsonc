@@ -1,7 +1,6 @@
 {
   "layer": "top",
   "position": "top",
-  // "modules-left": ["hyprland/workspaces"],
   // "modules-left": ["niri/workspaces"],
   "modules-left": ["niri/workspaces", "custom/niri-count"],
   // "modules-center": ["custom/niri-count"],
@@ -9,7 +8,6 @@
   "modules-right": ["custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
-  "hyprland/workspaces": {},
   "clock": {
     "format": "{:%I:%M %p}",
     "interval": 1,
@@ -20,10 +18,7 @@
     "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
   },
-  "hyprland/window": {
-    "format": "( {class} )",
-  },
-  "niri/workspaces": {
+ "niri/workspaces": {
     "current-only": true,
     "format": "{index} {name}",
   },

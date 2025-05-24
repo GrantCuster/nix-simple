@@ -42,13 +42,6 @@ EOF
   exit
 }
 
-check hyprpicker || {
-  notify "hyprpicker is not installed"
-  exit
-}
-killall -q hyprpicker
-color=$(hyprpicker)
-
 check wl-copy && {
   echo "$color" | sed -z 's/\n//g' | wl-copy
 }

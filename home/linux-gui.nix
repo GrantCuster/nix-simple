@@ -30,6 +30,8 @@
     beamMinimal26Packages.rebar3
     watchexec
 
+    google-chrome
+
     yt-dlp
 
     xdragon
@@ -42,7 +44,6 @@
     rustup
 
     ghostty
-
 
     espeak
 
@@ -70,21 +71,12 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/waybar";
     recursive = true;
   };
-  xdg.configFile.hypr = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/hypr";
-    recursive = true;
-  };
-  xdg.configFile.niri = {
+ xdg.configFile.niri = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/niri";
     recursive = true;
   };
   xdg.configFile.gammastep = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/gammastep";
     recursive = true;
-  };
-  xdg.configFile = {
-    "hyprscroller/hyprscroller.conf".text = ''
-      plugin = ${lib.getLib pkgs.hyprlandPlugins.hyprscroller}/lib/libhyprscroller.so 
-    '';
   };
 }

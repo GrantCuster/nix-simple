@@ -119,7 +119,6 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  # programs.hyprland.enable = true;
   programs.niri.enable = true;
 
   # Allow unfree packages
@@ -140,11 +139,6 @@
 
     # need a c compiler for neovim plugins
     zig
-    # hyprland extras
-    hyprshot
-    # hyprland screenshare
-    wireplumber
-    xdg-desktop-portal-hyprland  
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

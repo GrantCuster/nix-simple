@@ -189,10 +189,6 @@ vim.keymap.set("n", "<leader>aa", "ggVGy", {})
 -- neoclip
 vim.keymap.set("n", "<leader>cc", ":Telescope neoclip<CR>", {})
 
-vim.filetype.add({
-	pattern = { [".*/hyprland%.conf"] = "hyprlang" },
-})
-
 vim.cmd("set ignorecase")
 vim.keymap.set("n", "<escape>", ":noh<CR>")
 
