@@ -3,48 +3,57 @@
   font-family: "JetBrainsMono Nerd Font";
   min-height: 0;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 0;
 }
 window#waybar {
-  /* background: #282828; */
+  /* background: #1d2021; */
   background: transparent;
   color: #a89984;
   padding: 0;
   margin: 0;
   border: none;
 }
-window#waybar.side {
-  background: transparent;
-  /* border: none; */
-}
 #custom-clock,
 #custom-date,
-#battery,
-#custom-niri-count {
+#battery {
   /* background: rgba(29, 32, 33, 0.95); */
-  padding: 4px 8px;
+  padding: 2px 8px 4px;
   background: transparent;
 }
 
-.side #workspaces {
-  border: solid 2px #504945;
-  background: #282828;
-  padding: 4px 0;
+#battery {
+  color: #d3869b;
 }
 
-.side #workspaces button {
-  background: #282828;
-  border-radius: 0;
-  padding: 2px 8px;
+#custom-date {
+  color: #8ec07c;
 }
 
-#custom-todo {
+#custom-clock {
   color: #ebdbb2;
 }
 
+#custom-todo {
+  padding: 2px 8px 4px;
+  /* color: #ebdbb2; */
+  /* color: #b8bb26; */
+  color: #fabd2f;
+  /* color: #d3869b; */
+}
+
+#workspaces {
+  padding: 4px 2px 2px
+}
+
+#custom-niri-count {
+  padding: 4px 8px 2px;
+  color: #d3869b;
+}
+
 #workspaces button {
-  padding: 4px 8px;
-  color: #a89984;
+  padding: 0 6px;
+  /* color: #a89984; */
+  color: #ebdbb2;
   /* background: rgba(29, 32, 33, 0.95); */
   /* background: transparent; */
   /* color: #a89984; */

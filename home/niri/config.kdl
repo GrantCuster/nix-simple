@@ -117,12 +117,17 @@ output "DP-5" {
   background-color "#282828"
   transform "90"
 }
-
-
-
 cursor {
   hide-when-typing
   hide-after-inactive-ms 2000
+}
+
+overview  {
+  zoom 0.5
+  backdrop-color "#1d2021"
+  workspace-shadow {
+    off
+  }
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -131,7 +136,7 @@ cursor {
 layout {
     // Set gaps around windows in logical pixels.
     // gaps 16
-    gaps 0
+    gaps 2
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -158,7 +163,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.3333; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -176,10 +181,10 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        off
+        // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 0
+        width 1
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -191,7 +196,7 @@ layout {
 
         // Color of the ring on inactive monitors.
         // inactive-color "#282828"
-        inactive-color "#3c3836"
+        // inactive-color "#3c3836"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -215,7 +220,7 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         // off
 
-        width 2
+        width 0
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -224,11 +229,15 @@ layout {
 
         // Color of the ring on the active monitor.
         // active-color "#a89984"
-        active-color "#928374"
+        // active-color "#928374"
+        // inactive-color "#1d2021"
+        // active-color "#928374"
+        // active-color "#3c3836"
 
         // Color of the ring on inactive monitors.
         // inactive-color "#282828"
-        inactive-color "#3c3836"
+        active-color "#282828"
+        inactive-color "#282828"
 
         // width 4
         // active-color "#ffc87f"
@@ -258,8 +267,10 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
-spawn-at-startup "waybar" 
-spawn-at-startup "ghostty" "--title=todo" "-e" "sleep 0.1 && niri msg action center-column && nvim ~/todo/TODO.md"
+
+spawn-at-startup "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"
+spawn-at-startup "sh" "-c" "~/.config/niri/scripts/startup.sh"
+spawn-at-startup "sh ~/nix/home/scripts/startup.sh"
 spawn-at-startup "gammastep"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -286,9 +297,9 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
-  workspace-switch {
-    off
-  }
+  // workspace-switch {
+  //   off
+  // }
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -297,23 +308,29 @@ animations {
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
+// window-rule {
+//     // This regular expression is intentionally made as specific as possible,
+//     // since this is the default config, and we want no false positives.
+//     // You can get away with just app-id="wezterm" if you want.
+//     match app-id=r#"^org\.wezfurlong\.wezterm$"#
+//     default-column-width {}
+// }
 window-rule {
   match app-id="ghostty"
-  draw-border-with-background false
+  // draw-border-with-background false
+}
+// window-rule {
+//   match title="launch"
+//   default-column-width { proportion 1.0; }
+// }
+// get rid of chrome shadows
+window-rule {
+  clip-to-geometry true
 }
 window-rule {
-  match title="launch"
-  default-column-width { proportion 1.0; }
+  match is-focused=false
+  // opacity 0.5
 }
-
-
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -335,7 +352,7 @@ window-rule {
 }
 
 // named workspaces
-workspace "todo"
+workspace "home"
 
 binds {
     // Keys consist of Modifiers separated by + signs, followed by an XKB key name
@@ -351,6 +368,7 @@ binds {
     // Alt-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Alt+Shift+Slash { show-hotkey-overlay; }
+
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
@@ -372,7 +390,7 @@ binds {
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
     // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh do"; }
-    Alt+T { focus-workspace "todo"; }
+    Alt+T { focus-workspace "home"; }
     Alt+Shift+C { spawn "sh" "-c" "~/.config/niri/scripts/center_floating_window.sh"; }
 
     // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
@@ -382,6 +400,8 @@ binds {
     Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
 
     // Alt+Z { spawn "sh" "-c" ""; }
+
+    Alt+Space { toggle-overview; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
@@ -566,8 +586,8 @@ binds {
     // Alt+Space       { switch-layout "next"; }
     // Alt+Shift+Space { switch-layout "prev"; }
 
-    Alt+Shift+Space { toggle-window-floating; }
-    Alt+Space { switch-focus-between-floating-and-tiling; }
+    // Alt+Shift+Space { toggle-window-floating; }
+    // Alt+Space { switch-focus-between-floating-and-tiling; }
 
     Alt+Shift+3 { screenshot-screen; }
     Alt+Shift+4 { screenshot-window; }

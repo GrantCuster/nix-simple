@@ -1,13 +1,14 @@
 {
   "layer": "top",
-  "position": "top",
-  "modules-center": ["custom/todo"],
+  "position": "bottom",
+  "name": "bottom-bar",
+  "modules-left": ["niri/workspaces"],
   // "modules-left": ["niri/window"],
   // "modules-left": ["niri/workspaces", "custom/niri-count"],
   // "modules-center": ["custom/niri-count"],
   // "modules-center": ["custom/todo"],
-  "modules-left": ["niri/workspaces"],
-  "modules-right": ["battery", "custom/date", "custom/clock"],
+  "modules-center": [],
+  "modules-right": ["custom/niri-count"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "clock": {
@@ -20,8 +21,7 @@
     "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
   },
-  "niri/workspaces": {
-    "current-only": true,
+ "niri/workspaces": {
     "format": "{index} {name}",
   },
   "tray": {
@@ -44,7 +44,7 @@
     "exec": "sh ~/.config/waybar/scripts/recording_status.sh",
     "interval": 1,
   },
-  "niri/window": {
+  "niri/window":  {
     "format": "{}",
   },
   "custom/clock": {

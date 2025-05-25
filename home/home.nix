@@ -98,6 +98,8 @@
     (writeShellScriptBin "toggle_trackpad" (builtins.readFile ./scripts/toggle_trackpad.sh))
     (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
     (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
+    (writeShellScriptBin "daily" (builtins.readFile ./scripts/daily.sh))
+    # mac specific
     (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
     (writeShellScriptBin "refresh_nix_mac" (builtins.readFile ./scripts/refresh_nix_mac.sh))
   ];
@@ -137,7 +139,7 @@
     recursive = true;
   };
 
-  # Mac stuff
+  # Mac specific
   xdg.configFile.aerospace = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/aerospace";
     recursive = true;
@@ -189,7 +191,7 @@
         src = zsh-fzf_tab;
       }
     ];
-    initExtra = ''
+    initContent = ''
       # Add /usr/local/bin to PATH - maybe only needed on mac
       export PATH=/usr/local/bin:$PATH
       export PATH=$HOME/.local/bin:$PATH

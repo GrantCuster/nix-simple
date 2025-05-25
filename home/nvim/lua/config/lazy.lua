@@ -85,7 +85,10 @@ require("lazy").setup({
     config = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-        ensure_installed = { "lua", "javascript", "html", "vim", "vimdoc", "markdown", "markdown_inline" },
+        -- should update to main branch
+        -- getting stuck on compiling - debug later
+        -- ensure_installed = { "javascript", "html", "vim", "vimdoc", "markdown", "markdown_inline" },
+        ensure_installed = {},
         sync_install = false,
         auto_install = true,
         ignore_install = {},
@@ -178,7 +181,7 @@ require("lazy").setup({
       require("lspconfig")["gleam"].setup({ capabilities = capabilities })
     end,
   },
-  { "folke/neodev.nvim",             opts = {} },
+  -- { "folke/neodev.nvim",             opts = {} },
   -- {
   --   "epwalsh/obsidian.nvim",
   --   version = "*",
@@ -320,106 +323,106 @@ require("lazy").setup({
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
   },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
-    keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
-      },
-      {
-        "S",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-      {
-        "R",
-        mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end,
-        desc = "Treesitter Search",
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function()
-          require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search",
-      },
-    },
-  },
-  {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
-    "AckslD/nvim-neoclip.lua",
-    dependencies = {
-      { "nvim-telescope/telescope.nvim" },
-      { "kkharji/sqlite.lua",           module = "sqlite" },
-    },
-    config = function()
-      require("neoclip").setup({
-        continuous_sync = true,
-      })
-    end,
-  },
-  {
-    "m00qek/baleia.nvim",
-    version = "*",
-    config = function()
-      vim.g.baleia = require("baleia").setup({})
-
-      -- Command to colorize the current buffer
-      vim.api.nvim_create_user_command("BaleiaColorize", function()
-        vim.g.baleia.once(vim.api.nvim_get_current_buf())
-      end, { bang = true })
-
-      -- Command to show logs
-      vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
-    end,
-  },
-  {
-    "nvzone/typr",
-    dependencies = "nvzone/volt",
-    opts = {},
-    cmd = { "Typr", "TyprStats" },
-  },
-  {
-    "https://github.com/nocksock/do.nvim",
-    config = function()
-      require("do").setup({
-        -- default options
-        kaomoji_mode = 1, -- 0 kaomoji everywhere, 1 skip kaomoji in doing
-        winbar = false,
-        doing_prefix = "",
-        store = {
-          auto_create_file = false, -- automatically create a .do_tasks when calling :Do
-          file_name = ".do_tasks",
-        },
-      })
-    end,
-  },
+  -- {
+  --   "folke/flash.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       "s",
+  --       mode = { "n", "x", "o" },
+  --       function()
+  --         require("flash").jump()
+  --       end,
+  --       desc = "Flash",
+  --     },
+  --     {
+  --       "S",
+  --       mode = { "n", "x", "o" },
+  --       function()
+  --         require("flash").treesitter()
+  --       end,
+  --       desc = "Flash Treesitter",
+  --     },
+  --     {
+  --       "r",
+  --       mode = "o",
+  --       function()
+  --         require("flash").remote()
+  --       end,
+  --       desc = "Remote Flash",
+  --     },
+  --     {
+  --       "R",
+  --       mode = { "o", "x" },
+  --       function()
+  --         require("flash").treesitter_search()
+  --       end,
+  --       desc = "Treesitter Search",
+  --     },
+  --     {
+  --       "<c-s>",
+  --       mode = { "c" },
+  --       function()
+  --         require("flash").toggle()
+  --       end,
+  --       desc = "Toggle Flash Search",
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "chentoast/marks.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
+  -- {
+  --   "AckslD/nvim-neoclip.lua",
+  --   dependencies = {
+  --     { "nvim-telescope/telescope.nvim" },
+  --     { "kkharji/sqlite.lua",           module = "sqlite" },
+  --   },
+  --   config = function()
+  --     require("neoclip").setup({
+  --       continuous_sync = true,
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "m00qek/baleia.nvim",
+  --   version = "*",
+  --   config = function()
+  --     vim.g.baleia = require("baleia").setup({})
+  --
+  --     -- Command to colorize the current buffer
+  --     vim.api.nvim_create_user_command("BaleiaColorize", function()
+  --       vim.g.baleia.once(vim.api.nvim_get_current_buf())
+  --     end, { bang = true })
+  --
+  --     -- Command to show logs
+  --     vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
+  --   end,
+  -- },
+  -- {
+  --   "nvzone/typr",
+  --   dependencies = "nvzone/volt",
+  --   opts = {},
+  --   cmd = { "Typr", "TyprStats" },
+  -- },
+  -- {
+  --   "https://github.com/nocksock/do.nvim",
+  --   config = function()
+  --     require("do").setup({
+  --       -- default options
+  --       kaomoji_mode = 1, -- 0 kaomoji everywhere, 1 skip kaomoji in doing
+  --       winbar = false,
+  --       doing_prefix = "",
+  --       store = {
+  --         auto_create_file = false, -- automatically create a .do_tasks when calling :Do
+  --         file_name = ".do_tasks",
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -429,22 +432,6 @@ require("lazy").setup({
       local function cwd()
         local full_path = vim.loop.cwd()
         return full_path:match("([^/]+)$") -- Extract the last part of the string after "/"
-      end
-      local function first_unchecked_task()
-        local filepath = vim.fn.expand("~/dev/TODO.md")
-        local file = io.open(filepath, "r")
-        if file then
-          for line in file:lines() do
-            local task = line:match("^%- %[ %] (.+)")
-            if task then
-              file:close()
-              return task
-            end
-          end
-          file:close()
-          return "No unchecked tasks"
-        end
-        return "File not found"
       end
       local custom_oil = {
         sections = {
@@ -497,6 +484,8 @@ require("lazy").setup({
         -- 	},
         -- },
       })
+      -- transparent status
+      vim.api.nvim_set_hl(0, "StatusLine", { bg = "none", fg = "none" })
     end,
   },
   {
@@ -512,41 +501,41 @@ require("lazy").setup({
       require("mini.ai").setup()
     end,
   },
-  {
-    "skardyy/neo-img",
-    build = "cd ttyimg && go build", -- build ttyimg
-    config = function()
-      require("neo-img").setup({
-        backend = "kitty",
-      })
-    end,
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = {
-      "kevinhwang91/promise-async",
-    },
-    config = function()
-      require("ufo").setup({
-        provider_selector = function()
-          return { "treesitter", "indent" }
-        end,
-      })
-    end,
-  },
-  {
-    "lucamot/chrome-dev-console.nvim",
-    dependencies = { "lucamot/chrome-remote.nvim" },
-    config = function()
-      require("chrome-dev-console").setup({
-        console_window = {
-          height = 10,      -- Height of the split window
-          placement = "below", -- 'left', 'right', 'above', 'below'
-        },
-        auto_close_page = true, -- Close webpage when console buffer is deleted
-      })
-    end,
-  },
+  -- {
+  --   "skardyy/neo-img",
+  --   build = "cd ttyimg && go build", -- build ttyimg
+  --   config = function()
+  --     require("neo-img").setup({
+  --       backend = "kitty",
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = {
+  --     "kevinhwang91/promise-async",
+  --   },
+  --   config = function()
+  --     require("ufo").setup({
+  --       provider_selector = function()
+  --         return { "treesitter", "indent" }
+  --       end,
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "lucamot/chrome-dev-console.nvim",
+  --   dependencies = { "lucamot/chrome-remote.nvim" },
+  --   config = function()
+  --     require("chrome-dev-console").setup({
+  --       console_window = {
+  --         height = 10,      -- Height of the split window
+  --         placement = "below", -- 'left', 'right', 'above', 'below'
+  --       },
+  --       auto_close_page = true, -- Close webpage when console buffer is deleted
+  --     })
+  --   end,
+  -- },
   {
     "olimorris/codecompanion.nvim",
     config = function()
@@ -579,22 +568,22 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter",
     },
   },
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-      bufdelete = { enabled = true },
-      image = { enabled = true },
-    },
-    config = function()
-      Snacks = require("snacks")
-      vim.keymap.set({ "n", "t" }, "<C-x>", function()
-        Snacks.bufdelete()
-      end, {})
-    end,
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   priority = 1000,
+  --   lazy = false,
+  --   ---@type snacks.Config
+  --   opts = {
+  --     bufdelete = { enabled = true },
+  --     image = { enabled = true },
+  --   },
+  --   config = function()
+  --     Snacks = require("snacks")
+  --     vim.keymap.set({ "n", "t" }, "<C-x>", function()
+  --       Snacks.bufdelete()
+  --     end, {})
+  --   end,
+  -- },
   {
     "sindrets/diffview.nvim",
   },
