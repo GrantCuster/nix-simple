@@ -6,12 +6,13 @@
   margin: 0 0 0 0;
 }
 window#waybar {
-  /* background: #1d2021; */
-  background: transparent;
+  background: rgba(29, 32, 33, 0.9);
+  /* background: transparent; */
   color: #a89984;
   padding: 0;
   margin: 0;
   border: none;
+  opacity: 1; 
 }
 #custom-clock,
 #custom-date,
@@ -42,11 +43,11 @@ window#waybar {
 }
 
 #workspaces {
-  padding: 4px 2px 2px
+  padding: 2px 2px 4px
 }
 
 #custom-niri-count {
-  padding: 4px 8px 2px;
+  padding: 2px 8px 4px;
   color: #d3869b;
 }
 

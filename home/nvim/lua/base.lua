@@ -194,6 +194,7 @@ vim.keymap.set("n", "<escape>", ":noh<CR>")
 
 -- jump back to previous
 vim.keymap.set("n", "<leader>bb", ":edit #<CR>")
+vim.keymap.set({ "n", "i", "t" }, "<C-b>", [[<Cmd>edit #<CR>]], { noremap = true })
 
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#1d2021" })
 

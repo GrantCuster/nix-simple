@@ -209,6 +209,18 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      function gt
+          set dir (pwd)
+          while test "$dir" != "/"
+              if test -d "$dir/.git" -o -d "$dir/.project"
+                  cd "$dir"
+                  return 0
+              end
+              set dir (dirname "$dir")
+          end
+          echo "No parent directory with .git or .project found."
+          return 1
+      end
       function __sync_nvim_cwd --on-variable PWD --description "Sync Neovim working directory with Fish"
         status --is-command-substitution; and return  # Prevent running in subshells
         nvr -c "cd $PWD"  # Change Neovim's working directory

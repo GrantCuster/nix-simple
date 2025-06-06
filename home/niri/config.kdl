@@ -101,7 +101,7 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
    
-  background-color "#1d2021"
+  background-color "#282828"
 }
 output "DP-1" {
   background-color "#282828"
@@ -118,13 +118,17 @@ output "DP-5" {
   transform "90"
 }
 cursor {
+  // yet to get commix cursors working
+  // xcursor-theme "ComixCursors-White-Regular-Slim"
+  xcursor-theme "Adwaita"
+  xcursor-size 24
   hide-when-typing
   hide-after-inactive-ms 2000
 }
 
 overview  {
   zoom 0.5
-  backdrop-color "#1d2021"
+  backdrop-color "#282828"
   workspace-shadow {
     off
   }
@@ -236,8 +240,8 @@ layout {
 
         // Color of the ring on inactive monitors.
         // inactive-color "#282828"
-        active-color "#282828"
-        inactive-color "#282828"
+        active-color "#3c3836"
+        inactive-color "#3c3836"
 
         // width 4
         // active-color "#ffc87f"
@@ -378,6 +382,8 @@ binds {
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
     // Alt+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "+10%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.

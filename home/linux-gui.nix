@@ -13,6 +13,7 @@
     wl-clipboard
     clipse
     light
+    brightnessctl
     sway-contrib.grimshot
     newsboat
     waybar
@@ -50,6 +51,13 @@
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
   ];
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.comixcursors;
+    name = "comixcursors";
+  };
+
 
   xdg.configFile.sway = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/sway";
