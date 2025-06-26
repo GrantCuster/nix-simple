@@ -50,7 +50,7 @@ optimize_gif() {
 screen() {
   echo "$MP4_FILE" > "$TMP_ACTIVE_FILE_REF"
   echo "REC"  > "$TMP_REC_STATUS_FILE"
-  timeout 30 wf-recorder -f "$MP4_FILE"
+  timeout 120 wf-recorder -f "$MP4_FILE"
 }
 
 window() {
@@ -58,7 +58,7 @@ window() {
   echo "REC"  > "$TMP_REC_STATUS_FILE"
   GEOMETRY=$(echo "$WINDOWS" | slurp)
   if [[ ! -z "$GEOMETRY" ]]; then
-    timeout 30 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
+    timeout 120 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
   fi
 }
 
@@ -67,7 +67,7 @@ area() {
   echo "REC"  > "$TMP_REC_STATUS_FILE"
   GEOMETRY=$(slurp)
   if [[ ! -z "$GEOMETRY" ]]; then
-    timeout 30 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
+    timeout 120 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
   fi
 }
 

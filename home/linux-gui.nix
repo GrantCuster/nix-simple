@@ -22,7 +22,15 @@
     # ttyimage attempt
     go
 
+    xournalpp
+
+    kdePackages.kdenlive
+
     mpv
+
+    claude-code
+
+    zoom-us
 
     swaybg
 
