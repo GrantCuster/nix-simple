@@ -1,2 +1,0 @@
-- [ ] niri screenshots to mac keys
-- [ ] niri screen recording and gif setup

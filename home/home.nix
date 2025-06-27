@@ -99,6 +99,7 @@
     (writeShellScriptBin "findlastdir" (builtins.readFile ./scripts/findlastdir.sh))
     (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
     (writeShellScriptBin "daily" (builtins.readFile ./scripts/daily.sh))
+    (writeShellScriptBin "wakeup" (builtins.readFile ./scripts/wakeup.sh))
     # mac specific
     (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
     (writeShellScriptBin "refresh_nix_mac" (builtins.readFile ./scripts/refresh_nix_mac.sh))
