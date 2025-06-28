@@ -102,12 +102,31 @@
     };
   };
 
-   services.cron = {
-     enable = true;
-     systemCronJobs = [
-       "0 6 * * *  root /home/grant/morning_routine.sh"
-     ];
-   };
+ #  systemd.timers.wakeup = {
+ #    description = "Daily wakeup at 6 AM";
+ #    wantedBy = [ "timers.target" ];
+ #    timerConfig = {
+ #      OnCalendar = "*-*-* 06:00:00";
+ #      Persistent = true;
+ #    };
+ #  };
+ #
+ # systemd.services.wakeup = {
+ #   script = ''
+ #      ${pkgs.fish}/bin/fish -c /home/grant/nix/home/scripts/wakeup.sh
+ #    '';
+ #    serviceConfig = {
+ #      Type = "simple";
+ #      User = "grant";
+ #    };
+ #  };
+
+   # services.cron = {
+   #   enable = true;
+   #   systemCronJobs = [
+   #     "0 6 * * *  grant . /home/grant/nix/home/scripts/wakeup.sh"
+   #   ];
+   # };
 
   services.blueman.enable = true;
 
