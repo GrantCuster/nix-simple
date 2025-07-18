@@ -31,6 +31,7 @@
     ripgrep
 
     nodejs_22
+    ngrok
 
     fastfetch
     htop
@@ -64,7 +65,6 @@
     nodePackages_latest.ts-node
 
     neovim-remote
-
 
     nerd-fonts.jetbrains-mono
 

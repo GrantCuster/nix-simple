@@ -29,6 +29,7 @@
     mpv
 
     claude-code
+    opencode
 
     zoom-us
 

@@ -106,17 +106,20 @@ output "eDP-1" {
 output "DP-1" {
   background-color "#282828"
 }
-output "DP-6" {
-  background-color "#282828"
-}
-output "DP-3" {
-  background-color "#282828"
-  transform "90"
-}
 output "DP-5" {
+  position x=0 y=0
   background-color "#282828"
+}
+output "DP-6" {
+  position x=0 y=1440
+  background-color "#282828"
+  scale 1.25
   transform "90"
 }
+// output "DP-5" {
+//   background-color "#282828"
+//   transform "90"
+// }
 cursor {
   // yet to get commix cursors working
   // xcursor-theme "ComixCursors-White-Regular-Slim"
@@ -377,7 +380,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
     Alt+Shift+Return { spawn "ghostty"; }
-    Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--password-store=basic" "--hide-crash-restore-bubble"; }
+    Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Default" "--password-store=basic" "--hide-crash-restore-bubble"; }
+    Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 6" "--password-store=basic" "--hide-crash-restore-bubble"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -392,7 +396,7 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Alt+Q { close-window; }
+    // Alt+Q { close-window; }
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
     // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh do"; }
@@ -444,8 +448,8 @@ binds {
     Alt+Shift+Up    { focus-monitor-up; }
     Alt+Shift+Right { focus-monitor-right; }
     Alt+Shift+H     { focus-monitor-left; }
-    Alt+Shift+J     { focus-monitor-right; }
-    Alt+Shift+K     { focus-monitor-left; }
+    Alt+Shift+J     { focus-monitor-down; }
+    Alt+Shift+K     { focus-monitor-up; }
     Alt+Shift+L     { focus-monitor-right; }
 
     Alt+Shift+Ctrl+Left  { move-column-to-monitor-left; }

@@ -87,7 +87,12 @@ vim.o.foldlevelstart = 99 -- Start with all folds open
 vim.o.foldnestmax = 3 -- Maximum nested folds
 vim.o.foldminlines = 1
 
-vim.keymap.set({ "n", "t" }, "<C-g>", [[<Cmd>LazyGit<CR>]], {})
+vim.o.showtabline = 0
+
+-- Quit - bc ghostty is slow to quit otherwise
+vim.keymap.set('n', '<A-q>', ':qa<CR>', { noremap = true, silent = true })
+vim.keymap.set('i', '<A-q>', '<Esc>:qa<CR>', { noremap = true, silent = true })
+vim.keymap.set('t', '<A-q>', '<C-\\><C-n>:qa<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
@@ -96,7 +101,7 @@ vim.opt.showmode = false
 
 vim.opt.splitright = true
 
-vim.opt.fillchars:append({ eob = " " })
+vim.opt.fillchars:append({ eob = " ", diff = " " })
 
 -- Auto reload files
 vim.o.updatetime = 1000
@@ -196,6 +201,7 @@ vim.keymap.set("n", "<escape>", ":noh<CR>")
 vim.keymap.set("n", "<leader>bb", ":edit #<CR>")
 vim.keymap.set({ "n", "i", "t" }, "<C-b>", [[<Cmd>edit #<CR>]], { noremap = true })
 
+vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#1d2021" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = "#1d2021" })
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
@@ -519,8 +525,6 @@ end
 
 vim.keymap.set({ "n", "t" }, "<C-t>", "<Cmd>lua Toggle_terminal_buffers()<CR>", { noremap = true, silent = true })
 
-vim.opt.fillchars:append { diff = "╱" }
-
 vim.keymap.set("n", "<leader>gg", function()
   if next(require("diffview.lib").views) == nil then
     vim.cmd("DiffviewOpen")
@@ -550,4 +554,8 @@ vim.api.nvim_create_user_command("Gsync", function()
 end, {})
 vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
 
-
+-- Next and previous quickfix items
+vim.keymap.set('n', ']q', ':cnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '[q', ':cprev<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>qo', ':copen<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { noremap = true, silent = true })
