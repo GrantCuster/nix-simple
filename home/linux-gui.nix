@@ -44,6 +44,8 @@
 
     yt-dlp
 
+    reaper
+
     xdragon
 
     inotify-tools

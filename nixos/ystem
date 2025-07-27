@@ -1,0 +1,8 @@
+[4mNEXT                       [0m[4m [0m[4m  LEFT[0m[4m [0m[4mLAST                       [0m[4m [0m[4m   PASSED[0m[4m [0m[4mUNIT                        [0m[4m [0m[4mACTIVATES                     [0m
+Fri 2025-06-27 18:00:00 EDT  24min Fri 2025-06-27 17:00:11 EDT 35min ago logrotate.timer              logrotate.service
+Sat 2025-06-28 06:00:00 EDT    12h Fri 2025-06-27 16:48:33 EDT         - wakeup.timer                 wakeup.service
+Sat 2025-06-28 16:58:44 EDT    23h Fri 2025-06-27 16:58:44 EDT 36min ago systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Mon 2025-06-30 00:46:47 EDT 2 days Mon 2025-06-23 00:59:42 EDT         - fstrim.timer                 fstrim.service
+
+[0;1;39m4 timers listed.[0m
+Pass --all to see loaded but inactive timers, too.
