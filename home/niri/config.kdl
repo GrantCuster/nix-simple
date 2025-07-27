@@ -65,6 +65,10 @@ touchpad { // off
     focus-follows-mouse
 }
 
+environment {
+  DISPLAY ":0"
+}
+
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
 // The built-in laptop monitor is usually called "eDP-1".
@@ -170,7 +174,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.3333; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -279,6 +283,7 @@ spawn-at-startup "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"
 spawn-at-startup "sh" "-c" "~/.config/niri/scripts/startup.sh"
 spawn-at-startup "sh ~/nix/home/scripts/startup.sh"
 spawn-at-startup "gammastep"
+spawn-at-startup "xwayland-satellite"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.

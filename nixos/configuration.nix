@@ -13,6 +13,9 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
   security.polkit.enable = true;
 
 
@@ -76,6 +79,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+    jack.enable = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -155,6 +159,25 @@
     XCURSOR_THEME = "Adwaita";
     XCURSOR_SIZE = "24";
   };
+  
+  # fix for virtual camera - see https://github.com/obsproject/obs-studio/pull/11906#issuecomment-2986661982
+  programs.obs-studio.package = pkgs.obs-studio.overrideAttrs (oldAttrs: {
+    src = pkgs.fetchFromGitHub {
+      owner = "obsproject";
+      repo = "obs-studio";
+      rev = "12c6febae21f369da50f09d511b54eadc1dc1342"; # https://github.com/obsproject/obs-studio/pull/11906
+      sha256 = "sha256-DIlAMCdve7wfbMV5YCd3qJnZ2xwJMmQD6LamGP7ECOA=";
+      fetchSubmodules = true;
+    };
+    version = "31.1.0-beta1";
+    patches = builtins.filter (
+      patch:
+      !(
+        builtins.baseNameOf (toString patch) == "Enable-file-access-and-universal-access-for-file-URL.patch"
+      )
+    ) oldAttrs.patches;
+  });
+ 
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -175,11 +198,19 @@
     # need a c compiler for neovim plugins
     zig
 
+    xwayland-satellite
+    reaper
+    bitwig-studio
+
+    # obs-studio
     v4l-utils
   ];
 
   programs.obs-studio.enable = true;
   programs.obs-studio.enableVirtualCamera = true;
+  programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
+    obs-backgroundremoval
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
