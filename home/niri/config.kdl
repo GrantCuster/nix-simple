@@ -84,7 +84,7 @@ output "eDP-1" {
     // Alte "1920x1080@120.030"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 1.5
+    scale 1.25
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -170,7 +170,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.3333; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -300,13 +300,13 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    // off
+    off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
-  // workspace-switch {
-  //   off
-  // }
+  workspace-switch {
+    off
+  }
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -381,7 +381,7 @@ binds {
     Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
     Alt+Shift+Return { spawn "ghostty"; }
     Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Default" "--password-store=basic" "--hide-crash-restore-bubble"; }
-    Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 6" "--password-store=basic" "--hide-crash-restore-bubble"; }
+    Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 2" "--password-store=basic" "--hide-crash-restore-bubble"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -396,17 +396,27 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    // Alt+Q { close-window; }
+    Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/ghostty_close_fix.sh"; }
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
-    // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh do"; }
     Alt+T { focus-workspace "home"; }
-    Alt+Shift+C { spawn "sh" "-c" "~/.config/niri/scripts/center_floating_window.sh"; }
+
+    Alt+X { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh landscape"; }
+    Alt+C { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh square"; }
+    Alt+V { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh portrait"; }
+    Alt+Z { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh stop_recording"; }
+  // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh do"; }
+    // Alt+Shift+C { spawn "sh" "-c" "~/.config/niri/scripts/center_floating_window.sh"; }
+    // Alt+S { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh"; 
+
+    // Alt+Shift+S { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh window"; }
+
+    Alt+O { toggle-window-floating; }
 
     // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
     Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
 
-    Alt+N { spawn "sh" "-c" "~/.config/niri/scripts/new_workspace.sh"; }
+    Alt+N { spawn "nautilus" "-w"; }
     Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
 
     // Alt+Z { spawn "sh" "-c" ""; }
@@ -571,7 +581,8 @@ binds {
     Alt+F { maximize-column; }
     Alt+Shift+F { fullscreen-window; }
     Alt+Ctrl+F { toggle-windowed-fullscreen; }
-    Alt+C { center-column; }
+    Alt+Y { set-dynamic-cast-window; }
+    Alt+Shift+Y { center-column; }
 
     // Finer width adjustments.
     // This command can also:

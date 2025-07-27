@@ -22,6 +22,9 @@ vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
 
+-- remapping to opencode
+vim.keymap.set('n', '<C-b>', '<C-o>', { desc = 'Jump to previous location' })
+
 -- terminal clear
 vim.keymap.set("t", "<C-.>", [[clear<CR>]], { noremap = true })
 

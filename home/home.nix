@@ -86,6 +86,8 @@
     svelte-language-server
     marksman
 
+    reaper
+
     (writeShellScriptBin "smart_nvim" (builtins.readFile ./scripts/smart_nvim.sh))
     (writeShellScriptBin "oblique" (builtins.readFile ./scripts/oblique.sh))
     (writeShellScriptBin "welcome" (builtins.readFile ./scripts/welcome.sh))

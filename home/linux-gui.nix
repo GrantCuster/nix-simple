@@ -48,7 +48,10 @@
 
     inotify-tools
 
-    obs-studio
+    qt6.qtbase
+    qt6.qtwayland
+    qt6.qtwebengine
+    xdg-utils # Optional, improves Qt behavior
 
     # not actually gui but putting rust here for now
     # rustup

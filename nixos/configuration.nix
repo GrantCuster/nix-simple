@@ -9,6 +9,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  security.polkit.enable = true;
+
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -20,7 +27,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  networking.extraHosts = "192.0.0.0 twitter";
+  networking.extraHosts = ''
+  '';
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -86,7 +94,7 @@
   users.users.grant = {
     isNormalUser = true;
     description = "Grant Custer";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
      bluetuith
@@ -166,7 +174,12 @@
 
     # need a c compiler for neovim plugins
     zig
+
+    v4l-utils
   ];
+
+  programs.obs-studio.enable = true;
+  programs.obs-studio.enableVirtualCamera = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

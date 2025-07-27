@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
-read -p "Commit message: " message
-git commit -m "$message"
+git add .
+git commit -m "checkin"
