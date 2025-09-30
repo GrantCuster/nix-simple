@@ -61,8 +61,8 @@ touchpad { // off
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="0%"
+    // focus-follows-mouse max-scroll-amount "0%"
 }
 
 environment {
@@ -75,7 +75,7 @@ environment {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "eDP-1" {
+output "LG Display 0x06EB Unknown" {
     // Uncomment this line to disable this output.
     // off
 
@@ -88,7 +88,7 @@ output "eDP-1" {
     // Alte "1920x1080@120.030"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 1.25
+    scale 1.375
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -105,25 +105,23 @@ output "eDP-1" {
     // automatically.
     // position x=1280 y=0
    
-  background-color "#282828"
+  position x=1920 y=0
+  background-color "#1d2021"
 }
-output "DP-1" {
-  background-color "#282828"
-}
-output "DP-5" {
+output "LG Electronics LG ULTRAWIDE 206NTTQBG745" {
   position x=0 y=0
+  scale 1.125
   background-color "#282828"
 }
-output "DP-6" {
-  position x=0 y=1440
+output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
+  position x=0 y=1280
   background-color "#282828"
-  scale 1.25
   transform "90"
 }
-// output "DP-5" {
-//   background-color "#282828"
-//   transform "90"
-// }
+output "Seiko Epson Corporation EPSON PJ 0x01010101" {
+  position x=3057 y=0
+  // off
+}
 cursor {
   // yet to get commix cursors working
   // xcursor-theme "ComixCursors-White-Regular-Slim"
@@ -146,8 +144,8 @@ overview  {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    // gaps 16
-    gaps 2
+    gaps 4
+    // gaps 2
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -156,6 +154,7 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     center-focused-column "never"
+    always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Alt+R) toggles between.
     preset-column-widths {
@@ -195,7 +194,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 1
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -280,10 +279,11 @@ layout {
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 
 spawn-at-startup "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"
-spawn-at-startup "sh" "-c" "~/.config/niri/scripts/startup.sh"
-spawn-at-startup "sh ~/nix/home/scripts/startup.sh"
+// spawn-at-startup "sh" "-c" "~/.config/niri/scripts/startup.sh"
+// spawn-at-startup "sh ~/nix/home/scripts/startup.sh"
 spawn-at-startup "gammastep"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -401,7 +401,7 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/ghostty_close_fix.sh"; }
+    Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/close_and_center.sh"; }
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
     Alt+T { focus-workspace "home"; }
@@ -432,10 +432,9 @@ binds {
     Alt+Down  { focus-window-down; }
     Alt+Up    { focus-window-up; }
     Alt+Right { focus-column-right; }
-    Alt+H     { focus-column-left; }
-    // Alt+J     { focus-window-down; }
-    // Alt+K     { focus-window-up; }
-    Alt+L     { focus-column-right; }
+
+    Alt+H { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_left_and_center.sh"; }
+    Alt+L { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_right_and_center.sh"; }
 
     Alt+Ctrl+Left  { move-column-left; }
     Alt+Ctrl+Down  { move-window-down; }
@@ -445,6 +444,8 @@ binds {
     // Alt+Ctrl+J     { move-window-down; }
     // Alt+Ctrl+K     { move-window-up; }
     Alt+Ctrl+L     { move-column-right; }
+
+    Ctrl+Y { center-visible-columns; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -576,14 +577,14 @@ binds {
     Alt+BracketLeft  { consume-or-expel-window-left; }
     Alt+BracketRight { consume-or-expel-window-right; }
 
-    Alt+R { switch-preset-column-width; }
+    Alt+R { spawn "sh" "-c" "~/.config/niri/scripts/switch_width_and_center.sh"; }
     Alt+Shift+R { switch-preset-window-height; }
     Alt+Ctrl+R { reset-window-height; }
     // Alt+1 { set-column-width "33.3333%"; }
     // Alt+2 { set-column-width "50%"; }
     // Alt+3 { set-column-width "66.6667%"; }
     // Alt+4 { set-column-width "100%"; }
-    Alt+F { maximize-column; }
+    Alt+F { spawn "sh" "-c" "~/.config/niri/scripts/toggle_maximize_and_center.sh"; }
     Alt+Shift+F { fullscreen-window; }
     Alt+Ctrl+F { toggle-windowed-fullscreen; }
     Alt+Y { set-dynamic-cast-window; }

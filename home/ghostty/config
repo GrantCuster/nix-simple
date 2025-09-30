@@ -1,12 +1,13 @@
-theme = GruvboxDarkHard
+theme = gruvbox-hard
 window-decoration = false
 window-theme = system
 confirm-close-surface = false
 font-feature = -calt
 font-size = 11
 window-padding-x = 8
-window-padding-y = 4
-window-padding-balance = true
+window-padding-y = 0
+window-padding-balance = false
+window-padding-color = extend
 
 keybind = ctrl+comma=unbind
 keybind = ctrl+page_down=unbind

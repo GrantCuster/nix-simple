@@ -31,7 +31,7 @@
   networking.networkmanager.enable = true;
 
   networking.extraHosts = ''
-  '';
+ '';
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -161,22 +161,22 @@
   };
   
   # fix for virtual camera - see https://github.com/obsproject/obs-studio/pull/11906#issuecomment-2986661982
-  programs.obs-studio.package = pkgs.obs-studio.overrideAttrs (oldAttrs: {
-    src = pkgs.fetchFromGitHub {
-      owner = "obsproject";
-      repo = "obs-studio";
-      rev = "12c6febae21f369da50f09d511b54eadc1dc1342"; # https://github.com/obsproject/obs-studio/pull/11906
-      sha256 = "sha256-DIlAMCdve7wfbMV5YCd3qJnZ2xwJMmQD6LamGP7ECOA=";
-      fetchSubmodules = true;
-    };
-    version = "31.1.0-beta1";
-    patches = builtins.filter (
-      patch:
-      !(
-        builtins.baseNameOf (toString patch) == "Enable-file-access-and-universal-access-for-file-URL.patch"
-      )
-    ) oldAttrs.patches;
-  });
+  # programs.obs-studio.package = pkgs.obs-studio.overrideAttrs (oldAttrs: {
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "obsproject";
+  #     repo = "obs-studio";
+  #     rev = "12c6febae21f369da50f09d511b54eadc1dc1342"; # https://github.com/obsproject/obs-studio/pull/11906
+  #     sha256 = "sha256-DIlAMCdve7wfbMV5YCd3qJnZ2xwJMmQD6LamGP7ECOA=";
+  #     fetchSubmodules = true;
+  #   };
+  #   version = "31.1.0-beta1";
+  #   patches = builtins.filter (
+  #     patch:
+  #     !(
+  #       builtins.baseNameOf (toString patch) == "Enable-file-access-and-universal-access-for-file-URL.patch"
+  #     )
+  #   ) oldAttrs.patches;
+  # });
  
 
   # List packages installed in system profile. To search, run:
@@ -212,6 +212,18 @@
     obs-backgroundremoval
   ];
 
+  # For npm install opencode from this comment https://github.com/sst/opencode/issues/462#issuecomment-3193740355
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      icu
+      gmp
+      glibc
+      openssl
+      stdenv.cc.cc
+    ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -226,7 +238,7 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4111 5173 ];
+  networking.firewall.allowedTCPPorts = [ 4111 5173 8096 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

@@ -23,7 +23,7 @@ vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
 
 -- remapping to opencode
-vim.keymap.set('n', '<C-b>', '<C-o>', { desc = 'Jump to previous location' })
+vim.keymap.set("n", "<C-b>", "<C-o>", { desc = "Jump to previous location" })
 
 -- terminal clear
 vim.keymap.set("t", "<C-.>", [[clear<CR>]], { noremap = true })
@@ -92,10 +92,12 @@ vim.o.foldminlines = 1
 
 vim.o.showtabline = 0
 
+vim.opt.shell = "/home/grant/.nix-profile/bin/fish"
+
 -- Quit - bc ghostty is slow to quit otherwise
-vim.keymap.set('n', '<A-q>', ':qa<CR>', { noremap = true, silent = true })
-vim.keymap.set('i', '<A-q>', '<Esc>:qa<CR>', { noremap = true, silent = true })
-vim.keymap.set('t', '<A-q>', '<C-\\><C-n>:qa<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<A-q>", ":qa<CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "<A-q>", "<Esc>:qa<CR>", { noremap = true, silent = true })
+vim.keymap.set("t", "<A-q>", "<C-\\><C-n>:qa<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
@@ -134,6 +136,66 @@ vim.keymap.set("n", "<C-enter>", function()
 	vim_dir = vim_dir:gsub("/v:null", "")
 	vim.cmd("terminal fish -C 'cd " .. vim_dir .. "'")
 end, { noremap = true })
+
+
+-- Return true iff PID has any descendant whose command name is not in ignore set.
+local function has_non_ignored_descendant(root_pid, ignore_list)
+  local ignore = {}
+  for _, n in ipairs(ignore_list or { "fish" }) do ignore[n] = true end
+
+  local h = io.popen("ps -eo pid=,ppid=,comm=")
+  if not h then return false end
+  local data = h:read("*a") or ""
+  h:close()
+
+  -- parent -> children map
+  local kids = {}
+  for pid_s, ppid_s, comm in data:gmatch("(%d+)%s+(%d+)%s+([^\n]+)") do
+    local pid, ppid = tonumber(pid_s), tonumber(ppid_s)
+    if pid and ppid then
+      kids[ppid] = kids[ppid] or {}
+      table.insert(kids[ppid], { pid = pid, comm = comm })
+    end
+  end
+
+  local function base(name) return (name or ""):gsub(".-([^/]+)$", "%1") end
+
+  local stack = { root_pid }
+  while #stack > 0 do
+    local p = table.remove(stack)
+    local c = kids[p]
+    if c then
+      for _, pr in ipairs(c) do
+        local name = base(pr.comm)
+        if not ignore[name] then
+          return true
+        end
+        table.insert(stack, pr.pid)
+      end
+    end
+  end
+  return false
+end
+
+vim.keymap.set("t", "<C-enter>", function()
+  -- check if process (non-fish is running)
+  local job_id = vim.b.terminal_job_id or vim.api.nvim_buf_get_var(0, "terminal_job_id")
+  if job_id and job_id > 0 then
+    local shell_pid = vim.fn.jobpid(job_id)
+    if shell_pid and shell_pid > 0 then
+      if has_non_ignored_descendant(shell_pid, { "fish" }) then
+        -- there is no process open new terminal
+        -- parse from the terminal buffer name the cwd
+        local bufname = vim.api.nvim_buf_get_name(0)
+        -- example buffname term:///home/grant/dev::1757597042
+        -- parse out /home/grant/dev
+        local vim_dir = bufname:match("term://(.-)::")
+        vim.cmd("terminal fish -C 'cd " .. vim_dir .. "'")
+      end
+    end
+  end 
+end, { noremap = true })
+
 
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	pattern = "term://*",
@@ -244,38 +306,38 @@ end, {})
 
 local todo_win_id = nil -- Store the floating window ID
 
-vim.keymap.set({ "n", "t" }, "<C-t>", function()
-	-- Close the floating window if it exists
-	if todo_win_id and vim.api.nvim_win_is_valid(todo_win_id) then
-		vim.api.nvim_win_close(todo_win_id, true)
-		todo_win_id = nil
-		return
-	end
-
-	-- Set desired width and height
-	local width = 90
-	local height = 40
-
-	-- Calculate centered position
-	local row = math.floor((vim.o.lines - height) / 2)
-	local col = math.floor((vim.o.columns - width) / 2)
-
-	-- Create a new scratch buffer
-	local buf = vim.api.nvim_create_buf(false, true)
-
-	-- Open the floating window
-	todo_win_id = vim.api.nvim_open_win(buf, true, {
-		relative = "editor",
-		width = width,
-		height = height,
-		row = row,
-		col = col,
-		style = "minimal",
-		border = "rounded",
-	})
-
-	vim.cmd("edit ~/dev/TODO.md") -- Open the file in the floating window
-end, { noremap = true, silent = true })
+-- vim.keymap.set({ "n", "t" }, "<C-t>", function()
+-- 	-- Close the floating window if it exists
+-- 	if todo_win_id and vim.api.nvim_win_is_valid(todo_win_id) then
+-- 		vim.api.nvim_win_close(todo_win_id, true)
+-- 		todo_win_id = nil
+-- 		return
+-- 	end
+--
+-- 	-- Set desired width and height
+-- 	local width = 90
+-- 	local height = 40
+--
+-- 	-- Calculate centered position
+-- 	local row = math.floor((vim.o.lines - height) / 2)
+-- 	local col = math.floor((vim.o.columns - width) / 2)
+--
+-- 	-- Create a new scratch buffer
+-- 	local buf = vim.api.nvim_create_buf(false, true)
+--
+-- 	-- Open the floating window
+-- 	todo_win_id = vim.api.nvim_open_win(buf, true, {
+-- 		relative = "editor",
+-- 		width = width,
+-- 		height = height,
+-- 		row = row,
+-- 		col = col,
+-- 		style = "minimal",
+-- 		border = "rounded",
+-- 	})
+--
+-- 	vim.cmd("edit ~/dev/TODO.md") -- Open the file in the floating window
+-- end, { noremap = true, silent = true })
 
 local aero_win_id = nil -- Store the floating window ID
 
@@ -495,6 +557,138 @@ end
 -- Map the function to a key (e.g., <leader>gf)
 vim.api.nvim_set_keymap("n", "ge", ":lua OpenFileInRightWindow()<CR>", { noremap = true, silent = true })
 
+vim.keymap.set("n", "<leader>gg", function()
+	if next(require("diffview.lib").views) == nil then
+		vim.cmd("DiffviewOpen")
+	else
+		vim.cmd("DiffviewClose")
+	end
+end)
+
+vim.keymap.set("n", "<leader>gh", function()
+	if next(require("diffview.lib").views) == nil then
+		vim.cmd("DiffviewFileHistory")
+	else
+		vim.cmd("DiffviewClose")
+	end
+end)
+
+vim.keymap.set("n", "<leader>gf", function()
+	if next(require("diffview.lib").views) == nil then
+		vim.cmd("DiffviewFileHistory %")
+	else
+		vim.cmd("DiffviewClose")
+	end
+end)
+
+vim.api.nvim_create_user_command("Gsync", function()
+	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
+end, {})
+vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
+
+-- Next and previous quickfix items
+vim.keymap.set("n", "]q", ":cnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "[q", ":cprev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>qo", ":copen<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { noremap = true, silent = true })
+
+
+-- Active terminal toggle -------------------------------------------------------
+-- Helpers -------------------------------------------------------
+
+-- Build a set from a list for fast membership checks
+local function to_set(list)
+  local s = {}
+  for _, v in ipairs(list or {}) do s[v] = true end
+  return s
+end
+
+-- Return { children = { [ppid] = { {pid=..., comm=...}, ... } }, names = { [pid] = "comm" } }
+local function ps_tree()
+  local handle = io.popen("ps -eo pid=,ppid=,comm=")
+  if not handle then return { children = {}, names = {} } end
+  local data = handle:read("*a") or ""
+  handle:close()
+
+  local children, names = {}, {}
+  for pid_s, ppid_s, comm in data:gmatch("(%d+)%s+(%d+)%s+([^\n]+)") do
+    local pid, ppid = tonumber(pid_s), tonumber(ppid_s)
+    if pid and ppid then
+      children[ppid] = children[ppid] or {}
+      table.insert(children[ppid], { pid = pid, comm = comm })
+      names[pid] = comm
+    end
+  end
+  return { children = children, names = names }
+end
+
+-- basename("usr/bin/node") -> "node"
+local function basename(path)
+  return (path:gsub(".-([^/]+)$", "%1"))
+end
+
+-- DFS: does root_pid have any descendant whose command name is NOT ignored?
+local function has_non_ignored_descendant(root_pid, ignore_list)
+  local ignore = to_set(ignore_list or { "fish" })
+  local tree = ps_tree()
+  local children = tree.children
+
+  local stack = { root_pid }
+  while #stack > 0 do
+    local ppid = table.remove(stack)
+    local kids = children[ppid]
+    if kids then
+      for _, proc in ipairs(kids) do
+        local name = basename(proc.comm or "")
+        if not ignore[name] then
+          return true -- found a non-ignored process
+        end
+        -- keep walking in case a shell child spawned something else
+        table.insert(stack, proc.pid)
+      end
+    end
+  end
+  return false
+end
+
+-- Main ----------------------------------------------------------
+
+-- Returns terminal buffers that have an active descendant process
+-- other than anything in ignore_list (defaults to {"fish"}).
+local function get_terminal_buffers_with_active(ignore_list)
+  local terminal_buffers = {}
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf)
+      and vim.api.nvim_buf_get_option(buf, "buftype") == "terminal"
+    then
+      local job_id = vim.b[buf].terminal_job_id or vim.api.nvim_buf_get_var(buf, "terminal_job_id")
+      if job_id and job_id > 0 then
+        local shell_pid = vim.fn.jobpid(job_id)
+        if shell_pid and shell_pid > 0 then
+          if has_non_ignored_descendant(shell_pid, ignore_list) then
+            table.insert(terminal_buffers, buf)
+          end
+        end
+      end
+    end
+  end
+  return terminal_buffers
+end
+
+-- Optional: command to list them quickly
+vim.api.nvim_create_user_command("ListActiveTerminals", function()
+  local bufs = get_terminal_buffers_with_active({ "fish" })
+  if #bufs == 0 then
+    print("No terminal buffers with active non-fish processes.")
+    return
+  end
+  for _, b in ipairs(bufs) do
+    local name = vim.api.nvim_buf_get_name(b)
+    print(string.format("buf #%d  %s", b, name ~= "" and name or "[No Name]"))
+  end
+end, {})
+
+
 local function get_terminal_buffers()
 	local terminal_buffers = {}
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -507,7 +701,7 @@ end
 
 -- Function to toggle through terminal buffers
 function Toggle_terminal_buffers()
-	local terminal_buffers = get_terminal_buffers()
+	local terminal_buffers = get_terminal_buffers_with_active({ "fish" })
 	if #terminal_buffers == 0 then
 		print("No terminal buffers open")
 		return
@@ -528,37 +722,4 @@ end
 
 vim.keymap.set({ "n", "t" }, "<C-t>", "<Cmd>lua Toggle_terminal_buffers()<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>gg", function()
-  if next(require("diffview.lib").views) == nil then
-    vim.cmd("DiffviewOpen")
-  else
-    vim.cmd("DiffviewClose")
-  end
-end)
 
-vim.keymap.set("n", "<leader>gh", function()
-  if next(require("diffview.lib").views) == nil then
-    vim.cmd("DiffviewFileHistory")
-  else
-    vim.cmd("DiffviewClose")
-  end
-end)
-
-vim.keymap.set("n", "<leader>gf", function()
-  if next(require("diffview.lib").views) == nil then
-    vim.cmd("DiffviewFileHistory %")
-  else
-    vim.cmd("DiffviewClose")
-  end
-end)
-
-vim.api.nvim_create_user_command("Gsync", function()
-	vim.cmd("!git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main")
-end, {})
-vim.keymap.set("n", "<leader>gs", ":Gsync<CR>", { noremap = true, silent = true })
-
--- Next and previous quickfix items
-vim.keymap.set('n', ']q', ':cnext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '[q', ':cprev<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>qo', ':copen<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { noremap = true, silent = true })

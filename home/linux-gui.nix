@@ -29,7 +29,6 @@
     mpv
 
     claude-code
-    opencode
 
     zoom-us
 
@@ -39,6 +38,14 @@
     erlang
     beamMinimal26Packages.rebar3
     watchexec
+
+    google-cloud-sdk
+
+    docker
+
+    cliphist
+
+    lsof
 
     google-chrome
 
