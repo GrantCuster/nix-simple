@@ -85,6 +85,10 @@ output "Seiko Epson Corporation EPSON PJ 0x01010101" {
   position x=3057 y=0
   // off
 }
+output "BOE NE135A1M-NY1 Unknown" {
+  
+  scale 1.75
+}
 
 cursor {
   xcursor-theme "Adwaita"
@@ -136,7 +140,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -232,7 +236,7 @@ layout {
     struts {
         // left 12
         // right 12
-        left 0
+        left 740
         right 0
         top 0
         bottom 0
@@ -272,10 +276,10 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    // off
+    off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 0.5
+    // slowdown 0.25
   workspace-switch {
     // off
   }
@@ -386,6 +390,7 @@ binds {
     // Alt+Shift+S { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh window"; }
 
     Alt+O { toggle-window-floating; }
+    Alt+Space { switch-focus-between-floating-and-tiling; }
 
     // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
     Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
@@ -395,7 +400,7 @@ binds {
 
     // Alt+Z { spawn "sh" "-c" ""; }
 
-    Alt+Space { toggle-overview; }
+    // Alt+Space { toggle-overview; }
 
     Alt+Left  { focus-column-left; }
     Alt+Down  { focus-window-down; }
@@ -416,10 +421,10 @@ binds {
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
-    Alt+J     { focus-window-or-workspace-down; }
-    Alt+K     { focus-window-or-workspace-up; }
-    Alt+Ctrl+J     { move-window-down-or-to-workspace-down; }
-    Alt+Ctrl+K     { move-window-up-or-to-workspace-up; }
+    Alt+J     { focus-window-down; }
+    Alt+K     { focus-window-up; }
+    // Alt+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    // Alt+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
     Alt+Home { focus-column-first; }
     Alt+End  { focus-column-last; }
@@ -551,8 +556,8 @@ binds {
     // Alt+2 { set-column-width "50%"; }
     // Alt+3 { set-column-width "66.6667%"; }
     // Alt+4 { set-column-width "100%"; }
-    Alt+F { spawn "sh" "-c" "~/.config/niri/scripts/toggle_maximize_and_center.sh"; }
-    Alt+Shift+F { fullscreen-window; }
+    // Alt+F { spawn "sh" "-c" "~/.config/niri/scripts/toggle_maximize_and_center.sh"; }
+    Alt+F { fullscreen-window; }
     Alt+Ctrl+F { toggle-windowed-fullscreen; }
     Alt+Y { set-dynamic-cast-window; }
     Alt+Shift+Y { center-column; }
