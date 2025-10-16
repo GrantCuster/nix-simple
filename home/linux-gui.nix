@@ -53,6 +53,9 @@
 
     xdragon
 
+    railway
+    postgresql_18
+
     inotify-tools
 
     qt6.qtbase

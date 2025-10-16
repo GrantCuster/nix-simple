@@ -408,10 +408,6 @@ vim.keymap.set({ "n", "v", "t" }, "<C-a>", "<cmd>CodeCompanionChat Toggle<cr>", 
 vim.keymap.set({ "n", "v" }, "<Leader>cc", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
 vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
-vim.keymap.set("i", "<S-SPACE>", function()
-	vim.fn.feedkeys(vim.fn["copilot#Accept"](), "n")
-end, { desc = "Copilot accept" })
-
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		local buf_ft = vim.bo.filetype -- Get the current buffer's filetype

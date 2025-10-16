@@ -1,4 +1,4 @@
-theme = gruvbox-hard
+theme = dark:Gruvbox Dark,light:Gruvbox Light
 window-decoration = false
 window-theme = system
 confirm-close-surface = false
@@ -12,7 +12,7 @@ window-padding-color = extend
 keybind = ctrl+comma=unbind
 keybind = ctrl+page_down=unbind
 keybind = ctrl+equal=unbind
-keybind = ctrl+minus=unbind
+keybind = ctrl+-=unbind
 keybind = ctrl+zero=unbind
 keybind = ctrl+enter=unbind
 keybind = ctrl+page_up=unbind

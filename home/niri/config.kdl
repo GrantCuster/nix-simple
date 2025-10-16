@@ -72,16 +72,13 @@ environment {
 output "LG Display 0x06EB Unknown" {
   scale 1.375
   position x=1920 y=0
-  background-color "#1d2021"
 }
 output "LG Electronics LG ULTRAWIDE 206NTTQBG745" {
   position x=0 y=0
   scale 1.125
-  background-color "#282828"
 }
 output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
   position x=0 y=1280
-  background-color "#282828"
   transform "90"
 }
 output "Seiko Epson Corporation EPSON PJ 0x01010101" {
@@ -108,6 +105,7 @@ overview  {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
+    background-color "#1d2021"
     // Set gaps around windows in logical pixels.
     gaps 4
     // gaps 2
@@ -138,7 +136,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.3333; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -167,6 +165,8 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
+
+// focus-color
         active-color "#928374"
 
         // Color of the ring on inactive monitors.
@@ -211,6 +211,8 @@ layout {
 
         // Color of the ring on inactive monitors.
         // inactive-color "#282828"
+
+// border-color
         active-color "#3c3836"
         inactive-color "#3c3836"
 
@@ -270,12 +272,12 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    off
+    // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 0.5
   workspace-switch {
-    off
+    // off
   }
 }
 
@@ -353,6 +355,8 @@ binds {
     Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Default" "--password-store=basic" "--hide-crash-restore-bubble"; }
     Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 2" "--password-store=basic" "--hide-crash-restore-bubble"; }
 
+    Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/toggle_theme.sh"; }
+
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
     // Alt+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
@@ -409,8 +413,6 @@ binds {
     // Alt+Ctrl+J     { move-window-down; }
     // Alt+Ctrl+K     { move-window-up; }
     Alt+Ctrl+L     { move-column-right; }
-
-    Ctrl+Y { center-visible-columns; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.

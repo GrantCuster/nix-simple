@@ -78,13 +78,12 @@
     nodePackages_latest.typescript-language-server
     nixd
     tailwindcss-language-server
-    stylua
     nodePackages_latest.prettier
     prettierd
     eslint_d
     pyright
-    svelte-language-server
     marksman
+    copilot-language-server
 
     reaper
 

@@ -72,7 +72,7 @@
     "interval": 1,
   },
   "custom/date": {
-    "exec": "date '+%Y-%m-%d'",
+    "exec": "date +'%a-%b-%d-%Y'",
     "interval": 10,
   },
   "custom/clipboard": {
