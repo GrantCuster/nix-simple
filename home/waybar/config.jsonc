@@ -1,13 +1,15 @@
 {
-  "layer": "top",
+  "layer": "bottom",
   "position": "top",
-  "modules-center": ["custom/todo"],
+  // "margin-left": 760,
+  "exclusive": false,
+  // "modules-left": ["custom/todo"],
   // "modules-left": ["niri/window"],
   // "modules-left": ["niri/workspaces", "custom/niri-count"],
   // "modules-center": ["custom/niri-count"],
   // "modules-center": ["custom/todo"],
   "modules-left": ["niri/workspaces"],
-  "modules-right": ["custom/wakeup", "battery", "custom/date", "custom/clock"],
+  "modules-right": ["battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "clock": {

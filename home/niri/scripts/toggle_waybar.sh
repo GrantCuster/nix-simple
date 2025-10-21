@@ -10,6 +10,6 @@ if pgrep -f "waybar -c $CONFIG_PATH" > /dev/null; then
     pkill -f "waybar -c $CONFIG_PATH2"
 else
     # If not running, start it
-    waybar -c $CONFIG_PATH & waybar -c $CONFIG_PATH2 &
+    waybar -c $CONFIG_PATH &
 fi
 

@@ -102,6 +102,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 
 -- terminal styling
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	group = vim.api.nvim_create_augroup("terminal-buffer-styling", { clear = true }),
 	callback = function()
 		if vim.bo[0].buftype == "terminal" then
 			vim.opt.number = false
@@ -119,4 +120,4 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	end,
 })
 
-
+vim.opt.fillchars:append({ eob = " " })

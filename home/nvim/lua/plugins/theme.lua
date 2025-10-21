@@ -20,6 +20,9 @@ function M.apply(mode)
 		vim.cmd([[colorscheme gruvbox]])
 	end
 
+	-- Make sign column match background
+	vim.cmd([[highlight SignColumn guibg=NONE ctermbg=NONE]])
+
 	-- ✅ Force Lualine to reload theme after colorscheme change
 	local ok, lualine = pcall(require, "lualine")
 	if ok then

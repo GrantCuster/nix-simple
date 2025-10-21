@@ -1,10 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, lib, ... }:
 
 {
+  imports = [
+    ./modules/site-blocker.nix
+  ];
+
  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -236,6 +239,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.fwupd.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 4111 5173 8096 ];

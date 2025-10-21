@@ -8,6 +8,8 @@ window-padding-x = 8
 window-padding-y = 0
 window-padding-balance = false
 window-padding-color = extend
+resize-overlay = never
+app-notifications = no-clipboard-copy,no-config-reload
 
 keybind = ctrl+comma=unbind
 keybind = ctrl+page_down=unbind

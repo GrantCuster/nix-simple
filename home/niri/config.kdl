@@ -26,7 +26,7 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
 // formatted to single line for bash script toggle
-touchpad { // off
+touchpad { off
         tap
         dwt
         dwtp
@@ -86,16 +86,16 @@ output "Seiko Epson Corporation EPSON PJ 0x01010101" {
   // off
 }
 output "BOE NE135A1M-NY1 Unknown" {
-  
-  scale 1.75
+  mode "2880x1920@60.001"
+  scale 1.66
 }
 
-cursor {
-  xcursor-theme "Adwaita"
-  xcursor-size 24
-  hide-when-typing
-  hide-after-inactive-ms 2000
-}
+// cursor {
+//   xcursor-theme "Adwaita"
+//   xcursor-size 24
+//   hide-when-typing
+//   hide-after-inactive-ms 2000
+// }
 
 overview  {
   zoom 0.5
@@ -111,7 +111,7 @@ overview  {
 layout {
     background-color "#1d2021"
     // Set gaps around windows in logical pixels.
-    gaps 4
+    gaps 0
     // gaps 2
 
     // When to center a column when changing focus, options are:
@@ -131,6 +131,7 @@ layout {
         proportion 0.3333
         proportion 0.5
         proportion 0.6667
+        proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -140,7 +141,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 1.0; }
+    default-column-width { proportion 0.5; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -158,7 +159,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 2
@@ -236,7 +237,9 @@ layout {
     struts {
         // left 12
         // right 12
-        left 740
+        // left 760
+        // top 24
+        left 0
         right 0
         top 0
         bottom 0
@@ -299,21 +302,32 @@ animations {
 //     default-column-width {}
 // }
 window-rule {
-  match app-id="ghostty"
-  // draw-border-with-background false
+  open-floating true
 }
+
+
+// window-rule {
+//   match app-id="ghostty"
+//   // draw-border-with-background false
+// }
 // window-rule {
 //   match title="launch"
 //   default-column-width { proportion 1.0; }
 // }
 // get rid of chrome shadows
-window-rule {
-  clip-to-geometry true
-}
-window-rule {
-  match is-focused=false
-  // opacity 0.5
-}
+// window-rule {
+//   clip-to-geometry true
+// }
+// window-rule {
+//   match is-focused=false
+//   // opacity 0.5
+// }
+// window-rule {
+//   match is-floating=true
+//   focus-ring {
+//     off
+//   }
+// }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -336,6 +350,7 @@ window-rule {
 
 // named workspaces
 workspace "home"
+workspace "store"
 
 binds {
     // Keys consist of Modifiers separated by + signs, followed by an XKB key name
@@ -375,7 +390,7 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/close_and_center.sh"; }
-    Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
+    // Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
     Alt+T { focus-workspace "home"; }
 
@@ -391,6 +406,7 @@ binds {
 
     Alt+O { toggle-window-floating; }
     Alt+Space { switch-focus-between-floating-and-tiling; }
+    Alt+Shift+Space { toggle-window-floating; }
 
     // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
     Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
@@ -407,22 +423,35 @@ binds {
     Alt+Up    { focus-window-up; }
     Alt+Right { focus-column-right; }
 
-    Alt+H { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_left_and_center.sh"; }
-    Alt+L { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_right_and_center.sh"; }
+    // Alt+K { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_left_and_center.sh"; }
+    // Alt+J { spawn "sh" "-c" "~/.config/niri/scripts/move_focus_right_and_center.sh"; }
+
+    // Alt+H     { switch-focus-between-floating-and-tiling; }
+    // Alt+L     { switch-focus-between-floating-and-tiling; }
+    // Alt+K     { focus-column-left; }
+    // Alt+J     { focus-column-right; }
+
+    Alt+H { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh left"; }
+    Alt+L { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh right"; }
+    Alt+K { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh up"; }
+    Alt+J { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh down"; }
+
+    Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/hide_window.sh"; }
+
+    Alt+Ctrl+J     { move-column-right; }
+    Alt+Ctrl+K     { move-column-left; }
 
     Alt+Ctrl+Left  { move-column-left; }
     Alt+Ctrl+Down  { move-window-down; }
     Alt+Ctrl+Up    { move-window-up; }
     Alt+Ctrl+Right { move-column-right; }
-    Alt+Ctrl+H     { move-column-left; }
     // Alt+Ctrl+J     { move-window-down; }
     // Alt+Ctrl+K     { move-window-up; }
-    Alt+Ctrl+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
-    Alt+J     { focus-window-down; }
-    Alt+K     { focus-window-up; }
+    // Alt+J     { focus-window-down; }
+    // Alt+K     { focus-window-up; }
     // Alt+Ctrl+J     { move-window-down-or-to-workspace-down; }
     // Alt+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
@@ -538,7 +567,7 @@ binds {
     // Alt+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    Alt+B { focus-workspace-previous; }
+    Alt+B { focus-window-previous; }
 
     // Consume one window from the right into the focused column.
     Alt+Comma  { consume-window-into-column; }

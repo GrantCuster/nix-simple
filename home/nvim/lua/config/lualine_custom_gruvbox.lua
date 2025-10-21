@@ -13,33 +13,33 @@ local colors = {
 }
 return {
   normal = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   },
   insert = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   },
   visual = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   },
   replace = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   },
   command = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   },
   inactive = {
-    a = {bg = colors.none, fg = colors.white},
-    b = {bg = colors.none, fg = colors.gray},
-    c = {bg = colors.none, fg = colors.gray}
+    a = {bg = colors.black, fg = colors.white},
+    b = {bg = colors.black, fg = colors.white},
+    c = {bg = colors.black, fg = colors.white}
   }
 }
