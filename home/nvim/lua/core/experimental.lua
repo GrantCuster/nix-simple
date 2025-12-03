@@ -170,15 +170,6 @@ local function get_window_pixel_bounds(win)
   local ui                     = vim.api.nvim_list_uis()[1]
   local total_cols, total_rows = ui.width, ui.height
 
-  -- get Niri window size (pixels)
-  -- local res                    = vim.system({ "niri", "msg", "-j", "focused-window" }):wait()
-  -- if res.code ~= 0 then
-  --   vim.notify("Failed to get Niri window info", vim.log.levels.ERROR)
-  --   return
-  -- end
-  -- local info         = vim.json.decode(res.stdout)
-  -- local win_w, win_h = info.layout.window_size[1], info.layout.window_size[2]
-  -- Use active output for window dimensions
   local res                    = vim.system({ "niri", "msg", "-j", "focused-output" }):wait()
   local info                   = vim.json.decode(res.stdout)
   local win_w                  = info.logical.width
@@ -284,7 +275,7 @@ local function move_window_to_neovim_bounds(id, win)
 
   local actions = {
     { MoveWindowToFloating = { id = id } },
-    { MoveFloatingWindow = { id = id, x = x, y = y } },
+    { MoveFloatingWindow = { id = id, x = { SetFixed = x }, y = { SetFixed = y } } },
     { SetWindowWidth = { id = id, change = { SetFixed = w } } },
     { SetWindowHeight = { id = id, change = { SetFixed = h } } },
     { MoveWindowToWorkspace = { window_id = id, reference = { Name = "home" }, focus = false } },

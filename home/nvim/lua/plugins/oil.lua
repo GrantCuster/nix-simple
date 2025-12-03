@@ -15,7 +15,7 @@ return {
 					desc = "Open the entry in a vertical split",
 				},
 				["<C-h>"] = false,
-				["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+				["<C-t>"] = false,
 				["<C-p>"] = "actions.preview",
 				-- ["<C-c>"] = "actions.close",
 				["<C-c>"] = false,

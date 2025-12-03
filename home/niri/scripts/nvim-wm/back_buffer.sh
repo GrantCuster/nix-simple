@@ -14,10 +14,14 @@ if [ "$vim_focused" != "false" ]; then
 else
   current_window_id=$(niri msg -j focused-window | jq -r '.id')
   # Move current window to "store" workspace
-  niri msg action move-window-to-workspace --focus false "store"
-  niri msg action set-window-width --id "$current_window_id" proportion 0.5
-  niri msg action set-window-height --id "$current_window_id" proportion 1
-  niri msg action move-window-to-tiling --id "$current_window_id"
+
+  # Batch all niri actions using IPC helper
+  SCRIPT_DIR="$(dirname "$0")"
+  "$SCRIPT_DIR/niri_ipc.sh" \
+    "{\"MoveWindowToWorkspace\":{\"window_id\":$current_window_id,\"reference\":{\"Name\":\"store\"},\"focus\":false}}" \
+    "{\"SetWindowWidth\":{\"id\":$current_window_id,\"change\":{\"SetProportion\":0.5}}}" \
+    "{\"SetWindowHeight\":{\"id\":$current_window_id,\"change\":{\"SetProportion\":1.0}}}" \
+    "{\"MoveWindowToTiling\":{\"id\":$current_window_id}}"
 
   # Find the most recent nvim app tmp file and focus that window
   TARGET="${current_window_id}.app"

@@ -59,7 +59,7 @@ touchpad {
 
   touch {
     // off
-    map-to-output "DP-11"
+    map-to-output "Seiko Epson Corporation EPSON PJ 0x01010101" 
   }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
