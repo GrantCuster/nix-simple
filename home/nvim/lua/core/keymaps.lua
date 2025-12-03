@@ -30,7 +30,8 @@ vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
 
 -- Jump back and forward with Ctrl + o and Ctrl + i
 vim.keymap.set("t", "<C-o>", [[<C-\><C-n><C-o>]], opts)
-vim.keymap.set("t", "<C-i>", [[<C-\><C-n><C-i>]], opts)
+-- Note: <C-i> is the same as <Tab> in terminals, so we don't map it in terminal mode
+-- vim.keymap.set("t", "<C-i>", [[<C-\><C-n><C-i>]], opts)
 
 -- LINE NAVIGATION
 vim.keymap.set("n", "<down>", "gj", opts)
@@ -58,10 +59,16 @@ end, { noremap = true, silent = true, nowait = true })
 -- Copy current path
 vim.keymap.set("n", "<leader>cf", ":let @+ = expand('%')<CR>", {})
 
+-- Insert current date
+vim.keymap.set("n", "<leader>d", function()
+  local date = os.date("%Y-%m-%d")
+  vim.api.nvim_put({date}, "c", true, true)
+end, { desc = "Insert current date" })
+
 -- open splits
 vim.keymap.set({ "n", "t" }, "<C-e>", function()
   vim.cmd("split")
-  vim.cmd("wincmd j")
+  -- vim.cmd("wincmd j")
   local buf_ft = vim.bo.filetype
   if vim.bo[0].buftype == "terminal" then
     local cwd = vim.fn.getcwd()
@@ -72,7 +79,7 @@ vim.keymap.set({ "n", "t" }, "<C-e>", function()
 end, {})
 vim.keymap.set({ "n", "t" }, "<C-d>", function()
   vim.cmd("vsplit")
-  vim.cmd("wincmd l")
+  -- vim.cmd("wincmd l")
   local buf_ft = vim.bo.filetype
   if vim.bo[0].buftype == "terminal" then
     local cwd = vim.fn.getcwd()
@@ -127,17 +134,26 @@ vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
+-- Move lines up and down (noremap to override default K hover behavior)
+vim.keymap.set("n", "J", ":m .+1<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "K", ":m .-2<CR>", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv", { noremap = true, silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv", { noremap = true, silent = true })
+
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
-
--- Open terminal with enter
-vim.keymap.set("n", "<C-enter>", function()
+local function terminal_enter()
   local vim_dir = vim.fn.expand("%:p:h")
   vim_dir = vim_dir:gsub("^oil://", "")
   vim_dir = vim_dir:gsub("/v:null", "")
   vim.cmd("terminal fish -C 'cd " .. vim_dir .. "'")
-end, { noremap = true })
+end
+
+vim.api.nvim_create_user_command("TerminalEnter", terminal_enter, {})
+
+-- Open terminal with enter
+vim.keymap.set("n", "<C-enter>", terminal_enter, { noremap = true })
 
 -- Return true iff PID has any descendant whose command name is not in ignore set.
 local function has_non_ignored_descendant(root_pid, ignore_list)
@@ -210,7 +226,7 @@ vim.keymap.set(
 
 -- jump back to previous buffer
 vim.keymap.set("n", "<leader>bb", ":edit #<CR>")
-vim.keymap.set({ "n", "i", "t" }, "<C-b>", [[<Cmd>edit #<CR>]], { noremap = true })
+-- vim.keymap.set({ "n", "i", "t" }, "<C-b>", [[<Cmd>edit #<CR>]], { noremap = true })
 
 -- Returns terminal buffers that have an active descendant process
 -- other than anything in ignore_list (defaults to {"fish"}).
@@ -309,7 +325,7 @@ vim.api.nvim_create_autocmd({ "DirChanged", "BufEnter" }, {
     local function set_title_to_cwd()
       local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
       -- Send OSC 0 sequence to set terminal title
-      io.write(string.format("\027]0;%s\007", cwd))
+      io.write(string.format("\027]0;%s\007", "vim - " .. cwd))
       io.flush()
     end
     set_title_to_cwd()

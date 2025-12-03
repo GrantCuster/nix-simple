@@ -28,6 +28,10 @@ syntax match vibeHeader2 "^=\s.*$"
 syntax match vibeTodoUnchecked "^-\s*\[\s\].*$"
 syntax match vibeTodoChecked "^-\s*\[x\].*$"
 
+" Bracket content
+" Example: "[something]" - highlights content between brackets
+syntax match vibeBracketContent "\[.\{-}\]"
+
 " Define the highlight colors
 highlight default link vibePrefix Special
 highlight default link vibeSingleWord String
@@ -37,5 +41,6 @@ highlight default link vibeHeader1 Type
 highlight default link vibeHeader2 PreProc
 highlight default link vibeTodoUnchecked Special
 highlight default link vibeTodoChecked String
+highlight default link vibeBracketContent Identifier
 
 let b:current_syntax = "vibe"

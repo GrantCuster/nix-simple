@@ -46,7 +46,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
--- vim.o.cursorline = true
+vim.o.cursorline = true
 
 vim.o.scrolloff = 999
 vim.opt.swapfile = false
@@ -63,7 +63,7 @@ vim.o.showtabline = 0
 vim.opt.shell = "/home/grant/.nix-profile/bin/fish"
 
 -- Keep splits even
-vim.api.nvim_command("autocmd VimResized * wincmd =")
+-- vim.api.nvim_command("autocmd VimResized * wincmd =")
 vim.keymap.set("n", "<leader>=", [[<Cmd>wincmd =<CR>]], {})
 
 -- Auto-reload files when changed outside of Neovim
@@ -96,6 +96,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	callback = function()
 		vim.opt.number = false
 		vim.opt.relativenumber = false
+		vim.opt.cursorline = true
 		vim.cmd("startinsert")
 	end,
 })
@@ -107,6 +108,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		if vim.bo[0].buftype == "terminal" then
 			vim.opt.number = false
 			vim.opt.relativenumber = false
+			vim.opt.cursorline = true
 			vim.cmd("startinsert")
 		else
 			if vim.bo[0].filetype == "oil" then

@@ -1,45 +1,6 @@
-local colors = {
-  black        = '#282828',
-  white        = '#ebdbb2',
-  red          = '#fb4934',
-  green        = '#b8bb26',
-  blue         = '#83a598',
-  yellow       = '#fe8019',
-  gray         = '#a89984',
-  darkgray     = '#3c3836',
-  lightgray    = '#504945',
-  inactivegray = '#7c6f64',
-  none         = 'none',
-}
-return {
-  normal = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  },
-  insert = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  },
-  visual = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  },
-  replace = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  },
-  command = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  },
-  inactive = {
-    a = {bg = colors.black, fg = colors.white},
-    b = {bg = colors.black, fg = colors.white},
-    c = {bg = colors.black, fg = colors.white}
-  }
-}
+local background = vim.opt.background:get()
+
+print("lualine_custom_gruvbox: background is " .. background)
+print("lualine_custom_gruvbox: loading theme config.lualine_custom_gruvbox_" .. background)
+
+return require('config.lualine_custom_gruvbox_' .. background)

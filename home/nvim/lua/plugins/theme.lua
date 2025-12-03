@@ -12,6 +12,8 @@ local function read_state()
 end
 
 function M.apply(mode)
+	print("🎨 theme.lua: applying mode = " .. mode)
+
 	if mode == "light" then
 		vim.o.background = "light"
 		vim.cmd([[colorscheme gruvbox]])
@@ -20,14 +22,20 @@ function M.apply(mode)
 		vim.cmd([[colorscheme gruvbox]])
 	end
 
+	print("🎨 theme.lua: background is now " .. vim.o.background)
+
 	-- Make sign column match background
 	vim.cmd([[highlight SignColumn guibg=NONE ctermbg=NONE]])
 
-	-- ✅ Force Lualine to reload theme after colorscheme change
-	local ok, lualine = pcall(require, "lualine")
-	if ok then
-		lualine.setup({})
-	end
+		local theme = mode == "dark"
+			and require("config.lualine_custom_gruvbox_dark")
+			or require("config.lualine_custom_gruvbox_light")
+
+		local lualine = require("lualine")
+		local config = lualine.get_config()
+		config.options.theme = theme
+		lualine.setup(config)
+	
 end
 
 function M.toggle()
@@ -41,6 +49,23 @@ end
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		M.apply(read_state())
+	end,
+})
+
+-- Lualine refresh
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "background",
+	callback = function()
+		local mode = vim.o.background
+
+		local theme = mode == "dark"
+			and require("config.lualine_custom_gruvbox_dark")
+			or require("config.lualine_custom_gruvbox_light")
+
+		local lualine = require("lualine")
+		local config = lualine.get_config()
+		config.options.theme = theme
+		lualine.setup(config)
 	end,
 })
 

@@ -4,23 +4,25 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  imports = [
-    ./modules/site-blocker.nix
-  ];
-
  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelModules = [ "v4l2loopback" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  '';
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
+  # see https://discourse.nixos.org/t/usb-webcam-not-usable-despite-being-detected/70969/7
+  boot.kernelPatches = [ {
+    name = "webcam-fix";
+    patch = ./kernel/webcam-fix.patch;
+  } ];
+  # loopback might be causing problems
+  # boot.kernelModules = [ "v4l2loopback" ];
+  # boot.extraModulePackages = with config.boot.kernelPackages; [
+  #   v4l2loopback
+  # ];
+  # boot.extraModprobeConfig = ''
+  #   options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  # '';
   security.polkit.enable = true;
-
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -30,11 +32,25 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  imports = [
+    ./extras/focus-block.nix
+  ];
 
-  networking.extraHosts = ''
- '';
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "vibecheck.local" = {
+        extraConfig = ''
+          reverse_proxy localhost:5173
+        '';
+      };
+      "cosine.local" = {
+        extraConfig = ''
+          reverse_proxy localhost:3000
+        '';
+      };
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -68,12 +84,27 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      brlaser          # Brother raster driver (required for most Brother laser printers)
+      gutenprint       # fallback
+      hplip            # needed for CUPS PDF/filter stack
+      cups-filters     # IMPORTANT: CUPS PDF → raster filters
+    ];
+  };
+ 
   services.avahi = {
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
-  };
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      workstation = true;
+    };
+ };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -195,8 +226,12 @@
 
     espeak
 
+    mkcert
+
     adwaita-icon-theme
     comixcursors
+
+    rpi-imager
 
     # need a c compiler for neovim plugins
     zig

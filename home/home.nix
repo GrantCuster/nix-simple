@@ -26,7 +26,11 @@
 
     socat
 
+    libgcc.lib
+
     jq
+
+    bc
 
     ripgrep
 
@@ -58,6 +62,10 @@
     # gleam
 
     llm
+
+    icloudpd
+
+    usbutils
 
     # make sure gnu find
     findutils
@@ -104,6 +112,13 @@
     # mac specific
     (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
     (writeShellScriptBin "refresh_nix_mac" (builtins.readFile ./scripts/refresh_nix_mac.sh))
+  ];
+
+  programs.neovim.extraWrapperArgs = [
+    "--suffix"
+    "LD_LIBRARY_PATH"
+    ":"
+    "${pkgs.libgcc.lib}/lib"
   ];
 
   # Home Manager can also manage your environment variables through
@@ -207,6 +222,8 @@
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         clear
       fi
+      # increas limit
+      ulimit -n 65536
  '';
  };
 
@@ -271,6 +288,13 @@
       gsync = "git add . && git commit -am 'update' && git pull origin main --rebase && git push origin main";
       # clipboard history
       cl = "cliphist list | fzf --no-sort | cliphist decode | wl-copy";
+      # focus
+      focus = "sh ~/nix/nixos/extras/focus.sh on";
+      unfocus = "sh ~/nix/nixos/extras/focus.sh off";
+      timer = "sh ~/nix/nixos/extras/timer.sh";
+      l = "sh ~/nix/home/niri/scripts/nvim-wm/app_launcher.sh";
+      # cd to zoxide
+      cd = "z";
     };
   };
 

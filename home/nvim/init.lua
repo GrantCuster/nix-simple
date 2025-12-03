@@ -33,5 +33,4 @@ require("lazy").setup({
   require("plugins.comment"),
   require("plugins.lualine"),
   require("plugins.copilot"),
-  -- require("plugins.ai-sidekick")
 })

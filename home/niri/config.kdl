@@ -7,7 +7,7 @@
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
-  workspace-auto-back-and-forth
+  // workspace-auto-back-and-forth
 
     keyboard {
         xkb {
@@ -26,7 +26,8 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
 // formatted to single line for bash script toggle
-touchpad { off
+touchpad { 
+        // off
         tap
         dwt
         dwtp
@@ -56,6 +57,11 @@ touchpad { off
         // middle-emulation
     }
 
+  touch {
+    // off
+    map-to-output "DP-11"
+  }
+
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
 
@@ -75,11 +81,16 @@ output "LG Display 0x06EB Unknown" {
 }
 output "LG Electronics LG ULTRAWIDE 206NTTQBG745" {
   position x=0 y=0
-  scale 1.125
+  scale 1
+}
+output "Dell Inc. DELL S2725QS F8LFT84" {
+  position x=0 y=0
+  scale 1.5
 }
 output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
   position x=0 y=1280
   transform "90"
+  // off
 }
 output "Seiko Epson Corporation EPSON PJ 0x01010101" {
   position x=3057 y=0
@@ -90,12 +101,12 @@ output "BOE NE135A1M-NY1 Unknown" {
   scale 1.66
 }
 
-// cursor {
-//   xcursor-theme "Adwaita"
-//   xcursor-size 24
-//   hide-when-typing
-//   hide-after-inactive-ms 2000
-// }
+cursor {
+  xcursor-theme "Adwaita"
+  xcursor-size 24
+  hide-when-typing
+  hide-after-inactive-ms 2000
+}
 
 overview  {
   zoom 0.5
@@ -121,7 +132,7 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     center-focused-column "never"
-    always-center-single-column
+    // always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Alt+R) toggles between.
     preset-column-widths {
@@ -252,12 +263,13 @@ layout {
 // See the binds section below for more spawn examples.
 // spawn-at-startup "swaybg -m fill -i ~/nix/home/extra/castle-in-the-sky.jpg" 
 
-spawn-at-startup "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"
-// spawn-at-startup "sh" "-c" "~/.config/niri/scripts/startup.sh"
+// spawn-at-startup "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"
+spawn-at-startup "sh" "-c" "~/.config/niri/scripts/nvim-wm/startup.sh"
 // spawn-at-startup "sh ~/nix/home/scripts/startup.sh"
 spawn-at-startup "gammastep"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "sh" "-c" "~/nix/home/niri/scripts/nvim-wm/focus_tracker.sh"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -302,9 +314,25 @@ animations {
 //     default-column-width {}
 // }
 window-rule {
-  open-floating true
+  match is-floating=false
+  open-on-workspace "store"
 }
-
+window-rule {
+  match is-floating=true
+  focus-ring {
+    on
+    width 2
+    active-color "#928374"
+  }
+}
+window-rule {
+  match app-id="ghostty"
+  match at-startup=true
+  open-floating false
+  open-on-workspace "home"
+  default-column-width { proportion 1.0; }
+  default-window-height { proportion 1.0; }
+}
 
 // window-rule {
 //   match app-id="ghostty"
@@ -369,12 +397,20 @@ binds {
 
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
-    Alt+Shift+Return { spawn "ghostty"; }
-    Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Default" "--password-store=basic" "--hide-crash-restore-bubble"; }
-    Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 2" "--password-store=basic" "--hide-crash-restore-bubble"; }
+    Alt+U { spawn "fish" "-c" "~/nix/home/niri/scripts/nvim-wm/new_term.sh"; }
+    Alt+Ctrl+U { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
+    Alt+Shift+U { spawn "ghostty"; }
 
-    Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/toggle_theme.sh"; }
+    Alt+Return { spawn "fish" "-c" "~/nix/home/niri/scripts/nvim-wm/new_term.sh"; }
+    Alt+Shift+Return { spawn "fish" "-c" "~/nix/home/niri/scripts/nvim-wm/split_term.sh"; }
+
+
+    // Alt+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Default" "--password-store=basic" "--hide-crash-restore-bubble" "--disable-features=UseDnsHttpsSvcb" "--disable-doh" "--disable-features=AsyncDns"; }
+    Alt+G { spawn "sh" "-c" "~/nix/home/niri/scripts/nvim-wm/app_launcher.sh google-chrome-stable --ozone-platform=wayland --profile-directory=Default --password-store=basic --hide-crash-restore-bubble"; }
+    Alt+Shift+G { spawn "sh" "-c" "~/nix/home/niri/scripts/nvim-wm/app_launcher_split.sh google-chrome-stable --ozone-platform=wayland --profile-directory=Default --password-store=basic --hide-crash-restore-bubble"; }
+    // Alt+Shift+G { spawn "google-chrome-stable" "--ozone-platform=wayland" "--profile-directory=Profile 2" "--password-store=basic" "--hide-crash-restore-bubble"; }
+
+    Alt+T { spawn "sh" "-c" "~/.config/niri/scripts/toggle_theme.sh"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -389,30 +425,33 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/close_and_center.sh"; }
+    Alt+Q { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/quit_window.sh"; }
+    Alt+Shift+Q { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/quit_window_open_switcher.sh"; }
     // Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/toggle_default_window_width.sh"; }
     Alt+M { spawn "sh" "-c" "~/.config/niri/scripts/toggle_trackpad.sh"; }
-    Alt+T { focus-workspace "home"; }
 
-    Alt+X { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh landscape"; }
-    Alt+C { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh square"; }
-    Alt+V { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh portrait"; }
-    Alt+Z { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh stop_recording"; }
+    // Alt+X { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh landscape"; }
+    // Alt+C { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh square"; }
+    // Alt+V { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh portrait"; }
+    // Alt+Z { spawn "sh" "-c" "~/.config/niri/scripts/record_floating.sh stop_recording"; }
   // Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh do"; }
     // Alt+Shift+C { spawn "sh" "-c" "~/.config/niri/scripts/center_floating_window.sh"; }
     // Alt+S { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh"; 
 
     // Alt+Shift+S { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh window"; }
 
-    Alt+O { toggle-window-floating; }
-    Alt+Space { switch-focus-between-floating-and-tiling; }
-    Alt+Shift+Space { toggle-window-floating; }
+    // Alt+O { toggle-window-floating; }
+    // Alt+Space { switch-focus-between-floating-and-tiling; }
+    // Alt+Shift+Space { toggle-window-floating; }
 
     // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/send_to_scratchpad.sh niri"; }
     Alt+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_waybar.sh"; }
 
-    Alt+N { spawn "nautilus" "-w"; }
-    Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/done.sh"; }
+  // need to rethink this should be script
+    Alt+N { spawn "sh" "-c" "l nautilus"; }
+
+    Alt+D { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/nvim_split.sh down"; }
+    Alt+E { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/nvim_split.sh right"; }
 
     // Alt+Z { spawn "sh" "-c" ""; }
 
@@ -431,12 +470,14 @@ binds {
     // Alt+K     { focus-column-left; }
     // Alt+J     { focus-column-right; }
 
-    Alt+H { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh left"; }
-    Alt+L { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh right"; }
-    Alt+K { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh up"; }
-    Alt+J { spawn "sh" "-c" "~/.config/niri/scripts/nvim_focus.sh down"; }
+    Alt+H { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/focus_nav.sh left"; }
+    Alt+L { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/focus_nav.sh right"; }
+    Alt+K { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/focus_nav.sh up"; }
+    Alt+J { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/focus_nav.sh down"; }
 
-    Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/hide_window.sh"; }
+    Alt+Space { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/switch_window.sh"; }
+    Alt+Shift+Space { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/shift_switch_window.sh"; }
+    Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/hide_window.sh"; }
 
     Alt+Ctrl+J     { move-column-right; }
     Alt+Ctrl+K     { move-column-left; }
@@ -488,11 +529,11 @@ binds {
 
     Alt+Page_Down      { focus-workspace-down; }
     Alt+Page_Up        { focus-workspace-up; }
-    Alt+U              { focus-workspace-down; }
-    Alt+I              { focus-workspace-up; }
+    // Alt+U              { focus-workspace-down; }
+    // Alt+I              { focus-workspace-up; }
     Alt+Ctrl+Page_Down { move-column-to-workspace-down; }
     Alt+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Alt+Ctrl+U         { move-column-to-workspace-down; }
+    // Alt+Ctrl+U         { move-column-to-workspace-down; }
     Alt+Ctrl+I         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
@@ -501,7 +542,7 @@ binds {
 
     Alt+Shift+Page_Down { move-workspace-down; }
     Alt+Shift+Page_Up   { move-workspace-up; }
-    Alt+Shift+U         { move-workspace-down; }
+    // Alt+Shift+U         { move-workspace-down; }
     Alt+Shift+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
@@ -567,26 +608,28 @@ binds {
     // Alt+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    Alt+B { focus-window-previous; }
+    Alt+B { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/back_buffer.sh"; }
+    Alt+O { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/back_jump.sh"; }
+    Alt+I { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/forward_jump.sh"; }
 
     // Consume one window from the right into the focused column.
-    Alt+Comma  { consume-window-into-column; }
+    // Alt+Comma  { consume-window-into-column; }
     // Expel one window from the focused column to the right.
-    Alt+Period { expel-window-from-column; }
+    // Alt+Period { expel-window-from-column; }
 
     // There are also commands that consume or expel a single window to the side.
-    Alt+BracketLeft  { consume-or-expel-window-left; }
-    Alt+BracketRight { consume-or-expel-window-right; }
+    // Alt+BracketLeft  { consume-or-expel-window-left; }
+    // Alt+BracketRight { consume-or-expel-window-right; }
 
-    Alt+R { spawn "sh" "-c" "~/.config/niri/scripts/switch_width_and_center.sh"; }
-    Alt+Shift+R { switch-preset-window-height; }
-    Alt+Ctrl+R { reset-window-height; }
+    // Alt+R { spawn "sh" "-c" "~/.config/niri/scripts/switch_width_and_center.sh"; }
+    // Alt+Shift+R { switch-preset-window-height; }
+    // Alt+Ctrl+R { reset-window-height; }
     // Alt+1 { set-column-width "33.3333%"; }
     // Alt+2 { set-column-width "50%"; }
     // Alt+3 { set-column-width "66.6667%"; }
     // Alt+4 { set-column-width "100%"; }
     // Alt+F { spawn "sh" "-c" "~/.config/niri/scripts/toggle_maximize_and_center.sh"; }
-    Alt+F { fullscreen-window; }
+    Alt+F { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/toggle_fullscreen.sh"; }
     Alt+Ctrl+F { toggle-windowed-fullscreen; }
     Alt+Y { set-dynamic-cast-window; }
     Alt+Shift+Y { center-column; }
@@ -616,6 +659,10 @@ binds {
 
     // Alt+Shift+Space { toggle-window-floating; }
     // Alt+Space { switch-focus-between-floating-and-tiling; }
+
+    Alt+R { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/window_recorder.sh"; }
+    Alt+Shift+R { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/screen_recorder.sh"; }
+    Alt+X { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/stop_screen_recorder.sh"; }
 
     Alt+Shift+3 { screenshot-screen; }
     Alt+Shift+4 { screenshot-window; }
