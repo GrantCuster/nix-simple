@@ -17,6 +17,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.filetype.add({
   extension = {
     vibe = "vibe",
+    ["terminal-switcher"] = "vibe",
+    ["command-launcher"] = "vibe",
   },
 })
 

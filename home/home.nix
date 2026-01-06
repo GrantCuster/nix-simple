@@ -295,6 +295,7 @@
       l = "sh ~/nix/home/niri/scripts/nvim-wm/app_launcher.sh";
       # cd to zoxide
       cd = "z";
+      j = "z";
     };
   };
 

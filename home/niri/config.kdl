@@ -478,6 +478,7 @@ binds {
     Alt+Space { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/switch_window.sh"; }
     Alt+Shift+Space { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/shift_switch_window.sh"; }
     Alt+W { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/hide_window.sh"; }
+    Alt+Shift+W { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/hide_window_open_switcher.sh"; }
 
     Alt+Ctrl+J     { move-column-right; }
     Alt+Ctrl+K     { move-column-left; }
@@ -621,6 +622,7 @@ binds {
     // Alt+BracketLeft  { consume-or-expel-window-left; }
     // Alt+BracketRight { consume-or-expel-window-right; }
 
+    Alt+Shift+Z { spawn "sh" "-c" "~/.config/niri/scripts/nvim-wm/startup.sh"; }
     // Alt+R { spawn "sh" "-c" "~/.config/niri/scripts/switch_width_and_center.sh"; }
     // Alt+Shift+R { switch-preset-window-height; }
     // Alt+Ctrl+R { reset-window-height; }

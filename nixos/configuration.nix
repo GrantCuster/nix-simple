@@ -52,6 +52,27 @@
     };
   };
 
+  # will be at postgres://gcust@localhost:5432/dev
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_16;
+    ensureDatabases = [ "dev" "gcust" ];
+    ensureUsers = [{
+      name = "gcust";
+      ensureDBOwnership = true;
+    }];
+    authentication = pkgs.lib.mkOverride 10 ''
+      local all all trust
+      host all all 127.0.0.1/32 trust
+      host all all ::1/128 trust
+    '';
+    initialScript = pkgs.writeText "backend-initScript" ''
+      GRANT ALL ON SCHEMA public TO gcust;
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO gcust;
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO gcust;
+    '';
+  };
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 

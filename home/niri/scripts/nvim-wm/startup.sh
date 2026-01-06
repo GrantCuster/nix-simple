@@ -2,7 +2,9 @@
 
 sleep 1
 
-ulimit -n 65535 && ghostty -e nvim --listen /tmp/main.sock -c "edit ~/base/base.vibe"
+rm -f /tmp/main.sock
+
+ulimit -n 65535 && ghostty -e nvim --listen /tmp/main.sock -c "edit ~/base/today.vibe"
 
 sleep 1
 
