@@ -8,12 +8,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_6_16;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # see https://discourse.nixos.org/t/usb-webcam-not-usable-despite-being-detected/70969/7
-  boot.kernelPatches = [ {
-    name = "webcam-fix";
-    patch = ./kernel/webcam-fix.patch;
-  } ];
+  # boot.kernelPatches = [ {
+  #   name = "webcam-fix";
+  #   patch = ./kernel/webcam-fix.patch;
+  # } ];
   # loopback might be causing problems
   # boot.kernelModules = [ "v4l2loopback" ];
   # boot.extraModulePackages = with config.boot.kernelPackages; [
@@ -114,7 +114,13 @@
       cups-filters     # IMPORTANT: CUPS PDF → raster filters
     ];
   };
- 
+
+  # Enable scanner support
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.sane-airscan ];
+  };
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -153,7 +159,7 @@
   users.users.grant = {
     isNormalUser = true;
     description = "Grant Custer";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
      bluetuith
@@ -249,6 +255,8 @@
 
     mkcert
 
+    zoom-us
+
     adwaita-icon-theme
     comixcursors
 
@@ -263,7 +271,7 @@
 
     # obs-studio
     v4l-utils
-  ];
+ ];
 
   programs.obs-studio.enable = true;
   programs.obs-studio.enableVirtualCamera = true;
@@ -297,6 +305,8 @@
   services.openssh.enable = true;
 
   services.fwupd.enable = true;
+
+  services.tailscale.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 4111 5173 8096 ];

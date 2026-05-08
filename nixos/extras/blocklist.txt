@@ -6,3 +6,5 @@ reddit.com
 www.reddit.com
 vibecheck.local
 cosine.local
+bsky.app
+phanphy.social

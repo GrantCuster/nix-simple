@@ -21,7 +21,7 @@ if [ ! -d "$mp4_dir" ]; then
   mkdir -p "$mp4_dir"
 fi
 
-WINDOWS=$(sh ~/.config/niri/scripts/windows.sh)
+# WINDOWS=$(sh ~/.config/niri/scripts/windows.sh)
 
 is_recorder_running() {
   pgrep -x wf-recorder >/dev/null
@@ -53,14 +53,14 @@ screen() {
   timeout 120 wf-recorder -f "$MP4_FILE"
 }
 
-window() {
-  echo "$MP4_FILE" > "$TMP_ACTIVE_FILE_REF"
-  echo "REC"  > "$TMP_REC_STATUS_FILE"
-  GEOMETRY=$(echo "$WINDOWS" | slurp)
-  if [[ ! -z "$GEOMETRY" ]]; then
-    timeout 120 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
-  fi
-}
+# window() {
+#   echo "$MP4_FILE" > "$TMP_ACTIVE_FILE_REF"
+#   echo "REC"  > "$TMP_REC_STATUS_FILE"
+#   GEOMETRY=$(echo "$WINDOWS" | slurp)
+#   if [[ ! -z "$GEOMETRY" ]]; then
+#     timeout 120 wf-recorder -g "$GEOMETRY" -f "$MP4_FILE"
+#   fi
+# }
 
 area() {
   echo "$MP4_FILE" > "$TMP_ACTIVE_FILE_REF"

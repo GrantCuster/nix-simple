@@ -32,6 +32,8 @@
 
     bc
 
+    zoom-us
+
     ripgrep
 
     nodejs_22
@@ -70,8 +72,6 @@
     # make sure gnu find
     findutils
 
-    nodePackages_latest.ts-node
-
     neovim-remote
 
     nerd-fonts.jetbrains-mono
@@ -83,10 +83,10 @@
     # neovim lsp
     tree-sitter
     lua-language-server
-    nodePackages_latest.typescript-language-server
+    typescript-language-server
     nixd
     tailwindcss-language-server
-    nodePackages_latest.prettier
+    prettier
     prettierd
     eslint_d
     pyright
@@ -252,6 +252,8 @@
       set -x PATH $HOME/go/bin $PATH
       # opencode bash install
       set -x PATH $HOME/.opencode/bin $PATH
+      # local bin necessary for claude
+      set -x PATH $HOME/.local/bin $PATH
     '';
     shellAliases = {
       c = "clear";

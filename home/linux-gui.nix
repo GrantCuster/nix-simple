@@ -1,7 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, codex, ... }:
 
 {
   home.packages = with pkgs; [
+    codex
     # sway
     autotiling
     grim
@@ -12,7 +13,6 @@
     gifsicle
     wl-clipboard
     clipse
-    light
     brightnessctl
     sway-contrib.grimshot
     newsboat
@@ -22,21 +22,25 @@
     # ttyimage attempt
     go
 
+    obsidian
+
     xournalpp
 
     kdePackages.kdenlive
 
     mpv
+    mkvtoolnix
 
-    claude-code
+    groff
 
     zoom-us
+
+    slack
 
     swaybg
 
     # for gleam
     erlang
-    beamMinimal26Packages.rebar3
     watchexec
 
     google-cloud-sdk
@@ -50,8 +54,7 @@
     google-chrome
 
     yt-dlp
-
-    xdragon
+    deno
 
     railway
     postgresql_18

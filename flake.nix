@@ -14,9 +14,10 @@
       url = "github:aloxaf/fzf-tab";
       flake = false;
     };
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
  };
 
-  outputs = { self, nixpkgs, home-manager,  zsh-fzf_tab, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, codex-cli-nix, ... } @ inputs:
 {
     nixosConfigurations = {
 	    "mele" = nixpkgs.lib.nixosSystem {
@@ -80,8 +81,11 @@
 
     "linux-x86" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = { zsh-fzf_tab = zsh-fzf_tab; };
-      modules = [ 
+      extraSpecialArgs = {
+        zsh-fzf_tab = zsh-fzf_tab;
+        codex = codex-cli-nix.packages.x86_64-linux.default;
+      };
+      modules = [
         { nixpkgs.config.allowUnfree = true; }
         ./home/linux-x86.nix ./home/home.nix ./home/linux-gui.nix ];
     };
