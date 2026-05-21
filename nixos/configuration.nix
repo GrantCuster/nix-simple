@@ -144,6 +144,11 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+    wireplumber.extraConfig.no-ucm = {
+      "monitor.alsa.properties" = {
+        "alsa.use-ucm" = false;
+      };
+    };
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -159,12 +164,16 @@
   users.users.grant = {
     isNormalUser = true;
     description = "Grant Custer";
-    extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" "input" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
      bluetuith
     ];
   };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", GROUP="input", MODE="0660"
+  '';
 
   hardware.bluetooth = {
     enable = true;

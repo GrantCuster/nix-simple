@@ -1,8 +1,11 @@
-{ config, pkgs, lib, codex, ... }:
+{ config, pkgs, lib, codex, hunk, opencode, whisrs, ... }:
 
 {
   home.packages = with pkgs; [
     codex
+    hunk
+    opencode
+    whisrs
     # sway
     autotiling
     grim
@@ -75,6 +78,9 @@
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
+    (writeShellScriptBin "record-window" (builtins.readFile ./scripts/record-window.sh))
+    (writeShellScriptBin "open-last-recording" (builtins.readFile ./scripts/open-last-recording.sh))
+    (writeShellScriptBin "web-optimize-recording" (builtins.readFile ./scripts/web-optimize-recording.sh))
   ];
 
   home.pointerCursor = {

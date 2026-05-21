@@ -246,88 +246,88 @@ return {
             lualine_y = { "filetype" },
             lualine_z = { { "mode" } },
           },
-          tabline = {
-            lualine_a = {
-              {
-                vibe_todo,
-              },
-            },
-            lualine_b = {
-              {
-                require("plugins.lualine-timer").timer,
-              },
-            },
-            lualine_c = {},
-            lualine_x = {
-              {
-                active_terminals,
-                color = { fg = "#d3869b" }
-              },
-              {
-                minimized_apps,
-              },
-              {
-                focus_mode,
-                color = { fg = "#98871a" }
-              }
-            },
-            lualine_y = {
-              {
-                battery,
-              },
-            },
-            lualine_z = {
-              {
-                date,
-                color = { fg = "#fabd2f" },
-              },
-              {
-                clock,
-              },
-            },
-          },
+          -- tabline = {
+          --   lualine_a = {
+          --     {
+          --       vibe_todo,
+          --     },
+          --   },
+          --   lualine_b = {
+          --     {
+          --       require("plugins.lualine-timer").timer,
+          --     },
+          --   },
+          --   lualine_c = {},
+          --   lualine_x = {
+          --     {
+          --       active_terminals,
+          --       color = { fg = "#d3869b" }
+          --     },
+          --     {
+          --       minimized_apps,
+          --     },
+          --     {
+          --       focus_mode,
+          --       color = { fg = "#98871a" }
+          --     }
+          --   },
+          --   lualine_y = {
+          --     {
+          --       battery,
+          --     },
+          --   },
+          --   lualine_z = {
+          --     {
+          --       date,
+          --       color = { fg = "#fabd2f" },
+          --     },
+          --     {
+          --       clock,
+          --     },
+          --   },
+          -- },
         })
 
     -- Configure winbar to show filename at the top of each buffer
-    vim.opt.winbar = "%{%v:lua.require'lualine'.winbar()%}"
+    -- vim.opt.winbar = "%{%v:lua.require'lualine'.winbar()%}"
 
-    require("lualine").setup({
-      winbar = {
-        lualine_a = { project_name },
-        lualine_b = {
-          {
-            'filename',
-            path = 1,            -- 1 = relative path
-            file_status = false, -- Don't show file status indicators
-            cond = function()
-              -- Only show winbar for non-terminal buffers
-              return vim.bo.buftype ~= 'terminal'
-            end,
-            color = { fg = "#fabd2f" },
-          }
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-      },
-      inactive_winbar = {
-        lualine_a = { project_name },
-        lualine_b = {
-          {
-            'filename',
-            path = 1, -- 1 = relative path
-            file_status = false,
-            cond = function()
-              return vim.bo.buftype ~= 'terminal'
-            end,
-            color = { fg = "#fabd2f" },
-          }
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-      },
-    })
+    -- require("lualine").setup({
+    --   winbar = {
+    --     lualine_a = { project_name },
+    --     lualine_b = {
+    --       {
+    --         'filename',
+    --         path = 1,            -- 1 = relative path
+    --         file_status = false, -- Don't show file status indicators
+    --         cond = function()
+    --           -- Only show winbar for non-terminal buffers
+    --           return vim.bo.buftype ~= 'terminal'
+    --         end,
+    --         color = { fg = "#fabd2f" },
+    --       }
+    --     },
+    --     lualine_x = {},
+    --     lualine_y = {},
+    --     lualine_z = {}
+    --   },
+    --   inactive_winbar = {
+    --     lualine_a = { project_name },
+    --     lualine_b = {
+    --       {
+    --         'filename',
+    --         path = 1, -- 1 = relative path
+    --         file_status = false,
+    --         cond = function()
+    --           return vim.bo.buftype ~= 'terminal'
+    --         end,
+    --         color = { fg = "#fabd2f" },
+    --       }
+    --     },
+    --     lualine_x = {},
+    --     lualine_y = {},
+    --     lualine_z = {}
+    --   },
+    -- })
 
     -- Start the timer refresh after lualine is set up
     require("plugins.lualine-timer").start_refresh()

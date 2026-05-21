@@ -20,5 +20,5 @@ if [[ $(uname) == "Darwin" ]]; then
 else
   # necessary for neo image neovim image viewer (uses ttyimg from go)
   export PATH="$HOME/go/bin:$PATH"
-  ghostty -e nvim --listen /tmp/main.sock -c terminal
+  ghostty -e nvim -c terminal
 fi
