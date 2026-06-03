@@ -278,6 +278,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "waybar" "-c" "~/.config/waybar/bottom.jsonc"
 spawn-at-startup "sh" "-c" "~/.config/waybar/scripts/niri-window-watch.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -372,8 +373,8 @@ binds {
     Alt+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
-    Alt+Shift+Return { spawn "ghostty"; }
+    Alt+Return { spawn "ghostty"; }
+    Alt+Shift+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
     Alt+G { spawn-sh "google-chrome-stable --ozone-platform=wayland --password-store=basic --hide-crash-restore-bubble"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

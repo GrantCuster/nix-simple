@@ -8,7 +8,7 @@
   // "modules-center": ["custom/niri-count"],
   // "modules-center": ["custom/todo"],
   "modules-left": ["niri/workspaces"],
-  "modules-center": ["custom/niri-window-index"],
+  // "modules-center": ["custom/niri-window-index"],
   "modules-right": ["custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,

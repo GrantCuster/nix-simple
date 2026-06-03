@@ -271,6 +271,8 @@
       c = "clear";
       diffs = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
       ports = "google-chrome --app=\"http://localhost:36573/\" & disown";
+      codex = "ghostty --title=Codex -e codex --yolo & disown";
+      claude = "ghostty --title=Claude -e claude --dangerously-skip-permissions & disown";
       spaces = "google-chrome --app=\"http://localhost:36575/\" & disown";
       t = "~/.config/tmux/smart_tmux.sh";
       b = "battery_status";
