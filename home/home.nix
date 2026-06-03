@@ -255,12 +255,6 @@
           echo "No parent directory with .git or .project found."
           return 1
       end
-      function __sync_nvim_cwd --on-variable PWD --description "Sync Neovim working directory with Fish"
-        status --is-command-substitution; and return  # Prevent running in subshells
-        nvr -c "cd $PWD"  # Change Neovim's working directory
-        set timestamp (date +%s)
-        nvr -c "file term://$PWD::$timestamp"  # Change Neovim's terminal name
-      end
       set -x PATH $HOME/go/bin $PATH
       # opencode bash install
       set -x PATH $HOME/.opencode/bin $PATH

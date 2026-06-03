@@ -278,8 +278,8 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "waybar" "-c" "~/.config/waybar/bottom.jsonc"
-spawn-at-startup "sh" "-c" "~/.config/waybar/scripts/niri-window-watch.sh"
+spawn-at-startup "waybar" "-c" "/home/grant/.config/waybar/bottom.jsonc"
+spawn-at-startup "/home/grant/.config/waybar/scripts/niri-window-watch.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
