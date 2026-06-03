@@ -2,13 +2,11 @@
   font-size: 13px;
   font-family: "JetBrainsMono Nerd Font";
   min-height: 0;
-  padding: 0;
+  padding: 0 2px;
   margin: 0 0 0 0;
 }
 window#waybar {
   background: #f9f5d7;
-  padding: 0;
-  margin: 0;
   border: none;
   opacity: 1; 
 }
@@ -61,7 +59,7 @@ window#waybar {
   /* margin: 0; */
 }
 #workspaces button.active {
-  color: #98971a;
+  color: inherit;
   /* background: #928374; */
   /* color: black; */
   /* font-weight: 700; */

@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   require("plugins.gruvbox"),
+  require("plugins.treesitter"),
   require("plugins.diffview"),
   require("plugins.neogit"),
 })

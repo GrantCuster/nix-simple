@@ -1,5 +1,8 @@
 return {
   "sindrets/diffview.nvim",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+  },
   config = function()
     require("diffview").setup({
       view = {
