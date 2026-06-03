@@ -12,7 +12,12 @@ niri msg --json windows 2>/dev/null | jq -r \
   '[.[] | select(.workspace_id == $wsid)] |
    sort_by(.layout.pos_in_scrolling_layout[0], .layout.pos_in_scrolling_layout[1]) |
    map(
-     ((.title // "?") | if startswith("vim") then "Neovim" else . end | if length > 20 then .[0:20] + "…" else . end) as $label |
+     ((.title // "?") |
+       if startswith("npm run dev") then "Dev"
+       elif startswith("vim") then "Neovim"
+       else .
+       end |
+       if length > 20 then .[0:20] + "…" else . end) as $label |
      if .id == $fid
      then "&gt;\($label)"
      else " \($label)"
