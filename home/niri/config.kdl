@@ -372,6 +372,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Alt+Return { spawn "fish" "-c" "~/.config/tmux/launch.sh"; }
+    Alt+Shift+Return { spawn "ghostty"; }
     Alt+G { spawn-sh "google-chrome-stable --ozone-platform=wayland --password-store=basic --hide-crash-restore-bubble"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -566,6 +567,7 @@ binds {
 
     Alt+F { maximize-column; }
     Alt+Shift+F { fullscreen-window; }
+    Alt+Ctrl+F { toggle-windowed-fullscreen; }
 
     // While maximize-column leaves gaps and borders around the window,
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
@@ -575,9 +577,7 @@ binds {
 
     Ctrl+Space { spawn-sh "whisrs toggle"; }
 
-    // Expand the focused column to space not taken up by other fully visible columns.
-    // Makes the column "fill the rest of the space".
-    Alt+Ctrl+F { expand-column-to-available-width; }
+
 
     Alt+C { center-column; }
 

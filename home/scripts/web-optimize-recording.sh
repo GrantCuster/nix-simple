@@ -18,7 +18,7 @@ ffmpeg -i "$latest" \
   -c:v libx264 -crf 28 -preset slow \
   -pix_fmt yuv420p \
   -movflags +faststart \
-  -vf "scale='min(1280,iw)':'trunc(oh*a/2)*2',scale='trunc(iw/2)*2:trunc(ih/2)*2'" \
+  -vf "scale=-2:'trunc(min(1080,ih)/2)*2',fps=fps=60" \
   -an \
   "$output"
 

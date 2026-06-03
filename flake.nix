@@ -15,15 +15,11 @@
       flake = false;
     };
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
-    hunk = {
-      url = "github:modem-dev/hunk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     opencode.url = "github:sst/opencode";
     whisrs.url = "github:y0sif/whisrs";
  };
 
-  outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, codex-cli-nix, hunk, opencode, whisrs, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, codex-cli-nix, opencode, whisrs, ... } @ inputs:
 {
     nixosConfigurations = {
 	    "mele" = nixpkgs.lib.nixosSystem {
@@ -90,7 +86,6 @@
       extraSpecialArgs = {
         zsh-fzf_tab = zsh-fzf_tab;
         codex = codex-cli-nix.packages.x86_64-linux.default;
-        hunk = hunk.packages.x86_64-linux.hunk;
         opencode = opencode.packages.x86_64-linux.default;
         whisrs = whisrs.packages.x86_64-linux.default;
       };

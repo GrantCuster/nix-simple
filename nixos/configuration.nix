@@ -159,13 +159,14 @@
   # services.xserver.libinput.enable = true;
 
   programs.zsh.enable = true;
+  programs.fish.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don’t forget to set a password with ‘passwd’.
   users.users.grant = {
     isNormalUser = true;
     description = "Grant Custer";
     extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" "input" ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     packages = with pkgs; [
      bluetuith
     ];

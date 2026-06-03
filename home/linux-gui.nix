@@ -1,9 +1,8 @@
-{ config, pkgs, lib, codex, hunk, opencode, whisrs, ... }:
+{ config, pkgs, lib, codex, opencode, whisrs, ... }:
 
 {
   home.packages = with pkgs; [
     codex
-    hunk
     opencode
     whisrs
     # sway
@@ -19,6 +18,7 @@
     brightnessctl
     sway-contrib.grimshot
     newsboat
+    newsflash
     waybar
     spotify-player
 
@@ -75,6 +75,8 @@
     ghostty
 
     espeak
+
+    zed-editor
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))

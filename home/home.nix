@@ -18,6 +18,9 @@
 
     git
     lazygit
+    tig
+    delta
+    meld
 
     wget
     unzip
@@ -27,6 +30,7 @@
     socat
 
     libgcc.lib
+    gcc
 
     jq
 
@@ -60,6 +64,8 @@
     fzf
 
     gh
+
+    awscli2
 
     # gleam
 
@@ -146,6 +152,10 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/nvim";
     recursive = true;
   };
+  xdg.configFile.nvim-experiment = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/nvim-experiment";
+    recursive = true;
+  };
   # Generally easier to use these symlinks
   xdg.configFile.tmux = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/home/tmux";
@@ -177,6 +187,7 @@
       b = "battery_status";
       # n = "smart_nvim";
       n = "nvr .";
+      ne = "NVIM_APPNAME=nvim-experiment nvim";
       stat = "fastfetch --file ~/nix/home/extra/sloth.txt --logo-color-1 white";
       ts = "tmux_session";
       # git helpers
@@ -185,6 +196,7 @@
       gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
+      hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
       # sudo use nix packages
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
@@ -257,10 +269,12 @@
     '';
     shellAliases = {
       c = "clear";
+      d = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
       t = "~/.config/tmux/smart_tmux.sh";
       b = "battery_status";
       # n = "smart_nvim";
       n = "nvr .";
+      ne = "NVIM_APPNAME=nvim-experiment nvim";
       name = "niri msg action set-workspace-name";
       done = "niri msg action unset-workspace-name && niri msg action close-window && niri msg action focus-workspace 1";
       stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
@@ -271,6 +285,7 @@
       gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
+      hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
       # sudo use nix packages
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
@@ -320,8 +335,34 @@
 
   programs.git = {
     enable = true;
-    userName = "Grant Custer";
-    userEmail = "grantcuster@gmail.com";
+    signing.format = null;
+    settings = {
+      user.name = "Grant Custer";
+      user.email = "grantcuster@gmail.com";
+      diff.tool = "meld";
+      difftool.meld.cmd = "meld \"$LOCAL\" \"$REMOTE\"";
+      merge.tool = "meld";
+      mergetool.meld.cmd = "meld \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\"";
+      difftool.prompt = false;
+      mergetool.prompt = false;
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      features = "gruvbox-dark";
+      gruvbox-dark = {
+        syntax-theme = "gruvbox-dark";
+        dark = true;
+      };
+      gruvbox-light = {
+        syntax-theme = "gruvbox-light";
+        light = true;
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.
