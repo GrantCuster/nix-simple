@@ -264,8 +264,8 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
+        left 12
+        right 12
         // top 64
         // bottom 64
     }
@@ -481,6 +481,8 @@ binds {
     Alt+Shift+Page_Up   { move-workspace-up; }
     Alt+Shift+U         { move-workspace-down; }
     Alt+Shift+I         { move-workspace-up; }
+    Alt+Ctrl+J          { move-workspace-down; }
+    Alt+Ctrl+K          { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
