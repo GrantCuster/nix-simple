@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
+lock_file="${XDG_RUNTIME_DIR:-/tmp}/niri-window-watch.lock"
+exec 9>"$lock_file"
+flock -n 9 || exit 0
+
 signal_ready_waybars() {
   local signal="$1"
 
-  pgrep -x waybar | while IFS= read -r pid; do
+  pgrep -f '^[w]aybar( |$)' | while IFS= read -r pid; do
     local age
     age="$(ps -o etimes= -p "$pid" 2>/dev/null | tr -d ' ')"
 
@@ -14,8 +18,6 @@ signal_ready_waybars() {
 }
 
 niri msg --json event-stream | while IFS= read -r line; do
-  if echo "$line" | grep -qE 'Window'; then
-    signal_ready_waybars RTMIN+8
-    signal_ready_waybars RTMIN+9
-  fi
+  signal_ready_waybars RTMIN+8
+  signal_ready_waybars RTMIN+9
 done
