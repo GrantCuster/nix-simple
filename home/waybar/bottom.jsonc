@@ -1,5 +1,5 @@
 {
-  "layer": "top",
+  "layer": "bottom",
   "position": "bottom",
   "height": 26,
   "name": "bottom-bar",

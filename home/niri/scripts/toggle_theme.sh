@@ -4,23 +4,28 @@ STATE_FILE="$HOME/.cache/theme-mode"
 CONFIG_FILE="${NIRI_CONFIG_FILE:-$HOME/nix/home/niri/config.kdl}"
 DARK_BACKGROUND="#1d2021"
 LIGHT_BACKGROUND="#f9f5d7"
+DARK_OVERVIEW_BACKDROP="#1d2021"
+LIGHT_OVERVIEW_BACKDROP="#f9f5d7"
 MODE=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")
 
 if [ "$MODE" = "dark" ]; then
   NEW="light"
   THEME="Gruvbox Light"
   BACKGROUND="$LIGHT_BACKGROUND"
+  OVERVIEW_BACKDROP="$LIGHT_OVERVIEW_BACKDROP"
   niri msg action do-screen-transition
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 else
   NEW="dark"
   THEME="Gruvbox Dark"
   BACKGROUND="$DARK_BACKGROUND"
+  OVERVIEW_BACKDROP="$DARK_OVERVIEW_BACKDROP"
   niri msg action do-screen-transition
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 fi
 
 sed -i -E "s/(^[[:space:]]*background-color[[:space:]]+\").*(\"[[:space:]]*$)/\1$BACKGROUND\2/" "$CONFIG_FILE"
+sed -i -E "s/(^[[:space:]]*backdrop-color[[:space:]]+\").*(\"[[:space:]]*$)/\1$OVERVIEW_BACKDROP\2/" "$CONFIG_FILE"
 niri msg action load-config-file
 
 # --- Remember new mode
