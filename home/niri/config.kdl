@@ -434,6 +434,7 @@ binds {
     // Alt+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
     Alt+Home { focus-column-first; }
+    Alt+0    { focus-column-first; }
     Alt+End  { focus-column-last; }
     Alt+Ctrl+Home { move-column-to-first; }
     Alt+Ctrl+End  { move-column-to-last; }
@@ -468,6 +469,7 @@ binds {
     Alt+Page_Up        { focus-workspace-up; }
     Alt+U              { focus-workspace-down; }
     Alt+I              { focus-workspace-up; }
+    Alt+O              { focus-workspace-previous; }
     Alt+Ctrl+Page_Down { move-column-to-workspace-down; }
     Alt+Ctrl+Page_Up   { move-column-to-workspace-up; }
     Alt+Ctrl+U         { move-column-to-workspace-down; }

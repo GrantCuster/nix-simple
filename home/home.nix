@@ -271,6 +271,7 @@
       c = "clear";
       diffs = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
       ports = "google-chrome --app=\"http://localhost:36573/\" & disown";
+      spaces = "google-chrome --app=\"http://localhost:36575/\" & disown";
       t = "~/.config/tmux/smart_tmux.sh";
       b = "battery_status";
       # n = "smart_nvim";
