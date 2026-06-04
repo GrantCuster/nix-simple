@@ -8,7 +8,7 @@
   // "modules-center": ["custom/niri-count"],
   // "modules-center": ["custom/todo"],
   "modules-left": ["niri/workspaces"],
-  // "modules-center": ["custom/niri-window-index"],
+  "modules-center": ["custom/top-todo"],
   "modules-right": ["custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
@@ -37,6 +37,10 @@
   "custom/todo": {
     "exec": "sh ~/.config/waybar/scripts/todo.sh",
     "interval": 1,
+  },
+  "custom/top-todo": {
+    "exec": "sh ~/.config/waybar/scripts/top-todo.sh",
+    "interval": 5,
   },
   "custom/niri-count": {
     "exec": "sh ~/.config/waybar/scripts/niri-test.sh",

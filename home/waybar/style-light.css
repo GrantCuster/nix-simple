@@ -29,7 +29,8 @@ window#waybar {
   color: #3c3836;
 }
 
-#custom-todo {
+#custom-todo,
+#custom-top-todo {
   padding: 2px 8px 4px;
   /* color: #ebdbb2; */
   /* color: #b8bb26; */
