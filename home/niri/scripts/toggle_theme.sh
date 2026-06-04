@@ -31,6 +31,9 @@ niri msg action load-config-file
 # --- Remember new mode
 echo "$NEW" > "$STATE_FILE"
 
+# --- Keep notifications on the active Gruvbox palette
+"$HOME/.config/niri/scripts/apply_mako_theme.sh"
+
 # --- Tell all active Neovim sessions (via nvr) to update
 nvr --serverlist | while read -r server; do
   nvr --servername "$server" --remote-expr "v:lua.require('theme').apply('$NEW')" >/dev/null 2>&1

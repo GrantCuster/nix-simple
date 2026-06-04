@@ -274,6 +274,7 @@ overview {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "/home/grant/.config/waybar/scripts/start-waybars.sh"
+spawn-at-startup "/home/grant/.config/niri/scripts/apply_mako_theme.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

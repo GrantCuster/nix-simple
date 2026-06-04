@@ -1,2 +1,91 @@
+font=JetBrainsMono Nerd Font 10
+width=420
+height=160
+anchor=top-right
+outer-margin=16,18,0,0
+margin=8
+padding=12,14
+border-size=2
+border-radius=8
+icons=1
+max-icon-size=48
+icon-border-radius=6
+markup=1
+actions=1
+history=1
+max-history=20
+max-visible=5
+sort=-time
 default-timeout=5000
 ignore-timeout=1
+format=<b>%s</b>\n%b
+group-by=app-name,summary
+
+# Dark Gruvbox defaults. These are used before toggle_theme.sh sets a mako mode.
+background-color=#282828FF
+text-color=#ebdbb2FF
+border-color=#928374FF
+progress-color=over #83a598FF
+
+[grouped]
+format=(%g) <b>%s</b>\n%b
+invisible=1
+
+[group-index=0]
+invisible=0
+
+[hidden]
+format=<b>%h hidden</b>
+background-color=#3c3836FF
+text-color=#a89984FF
+border-color=#665c54FF
+
+[mode=dark]
+background-color=#282828FF
+text-color=#ebdbb2FF
+border-color=#928374FF
+progress-color=over #83a598FF
+
+[mode=dark urgency=low]
+background-color=#1d2021FF
+text-color=#a89984FF
+border-color=#504945FF
+progress-color=over #665c54FF
+
+[mode=dark urgency=normal]
+background-color=#282828FF
+text-color=#ebdbb2FF
+border-color=#928374FF
+progress-color=over #83a598FF
+
+[mode=dark urgency=critical]
+background-color=#3c1f1eFF
+text-color=#fbf1c7FF
+border-color=#fb4934FF
+progress-color=over #fb4934FF
+default-timeout=0
+
+[mode=light]
+background-color=#fbf1c7FF
+text-color=#3c3836FF
+border-color=#928374FF
+progress-color=over #458588FF
+
+[mode=light urgency=low]
+background-color=#f9f5d7FF
+text-color=#7c6f64FF
+border-color=#d5c4a1FF
+progress-color=over #bdae93FF
+
+[mode=light urgency=normal]
+background-color=#fbf1c7FF
+text-color=#3c3836FF
+border-color=#928374FF
+progress-color=over #458588FF
+
+[mode=light urgency=critical]
+background-color=#f2d5cfFF
+text-color=#3c3836FF
+border-color=#cc241dFF
+progress-color=over #cc241dFF
+default-timeout=0
