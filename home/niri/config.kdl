@@ -308,6 +308,14 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     slowdown 0.5
+
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1600 epsilon=0.0001
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=1600 epsilon=0.0001
+    }
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -544,8 +552,8 @@ binds {
     // Alternatively, there are commands to move just a single window:
     // Alt+Ctrl+1 { move-window-to-workspace 1; }
 
-    // Switches focus between the current and the previous workspace.
-    // Alt+Tab { focus-workspace-previous; }
+    // Switches between workspace 1 and the most recent other workspace.
+    Alt+Tab repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_workspace_1_recent.sh"; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
