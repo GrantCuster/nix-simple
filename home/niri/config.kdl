@@ -119,7 +119,7 @@ output "BOE NE135A1M-NY1 Unknown" {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 4
-    background-color "#f9f5d7"
+    background-color "#1d2021"
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -258,21 +258,10 @@ layout {
         color "#0007"
     }
 
-    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
-    // You can think of them as a kind of outer gaps. They are set in logical pixels.
-    // Left and right struts will cause the next window to the side to always be visible.
-    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
-    // layer-shell panels and regular gaps.
-    struts {
-        left 12
-        right 12
-        // top 64
-        // bottom 64
-    }
 }
 
 overview {
-    backdrop-color "#f9f5d7"
+    backdrop-color "#1d2021"
     workspace-shadow {
         off
     }
