@@ -263,7 +263,8 @@
     '';
     shellAliases = {
       c = "clear";
-      diffs = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
+      diff = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
+      tour = "google-chrome --app=\"http://localhost:39281/?path=$(pwd)\" & disown";
       ports = "google-chrome --app=\"http://localhost:36573/\" & disown";
       todos = "google-chrome --app=\"http://localhost:36577/\" & disown";
       cdx = "ghostty --title=Codex -e codex --yolo & disown";
