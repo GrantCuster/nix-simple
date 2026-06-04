@@ -603,6 +603,8 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Alt+V       { toggle-window-floating; }
     Alt+Shift+V { switch-focus-between-floating-and-tiling; }
+    Alt+P       { spawn "sh" "-c" "~/.config/niri/scripts/sticky_pip.sh"; }
+    Alt+Ctrl+P  { spawn "sh" "-c" "~/.config/niri/scripts/sticky_pip.sh stop"; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
