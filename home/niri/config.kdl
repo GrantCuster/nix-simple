@@ -119,7 +119,7 @@ output "BOE NE135A1M-NY1 Unknown" {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 4
-    background-color "#f9f5d7"
+    background-color "#1d2021"
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -261,7 +261,7 @@ layout {
 }
 
 overview {
-    backdrop-color "#f9f5d7"
+    backdrop-color "#1d2021"
     workspace-shadow {
         off
     }
