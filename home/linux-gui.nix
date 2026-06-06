@@ -80,6 +80,7 @@
 
     (writeShellScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh))
     (writeShellScriptBin "gif" (builtins.readFile ./scripts/gif.sh))
+    (writeShellScriptBin "record-screen" (builtins.readFile ./scripts/record-screen.sh))
     (writeShellScriptBin "record-window" (builtins.readFile ./scripts/record-window.sh))
     (writeShellScriptBin "open-last-recording" (builtins.readFile ./scripts/open-last-recording.sh))
     (writeShellScriptBin "web-optimize-recording" (builtins.readFile ./scripts/web-optimize-recording.sh))

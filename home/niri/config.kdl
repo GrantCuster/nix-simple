@@ -407,11 +407,6 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
-    // Open/close the Overview: a zoomed-out view of workspaces and windows.
-    // You can also move the mouse into the top-left hot corner,
-    // or do a four-finger swipe up on a touchpad.
-    Alt+Space repeat=false { toggle-overview; }
-
     Alt+Q repeat=false { close-window; }
 
     Alt+Left  { focus-column-left; }
@@ -553,7 +548,7 @@ binds {
     // Alt+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches between workspace 1 and the most recent other workspace.
-    Alt+Tab repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_workspace_1_recent.sh"; }
+    Alt+Space repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_workspace_1_recent.sh"; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
@@ -632,7 +627,9 @@ binds {
     Alt+Print { screenshot-window; }
 
     Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/toggle_theme.sh"; }
+    Alt+Ctrl+V { spawn "record-screen"; }
     Alt+Shift+R { spawn "record-window"; }
+    Alt+Ctrl+X { spawn "record-screen" "cancel"; }
     Alt+Shift+X { spawn "record-window" "cancel"; }
     Alt+Shift+O { spawn "open-last-recording"; }
     Alt+Shift+W { spawn "web-optimize-recording"; }
