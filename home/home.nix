@@ -47,6 +47,7 @@
     htop
 
     imagemagick
+    autotrace
     ffmpeg
 
     pandoc
@@ -74,6 +75,8 @@
     icloudpd
 
     usbutils
+    qmk
+    dos2unix
 
     # make sure gnu find
     findutils
@@ -265,6 +268,8 @@
       c = "clear";
       diff = "google-chrome --app=\"http://localhost:39271/?path=$(pwd)\" & disown";
       tour = "google-chrome --app=\"http://localhost:39281/?path=$(pwd)\" & disown";
+      draw = "google-chrome --app=\"http://localhost:41737/\" & disown";
+      timeblock = "google-chrome --app=\"http://localhost:48173/\" & disown";
       ports = "google-chrome --app=\"http://localhost:36573/\" & disown";
       todos = "google-chrome --app=\"http://localhost:36577/\" & disown";
       cdx = "ghostty --title=Codex -e codex --yolo & disown";

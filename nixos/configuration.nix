@@ -149,6 +149,20 @@
         "alsa.use-ucm" = false;
       };
     };
+    # Disable this machine's A2DP *sink* role (i.e. acting as a Bluetooth
+    # speaker). Needed for dual-role Bluetooth amps/receivers like the Fosi
+    # Audio BT20A PRO, which advertise both an A2DP sink and source endpoint.
+    # With a2dp_sink enabled, a normal Connect() makes this PC grab the amp's
+    # source endpoint, holding the audio link so playback fails ("a2dp-sink
+    # profile connect failed: Device or resource busy") and no sink appears.
+    # Dropping a2dp_sink forces the correct direction (PC = source -> amp = sink)
+    # so audio plays. Headphones/speakers (this PC as source) are unaffected;
+    # only "phone streams TO this PC as a speaker" stops working.
+    wireplumber.extraConfig.bluez-no-a2dp-sink = {
+      "monitor.bluez.properties" = {
+        "bluez5.roles" = [ "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag" ];
+      };
+    };
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -165,12 +179,16 @@
   users.users.grant = {
     isNormalUser = true;
     description = "Grant Custer";
-    extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "scanner" "lp" "input" "plugdev" ];
     shell = pkgs.fish;
     packages = with pkgs; [
      bluetuith
     ];
   };
+  users.groups.plugdev = {};
+  security.sudo.wheelNeedsPassword = false;
+
+  services.udev.packages = [ pkgs.qmk-udev-rules ];
 
   services.udev.extraRules = ''
     KERNEL=="uinput", GROUP="input", MODE="0660"

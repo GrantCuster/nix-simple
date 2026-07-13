@@ -9,6 +9,7 @@ disabled = true
 # Use nerd fonts for icons
 
 [aws]
+disabled = true
 symbol = " "
 
 [buf]
@@ -168,6 +169,7 @@ symbol = " "
 symbol = " "
 
 [gcloud]
+disabled = true
 symbol = " "
 
 [swift]

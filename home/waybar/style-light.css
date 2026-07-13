@@ -12,6 +12,7 @@ window#waybar {
 }
 #custom-clock,
 #custom-date,
+#custom-focus-mode,
 #battery {
   padding: 2px 8px 4px;
   background: transparent;
@@ -29,6 +30,14 @@ window#waybar {
   color: #3c3836;
 }
 
+#custom-focus-mode {
+  color: #689d6a;
+}
+
+#custom-recording-status {
+  color: #cc241d;
+}
+
 #custom-todo,
 #custom-top-todo {
   padding: 2px 8px 4px;
@@ -36,6 +45,11 @@ window#waybar {
   /* color: #b8bb26; */
   color: #b57614;
   /* color: #d3869b; */
+}
+
+#custom-timeblocks {
+  padding: 2px 8px 4px;
+  color: #79740e;
 }
 
 #workspaces {

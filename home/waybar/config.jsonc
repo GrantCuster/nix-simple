@@ -8,8 +8,8 @@
   // "modules-center": ["custom/niri-count"],
   // "modules-center": ["custom/todo"],
   "modules-left": ["niri/workspaces"],
-  "modules-center": ["custom/top-todo"],
-  "modules-right": ["custom/recording-status", "battery", "custom/date", "custom/clock"],
+  "modules-center": ["custom/timeblocks", "custom/top-todo"],
+  "modules-right": ["custom/focus-mode", "custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "clock": {
@@ -24,7 +24,7 @@
   },
   "niri/workspaces": {
     "current-only": true,
-    "format": "{index} {name}",
+    "format": "{name}",
   },
   "tray": {
     "icon-size": 14,
@@ -42,6 +42,11 @@
     "exec": "sh ~/.config/waybar/scripts/top-todo.sh",
     "interval": 5,
   },
+  "custom/timeblocks": {
+    "exec": "sh ~/.config/waybar/scripts/timeblocks.sh",
+    "return-type": "json",
+    "interval": 15,
+  },
   "custom/niri-count": {
     "exec": "sh ~/.config/waybar/scripts/niri-test.sh",
     "interval": 1,
@@ -53,6 +58,12 @@
   "custom/recording-status": {
     "exec": "sh ~/.config/waybar/scripts/recording_status.sh",
     "interval": 1,
+  },
+  "custom/focus-mode": {
+    "exec": "sh ~/.config/waybar/scripts/focus-mode.sh",
+    "exec-if": "test \"$(cat ~/nix/nixos/extras/focus-state 2>/dev/null || echo off)\" = on",
+    "return-type": "json",
+    "interval": 5,
   },
   "custom/niri-window-index": {
     "exec": "sh ~/.config/waybar/scripts/niri-window-index.sh",
