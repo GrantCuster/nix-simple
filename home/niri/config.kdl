@@ -583,7 +583,7 @@ binds {
 
     Ctrl+Space { spawn-sh "whisrs toggle"; }
     Ctrl+Shift+Alt+Super+1 repeat=false { spawn-sh "whisrs toggle"; }
-    Ctrl+Shift+Alt+Super+2 repeat=false { spawn-sh "whisrs toggle"; }
+    Ctrl+Shift+Alt+Super+2 repeat=false { spawn "whisrs_toggle_submit"; }
 
     Alt+C { center-column; }
 

@@ -77,6 +77,7 @@
     usbutils
     qmk
     dos2unix
+    dotool
 
     # make sure gnu find
     findutils
@@ -118,6 +119,7 @@
     (writeShellScriptBin "battery_status" (builtins.readFile ./scripts/battery_status.sh))
     (writeShellScriptBin "daily" (builtins.readFile ./scripts/daily.sh))
     (writeShellScriptBin "wakeup" (builtins.readFile ./scripts/wakeup.sh))
+    (writeShellScriptBin "whisrs_toggle_submit" (builtins.readFile ./scripts/whisrs_toggle_submit.sh))
     # mac specific
     (writeShellScriptBin "sketch" (builtins.readFile ./scripts/sketch.sh))
     (writeShellScriptBin "refresh_nix_mac" (builtins.readFile ./scripts/refresh_nix_mac.sh))
