@@ -202,6 +202,8 @@
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
       hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
+      laptop = "toggle-external-screens off";
+      projector = "toggle-external-screens on";
       # sudo use nix packages
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";
@@ -274,6 +276,7 @@
       timeblock = "google-chrome --app=\"http://localhost:48173/\" & disown";
       ports = "google-chrome --app=\"http://localhost:36573/\" & disown";
       todos = "google-chrome --app=\"http://localhost:36577/\" & disown";
+      capture = "capture-kiosk & disown";
       cdx = "ghostty --title=Codex -e codex --yolo & disown";
       cld = "ghostty --title=Claude -e claude --dangerously-skip-permissions & disown";
       spaces = "google-chrome --app=\"http://localhost:36575/\" & disown";
@@ -293,6 +296,8 @@
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
       hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
+      laptop = "toggle-external-screens off";
+      projector = "toggle-external-screens on";
       # sudo use nix packages
       s = "sudo --preserve-env=PATH env";
       sn = "sudo --preserve-env=PATH env nvim -u ~/.config/nvim/init.lua";

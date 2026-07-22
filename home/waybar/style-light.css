@@ -13,6 +13,7 @@ window#waybar {
 #custom-clock,
 #custom-date,
 #custom-focus-mode,
+#custom-focused-output,
 #battery {
   padding: 2px 8px 4px;
   background: transparent;
@@ -32,6 +33,10 @@ window#waybar {
 
 #custom-focus-mode {
   color: #689d6a;
+}
+
+#custom-focused-output {
+  color: #076678;
 }
 
 #custom-recording-status {

@@ -53,6 +53,11 @@ input {
         // scroll-method "no-scroll"
     }
 
+    touch {
+        map-to-output "Seiko Epson Corporation EPSON PJ 0x01010101"
+        calibration-matrix -1.0 0.0 1.0 0.0 -1.0 1.0
+    }
+
     trackpoint {
         // off
         // natural-scroll
@@ -74,6 +79,15 @@ input {
 
 output "BOE NE135A1M-NY1 Unknown" {
   scale 1.875
+  position x=192 y=0
+}
+
+output "Dell Inc. DELL P2421 CW19L23" {
+  position x=0 y=1024
+}
+
+output "Seiko Epson Corporation EPSON PJ 0x01010101" {
+  position x=0 y=2224
 }
 
 // You can configure outputs by their name, which you can find
@@ -439,10 +453,20 @@ binds {
     Alt+Ctrl+Home { move-column-to-first; }
     Alt+Ctrl+End  { move-column-to-last; }
 
+    Alt+1 { focus-monitor "BOE NE135A1M-NY1 Unknown"; }
+    Alt+2 { focus-monitor "Dell Inc. DELL P2421 CW19L23"; }
+    Alt+3 { focus-monitor "Seiko Epson Corporation EPSON PJ 0x01010101"; }
+
+    Alt+Shift+1 { move-window-to-monitor "BOE NE135A1M-NY1 Unknown"; }
+    Alt+Shift+2 { move-window-to-monitor "Dell Inc. DELL P2421 CW19L23"; }
+    Alt+Shift+3 { move-window-to-monitor "Seiko Epson Corporation EPSON PJ 0x01010101"; }
+
     Alt+Shift+Left  { focus-monitor-left; }
     Alt+Shift+Down  { focus-monitor-down; }
     Alt+Shift+Up    { focus-monitor-up; }
     Alt+Shift+Right { focus-monitor-right; }
+    Super+J { focus-monitor-down; }
+    Super+K { focus-monitor-up; }
     // Alt+Shift+H     { focus-monitor-left; }
     // Alt+Shift+J     { focus-monitor-down; }
     // Alt+Shift+K     { focus-monitor-up; }
@@ -650,7 +674,6 @@ binds {
     Alt+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 
-    // Powers off the monitors. To turn them back on, do any input like
-    // moving the mouse or pressing any other key.
-    Alt+Shift+P { power-off-monitors; }
+    // Toggle the connected non-laptop screens.
+    Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_external_screens.sh"; }
 }

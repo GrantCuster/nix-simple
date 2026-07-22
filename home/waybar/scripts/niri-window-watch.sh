@@ -20,4 +20,5 @@ signal_ready_waybars() {
 niri msg --json event-stream | while IFS= read -r line; do
   signal_ready_waybars RTMIN+8
   signal_ready_waybars RTMIN+9
+  signal_ready_waybars RTMIN+10
 done

@@ -84,6 +84,8 @@
     (writeShellScriptBin "record-window" (builtins.readFile ./scripts/record-window.sh))
     (writeShellScriptBin "open-last-recording" (builtins.readFile ./scripts/open-last-recording.sh))
     (writeShellScriptBin "web-optimize-recording" (builtins.readFile ./scripts/web-optimize-recording.sh))
+    (writeShellScriptBin "capture-kiosk" (builtins.readFile ./scripts/capture-kiosk.sh))
+    (writeShellScriptBin "toggle-external-screens" (builtins.readFile ./niri/scripts/toggle_external_screens.sh))
   ];
 
   home.pointerCursor = {
