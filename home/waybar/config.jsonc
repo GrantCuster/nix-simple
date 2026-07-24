@@ -1,6 +1,7 @@
 {
   // "layer": "bottom",
   "position": "top",
+  "height": 24,
   // "margin-left": 760,
   // "modules-left": ["custom/todo"],
   // "modules-left": ["niri/window"],
@@ -9,7 +10,7 @@
   // "modules-center": ["custom/todo"],
   "modules-left": ["niri/workspaces"],
   "modules-center": ["custom/timeblocks", "custom/top-todo"],
-  "modules-right": ["custom/focused-output", "custom/focus-mode", "custom/recording-status", "battery", "custom/date", "custom/clock"],
+  "modules-right": ["custom/focus-mode", "custom/recording-status", "battery", "custom/date", "custom/clock"],
   // "modules-right": ["battery", "custom/date", "custom/clock"],
   "reload_style_on_change": true,
   "clock": {
@@ -23,8 +24,20 @@
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
   },
   "niri/workspaces": {
-    "current-only": true,
-    "format": "{name}",
+    "current-only": false,
+    "format": "{icon}{name}",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "default": "{value}",
+    },
   },
   "tray": {
     "icon-size": 14,
@@ -64,13 +77,6 @@
     "exec-if": "test \"$(cat ~/nix/nixos/extras/focus-state 2>/dev/null || echo off)\" = on",
     "return-type": "json",
     "interval": 5,
-  },
-  "custom/focused-output": {
-    "exec": "sh ~/.config/waybar/scripts/focused-output.sh",
-    "return-type": "json",
-    "interval": "once",
-    "signal": 10,
-    "tooltip": true,
   },
   "custom/niri-window-index": {
     "exec": "sh ~/.config/waybar/scripts/niri-window-index.sh",

@@ -15,10 +15,9 @@ window#waybar {
 #custom-clock,
 #custom-date,
 #custom-focus-mode,
-#custom-focused-output,
 #battery {
   /* background: rgba(29, 32, 33, 0.95); */
-  padding: 2px 8px 4px;
+  padding: 1px 8px 2px;
   background: transparent;
 }
 
@@ -38,17 +37,13 @@ window#waybar {
   color: #b8bb26;
 }
 
-#custom-focused-output {
-  color: #83a598;
-}
-
 #custom-recording-status {
   color: #fb4934;
 }
 
 #custom-todo,
 #custom-top-todo {
-  padding: 2px 8px 4px;
+  padding: 1px 8px 2px;
   /* color: #ebdbb2; */
   /* color: #b8bb26; */
   color: #fabd2f;
@@ -56,39 +51,37 @@ window#waybar {
 }
 
 #custom-timeblocks {
-  padding: 2px 8px 4px;
+  padding: 1px 8px 2px;
   color: #b8bb26;
 }
 
 #workspaces {
-  padding: 2px 2px 4px
+  padding: 1px 2px 2px
 }
 
 #custom-niri-count {
-  padding: 2px 8px 4px;
+  padding: 1px 8px 2px;
   color: #d3869b;
 }
 
 #custom-niri-window-index {
-  padding: 2px 8px 4px;
+  padding: 1px 8px 2px;
   color: #83a598;
 }
 
 #workspaces button {
-  padding: 0 6px;
-  /* color: #a89984; */
-  color: #ebdbb2;
-  /* background: rgba(29, 32, 33, 0.95); */
-  /* background: transparent; */
-  /* color: #a89984; */
-  /* border-radius: 0; */
-  /* padding: 4px 4px; */
-  /* border: none; */
-  /* margin: 0; */
+  padding: 0 3px;
+  color: #a89984;
+  border-radius: 0;
 }
+
 #workspaces button.active {
-  color: inherit;
-  /* background: #928374; */
-  /* color: black; */
-  /* font-weight: 700; */
+  color: #ebdbb2;
+  background: #504945;
+}
+
+#workspaces button.focused {
+  color: #1d2021;
+  background: #b8bb26;
+  font-weight: 700;
 }

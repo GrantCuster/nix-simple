@@ -267,6 +267,15 @@
       set -x PATH $HOME/.opencode/bin $PATH
       # local bin necessary for claude
       set -x PATH $HOME/.local/bin $PATH
+      function name
+          if test (count $argv) -eq 0
+              echo "Usage: name <workspace-name>" >&2
+              return 1
+          end
+
+          set workspace_name (string join ' ' $argv)
+          niri msg action set-workspace-name " $workspace_name"
+      end
     '';
     shellAliases = {
       c = "clear";
@@ -285,7 +294,6 @@
       # n = "smart_nvim";
       n = "nvr .";
       ne = "NVIM_APPNAME=nvim-experiment nvim";
-      name = "niri msg action set-workspace-name";
       done = "niri msg action unset-workspace-name && niri msg action close-window && niri msg action focus-workspace 1";
       stat = "fastfetch --file ~/nix/home/extra/sloth.txt";
       ts = "tmux_session";

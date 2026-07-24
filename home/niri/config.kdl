@@ -82,12 +82,16 @@ output "BOE NE135A1M-NY1 Unknown" {
   position x=192 y=0
 }
 
-output "Dell Inc. DELL P2421 CW19L23" {
+output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
   position x=0 y=1024
 }
 
+output "Dell Inc. DELL P2421 CW19L23" {
+  position x=0 y=2104
+}
+
 output "Seiko Epson Corporation EPSON PJ 0x01010101" {
-  position x=0 y=2224
+  position x=0 y=3304
 }
 
 // You can configure outputs by their name, which you can find
@@ -429,8 +433,8 @@ binds {
     // Alt+Up    { focus-window-up; }
     // Alt+Right { focus-column-right; }
     Alt+H     { focus-column-left; }
-    Alt+J     { focus-window-down; }
-    Alt+K     { focus-window-up; }
+    Alt+J     { focus-window-or-monitor-down; }
+    Alt+K     { focus-window-or-monitor-up; }
     Alt+L     { focus-column-right; }
 
     // Alt+Shift+Left  { move-column-left; }
@@ -438,8 +442,8 @@ binds {
     // Alt+Shift+Up    { move-window-up; }
     // Alt+Shift+Right { move-column-right; }
     Alt+Shift+H     { move-column-left; }
-    Alt+Shift+J     { move-window-down-or-to-workspace-down; }
-    Alt+Shift+K     { move-window-up-or-to-workspace-up; }
+    Alt+Shift+J     { move-window-to-monitor-down; }
+    Alt+Shift+K     { move-window-to-monitor-up; }
     Alt+Shift+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
@@ -452,14 +456,6 @@ binds {
     Alt+End  { focus-column-last; }
     Alt+Ctrl+Home { move-column-to-first; }
     Alt+Ctrl+End  { move-column-to-last; }
-
-    Alt+1 { focus-monitor "BOE NE135A1M-NY1 Unknown"; }
-    Alt+2 { focus-monitor "Dell Inc. DELL P2421 CW19L23"; }
-    Alt+3 { focus-monitor "Seiko Epson Corporation EPSON PJ 0x01010101"; }
-
-    Alt+Shift+1 { move-window-to-monitor "BOE NE135A1M-NY1 Unknown"; }
-    Alt+Shift+2 { move-window-to-monitor "Dell Inc. DELL P2421 CW19L23"; }
-    Alt+Shift+3 { move-window-to-monitor "Seiko Epson Corporation EPSON PJ 0x01010101"; }
 
     Alt+Shift+Left  { focus-monitor-left; }
     Alt+Shift+Down  { focus-monitor-down; }
@@ -494,6 +490,8 @@ binds {
     Alt+U              { focus-workspace-down; }
     Alt+I              { focus-workspace-up; }
     Alt+O              { focus-workspace-previous; }
+    Alt+N              { focus-workspace-down; }
+    Alt+P              { focus-workspace-up; }
     Alt+B repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_non_home_workspace.sh"; }
     Alt+Ctrl+Page_Down { move-column-to-workspace-down; }
     Alt+Ctrl+Page_Up   { move-column-to-workspace-up; }
@@ -551,15 +549,15 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    // Alt+1 { focus-workspace 1; }
-    // Alt+2 { focus-workspace 2; }
-    // Alt+3 { focus-workspace 3; }
-    // Alt+4 { focus-workspace 4; }
-    // Alt+5 { focus-workspace 5; }
-    // Alt+6 { focus-workspace 6; }
-    // Alt+7 { focus-workspace 7; }
-    // Alt+8 { focus-workspace 8; }
-    // Alt+9 { focus-workspace 9; }
+    Alt+1 { focus-workspace 1; }
+    Alt+2 { focus-workspace 2; }
+    Alt+3 { focus-workspace 3; }
+    Alt+4 { focus-workspace 4; }
+    Alt+5 { focus-workspace 5; }
+    Alt+6 { focus-workspace 6; }
+    Alt+7 { focus-workspace 7; }
+    Alt+8 { focus-workspace 8; }
+    Alt+9 { focus-workspace 9; }
     // Alt+Ctrl+1 { move-column-to-workspace 1; }
     // Alt+Ctrl+2 { move-column-to-workspace 2; }
     // Alt+Ctrl+3 { move-column-to-workspace 3; }
@@ -571,7 +569,15 @@ binds {
     // Alt+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
-    // Alt+Ctrl+1 { move-window-to-workspace 1; }
+    Alt+Shift+1 { move-window-to-workspace 1; }
+    Alt+Shift+2 { move-window-to-workspace 2; }
+    Alt+Shift+3 { move-window-to-workspace 3; }
+    Alt+Shift+4 { move-window-to-workspace 4; }
+    Alt+Shift+5 { move-window-to-workspace 5; }
+    Alt+Shift+6 { move-window-to-workspace 6; }
+    Alt+Shift+7 { move-window-to-workspace 7; }
+    Alt+Shift+8 { move-window-to-workspace 8; }
+    Alt+Shift+9 { move-window-to-workspace 9; }
 
     // Switches between workspace 1 and the most recent other workspace.
     Alt+Space repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_workspace_1_recent.sh"; }
@@ -632,7 +638,7 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Alt+V       { toggle-window-floating; }
     Alt+Shift+V { switch-focus-between-floating-and-tiling; }
-    Alt+P       { spawn "sh" "-c" "~/.config/niri/scripts/sticky_pip.sh"; }
+    // Alt+P       { spawn "sh" "-c" "~/.config/niri/scripts/sticky_pip.sh"; }
     Alt+Ctrl+P  { spawn "sh" "-c" "~/.config/niri/scripts/sticky_pip.sh stop"; }
 
     // Toggle tabbed column display mode.
