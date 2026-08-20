@@ -94,6 +94,12 @@ output "Seiko Epson Corporation EPSON PJ 0x01010101" {
   position x=0 y=3304
 }
 
+// The projector and TV are used interchangeably, so they share this position.
+output "VIZIO, Inc VQD43R-1001 0x01010101" {
+  position x=0 y=3304
+  transform "180"
+}
+
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
 // The built-in laptop monitor is usually called "eDP-1".
