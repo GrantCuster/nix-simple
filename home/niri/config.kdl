@@ -54,7 +54,8 @@ input {
     }
 
     touch {
-        map-to-output "Seiko Epson Corporation EPSON PJ 0x01010101"
+        // map-to-output "Seiko Epson Corporation EPSON PJ 0x01010101"
+        map-to-output "VIZIO, Inc VQD43R-1001 0x01010101"
         calibration-matrix -1.0 0.0 1.0 0.0 -1.0 1.0
     }
 
