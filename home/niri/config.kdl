@@ -690,3 +690,4 @@ binds {
     // Toggle the connected non-laptop screens.
     Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_external_screens.sh"; }
 }
+  mode "1920x1080"
