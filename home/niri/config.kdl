@@ -95,10 +95,16 @@ output "Seiko Epson Corporation EPSON PJ 0x01010101" {
   position x=0 y=3304
 }
 
-// The projector and TV are used interchangeably, so they share this position.
+// The Vizio sits directly below the ASUS monitor in the vertical display stack.
 output "VIZIO, Inc VQD43R-1001 0x01010101" {
-  position x=0 y=3304
+  mode "1920x1080"
+  position x=0 y=2104
   transform "180"
+}
+
+// Persistent parking workspace for windows minimized into Arranger.
+workspace "minimized" {
+  open-on-output "VIZIO, Inc VQD43R-1001 0x01010101"
 }
 
 // You can configure outputs by their name, which you can find
