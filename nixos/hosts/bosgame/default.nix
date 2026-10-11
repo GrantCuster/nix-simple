@@ -38,6 +38,31 @@
     ];
   };
 
+  # Present the read-only media disk in the hierarchy Jellyfin expects without
+  # changing the files themselves.  Each show needs to be one level beneath a
+  # shared library root; home videos retain their useful category folders.
+  systemd.tmpfiles.rules = [
+    "d /var/lib/jellyfin/library-layout 0755 jellyfin jellyfin -"
+    "d /var/lib/jellyfin/library-layout/movies 0755 jellyfin jellyfin -"
+    "d /var/lib/jellyfin/library-layout/movies/errol-morris 0755 jellyfin jellyfin -"
+    "d /var/lib/jellyfin/library-layout/movies/errol-morris/Vernon\\x2c\\x20Florida\\x20(1981) 0755 jellyfin jellyfin -"
+    "d /var/lib/jellyfin/library-layout/shows 0755 jellyfin jellyfin -"
+    "d /var/lib/jellyfin/library-layout/videos 0755 jellyfin jellyfin -"
+
+    "L+ /var/lib/jellyfin/library-layout/movies/errol-morris/Gates\\x20of\\x20Heaven\\x20(1978) - - - - /media/video/errol-morris-movies/gates-of-heaven-1978"
+    "L+ /var/lib/jellyfin/library-layout/movies/errol-morris/Vernon\\x2c\\x20Florida\\x20(1981)/Vernon\\x2c\\x20Florida\\x20(1981).mp4 - - - - /media/video/errol-morris-movies/VernonFloridaErrolMorris1981/Vernon\\x2c\\x20Florida\\x20(Errol\\x20Morris\\x2c\\x201981).mp4"
+
+    "L+ /var/lib/jellyfin/library-layout/shows/Beast\\x20Wars\\x20(1996) - - - - /media/video/beast-wars"
+    "L+ /var/lib/jellyfin/library-layout/shows/Cowboy\\x20Bebop\\x20(1998) - - - - /media/video/cowboy-bebop"
+    "L+ /var/lib/jellyfin/library-layout/shows/Neon\\x20Genesis\\x20Evangelion\\x20(1995) - - - - /media/video/evangelion"
+    "L+ /var/lib/jellyfin/library-layout/shows/Scavengers\\x20Reign\\x20(2023) - - - - /media/video/scavengers-reign"
+
+    "L+ /var/lib/jellyfin/library-layout/videos/Bikes - - - - /media/video/bikes"
+    "L+ /var/lib/jellyfin/library-layout/videos/HCI\\x20Demos - - - - /media/video/hci-demos"
+    "L+ /var/lib/jellyfin/library-layout/videos/Music\\x20Performances - - - - /media/video/music"
+    "L+ /var/lib/jellyfin/library-layout/videos/Primitive\\x20Technology - - - - /media/video/primitive"
+  ];
+
   # A deliberately small local TV session: no desktop environment, just a
   # Wayland kiosk compositor running Jellyfin Desktop.
   users.users.media = {
