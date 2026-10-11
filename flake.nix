@@ -22,6 +22,14 @@
   outputs = { self, nixpkgs, home-manager, zsh-fzf_tab, codex-cli-nix, opencode, whisrs, ... } @ inputs:
 {
     nixosConfigurations = {
+	    "beelink" = nixpkgs.lib.nixosSystem {
+	      specialArgs = {inherit inputs;};
+	      modules = [
+		./nixos/hosts/beelink
+		./nixos/modules/server-base.nix
+	      ];
+	    };
+
 	    "mele" = nixpkgs.lib.nixosSystem {
 	      specialArgs = {inherit inputs;};
 	      modules = [
