@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   home.username = "grant";
@@ -23,6 +23,7 @@
     waybar
     wf-recorder
     wl-clipboard
+    inputs.whisrs.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.fish.enable = true;
