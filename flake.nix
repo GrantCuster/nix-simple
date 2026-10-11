@@ -58,9 +58,8 @@
 	    "bosgame" = nixpkgs.lib.nixosSystem {
 	      specialArgs = {inherit inputs;};
 	      modules = [
-		./nixos/bosgame.nix
-		./nixos/configuration.nix
-		./nixos/jellyfin.nix
+		./nixos/hosts/bosgame
+		./nixos/modules/server-base.nix
 	      ];
 	    };
 
