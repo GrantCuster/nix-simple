@@ -1,5 +1,15 @@
 { pkgs, ... }:
 
+let
+  startJellyfinKiosk = pkgs.writeShellScript "start-jellyfin-kiosk" ''
+    until ${pkgs.curl}/bin/curl --fail --silent --output /dev/null \
+      http://127.0.0.1:8096/System/Info/Public; do
+      ${pkgs.coreutils}/bin/sleep 1
+    done
+
+    exec ${pkgs.jellyfin-media-player}/bin/jellyfin-desktop --tv --fullscreen
+  '';
+in
 {
   imports = [
     ../../bosgame.nix
@@ -82,8 +92,15 @@
     enable = true;
     settings.default_session = {
       user = "media";
-      command = "${pkgs.dbus}/bin/dbus-run-session -- ${pkgs.cage}/bin/cage -d -- ${pkgs.jellyfin-media-player}/bin/jellyfin-desktop";
+      command = "${pkgs.dbus}/bin/dbus-run-session -- ${pkgs.cage}/bin/cage -d -- ${startJellyfinKiosk}";
     };
+  };
+
+  # Starting the service and accepting HTTP connections are separate stages.
+  # Order greetd after Jellyfin, then let the wrapper above wait for readiness.
+  systemd.services.greetd = {
+    after = [ "jellyfin.service" ];
+    wants = [ "jellyfin.service" ];
   };
 
   environment.systemPackages = [ pkgs.jellyfin-media-player ];
