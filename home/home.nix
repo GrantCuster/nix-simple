@@ -201,6 +201,7 @@
       gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
+      iphotos = "icloud-photos-sync";
       hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
       laptop = "toggle-external-screens off";
       projector = "toggle-external-screens on";
@@ -303,6 +304,7 @@
       gp = "git push origin $(git rev-parse --abbrev-ref HEAD)";
       gP = "git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       gs = "git status";
+      iphotos = "icloud-photos-sync";
       hr = "home-manager --flake ~/nix#linux-x86 --extra-experimental-features \"nix-command flakes\" switch";
       laptop = "toggle-external-screens off";
       projector = "toggle-external-screens on";

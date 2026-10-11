@@ -61,6 +61,7 @@
 
     railway
     postgresql_18
+    curl
 
     inotify-tools
 
@@ -85,6 +86,7 @@
     (writeShellScriptBin "open-last-recording" (builtins.readFile ./scripts/open-last-recording.sh))
     (writeShellScriptBin "web-optimize-recording" (builtins.readFile ./scripts/web-optimize-recording.sh))
     (writeShellScriptBin "capture-kiosk" (builtins.readFile ./scripts/capture-kiosk.sh))
+    (writeShellScriptBin "submit-scan" (builtins.readFile ./scripts/submit-scan.sh))
     (writeShellScriptBin "toggle-external-screens" (builtins.readFile ./niri/scripts/toggle_external_screens.sh))
   ];
 

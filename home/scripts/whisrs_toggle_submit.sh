@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-target_output="DP-12"
+# Connector names change when displays are unplugged or reconnected. Resolve the
+# Dell by its EDID identity rather than relying on its current DP-* connector.
+dell_output() {
+  niri msg --json outputs | jq --raw-output '
+    to_entries[]
+    | select(
+        .value.make == "Dell Inc."
+        and .value.model == "DELL P2421"
+        and .value.serial == "CW19L23"
+      )
+    | .key
+  ' | head --lines=1
+}
+
 terminal_app_id="com.mitchellh.ghostty"
 
 notify_error() {
@@ -9,7 +22,10 @@ notify_error() {
 }
 
 leftmost_terminal_id() {
-  local workspace_id
+  local target_output workspace_id
+  target_output="$(dell_output)"
+  [[ -n "$target_output" ]] || return 1
+
   workspace_id="$(
     niri msg --json workspaces | jq --raw-output --exit-status \
       --arg output "$target_output" '
@@ -40,7 +56,7 @@ status="$(whisrs status 2>/dev/null || true)"
 case "$status" in
   idle)
     if ! terminal_id="$(leftmost_terminal_id)"; then
-      notify_error "No tiled Ghostty terminal on ASUS's active workspace"
+      notify_error "No tiled Ghostty terminal on Dell's active workspace"
       exit 1
     fi
 

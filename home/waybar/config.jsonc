@@ -1,5 +1,7 @@
 {
   // "layer": "bottom",
+  // Show this bar on every output except the Hisense TV.
+  "output": ["!DP-1", "!DP-11", "*"],
   "position": "top",
   "height": 24,
   // "margin-left": 760,

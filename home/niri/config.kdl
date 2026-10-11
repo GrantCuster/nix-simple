@@ -55,8 +55,8 @@ input {
 
     touch {
         // map-to-output "Seiko Epson Corporation EPSON PJ 0x01010101"
-        map-to-output "VIZIO, Inc VQD43R-1001 0x01010101"
-        calibration-matrix 1.0 0.0 0.0 0.0 1.0 0.0
+        map-to-output "Hisense Electric Co., Ltd. HISENSE 0x00000001"
+        calibration-matrix 1.0 0.0 0.005 0.0 1.0 0.005
     }
 
     trackpoint {
@@ -80,31 +80,43 @@ input {
 
 output "BOE NE135A1M-NY1 Unknown" {
   scale 1.875
-  position x=192 y=0
-}
-
-output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
-  position x=0 y=1024
+  // Laptop display at the top of the vertical stack.
+  position x=0 y=0
 }
 
 output "Dell Inc. DELL P2421 CW19L23" {
   position x=0 y=2104
 }
 
-output "Seiko Epson Corporation EPSON PJ 0x01010101" {
-  position x=0 y=3304
+// ASUS sits below the laptop and above the Dell.
+output "ASUSTek COMPUTER INC ASUS VA24E L8LMTF258494" {
+  position x=0 y=1024
 }
 
-// The Vizio sits directly below the ASUS monitor in the vertical display stack.
-output "VIZIO, Inc VQD43R-1001 0x01010101" {
-  mode "1920x1080"
-  position x=0 y=2104
+// The Hisense TV sits directly below the Dell monitor in the vertical display stack.
+output "Hisense Electric Co., Ltd. HISENSE 0x00000001" {
+  mode "3840x2160@60.000"
+  scale 1.5
+  position x=0 y=3304
   transform "180"
+
+  layout {
+    gaps 0
+    background-color "#1d2021"
+
+    border {
+      off
+    }
+
+    focus-ring {
+      off
+    }
+  }
 }
 
 // Persistent parking workspace for windows minimized into Arranger.
 workspace "minimized" {
-  open-on-output "VIZIO, Inc VQD43R-1001 0x01010101"
+  open-on-output "Hisense Electric Co., Ltd. HISENSE 0x00000001"
 }
 
 // You can configure outputs by their name, which you can find
@@ -340,10 +352,6 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     slowdown 0.5
-
-    workspace-switch {
-        off
-    }
 
     horizontal-view-movement {
         spring damping-ratio=1.0 stiffness=1600 epsilon=0.0001
@@ -581,17 +589,6 @@ binds {
     // Alt+Ctrl+8 { move-column-to-workspace 8; }
     // Alt+Ctrl+9 { move-column-to-workspace 9; }
 
-    // Alternatively, there are commands to move just a single window:
-    Alt+Shift+1 { move-window-to-workspace 1; }
-    Alt+Shift+2 { move-window-to-workspace 2; }
-    Alt+Shift+3 { move-window-to-workspace 3; }
-    Alt+Shift+4 { move-window-to-workspace 4; }
-    Alt+Shift+5 { move-window-to-workspace 5; }
-    Alt+Shift+6 { move-window-to-workspace 6; }
-    Alt+Shift+7 { move-window-to-workspace 7; }
-    Alt+Shift+8 { move-window-to-workspace 8; }
-    Alt+Shift+9 { move-window-to-workspace 9; }
-
     // Switches between workspace 1 and the most recent other workspace.
     Alt+Space repeat=false { spawn "sh" "-c" "~/.config/niri/scripts/toggle_workspace_1_recent.sh"; }
 
@@ -618,15 +615,10 @@ binds {
     Alt+Shift+F { fullscreen-window; }
     Alt+Ctrl+F { toggle-windowed-fullscreen; }
 
-    // While maximize-column leaves gaps and borders around the window,
-    // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
-    // This bind corresponds to normal window maximizing,
-    // e.g. by double-clicking on the titlebar.
-    Alt+M { maximize-window-to-edges; }
-
     Ctrl+Space { spawn-sh "whisrs toggle"; }
     Ctrl+Shift+Alt+Super+1 repeat=false { spawn "whisrs_toggle_submit"; }
     Ctrl+Shift+Alt+Super+2 repeat=false { spawn "whisrs_toggle_submit"; }
+    Ctrl+Shift+Alt+Super+3 repeat=false { spawn "submit-scan"; }
 
     Alt+C { center-column; }
 
@@ -667,9 +659,12 @@ binds {
     // Alt+Space       { switch-layout "next"; }
     // Alt+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    F9 { screenshot; }
+    Ctrl+F9 { screenshot-screen; }
+    Alt+F9 { screenshot-window; }
+    Alt+Shift+1 { spawn "sh" "-c" "~/.config/niri/scripts/capture_active_window_to_arranger.sh"; }
+    Alt+Shift+2 { spawn "sh" "-c" "~/.config/niri/scripts/capture_active_window_to_arranger.sh screenshot"; }
+    Alt+Shift+3 { spawn "sh" "-c" "~/.config/niri/scripts/capture_active_window_to_arranger.sh screenshot-screen"; }
 
     Alt+Shift+T { spawn "sh" "-c" "~/.config/niri/scripts/toggle_theme.sh"; }
     Alt+Ctrl+V { spawn "record-screen"; }
@@ -694,6 +689,5 @@ binds {
     Ctrl+Alt+Delete { quit; }
 
     // Toggle the connected non-laptop screens.
-    Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_external_screens.sh"; }
+    // Alt+Shift+P { spawn "sh" "-c" "~/.config/niri/scripts/toggle_external_screens.sh"; }
 }
-  mode "1920x1080"

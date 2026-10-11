@@ -40,6 +40,27 @@ enabled_external_outputs() {
   '
 }
 
+output_enabled() {
+  local output="$1"
+
+  outputs_json | jq -e --arg output "$output" '
+    .[$output].logical != null
+  ' >/dev/null
+}
+
+wait_for_output_enabled() {
+  local output="$1"
+
+  for _ in 1 2 3 4 5; do
+    if output_enabled "$output"; then
+      return 0
+    fi
+    sleep 0.2
+  done
+
+  return 1
+}
+
 save_outputs() {
   mkdir -p "$STATE_DIR"
   tmp_file="$(mktemp "$STATE_DIR/external-screens.XXXXXX")"
@@ -90,9 +111,19 @@ turn_on() {
     return 0
   fi
 
+  failed_outputs=()
   for output in "${outputs[@]}"; do
-    niri msg output "$output" on || true
+    if ! niri msg output "$output" on || ! wait_for_output_enabled "$output"; then
+      failed_outputs+=("$output")
+    fi
   done
+
+  if [ "${#failed_outputs[@]}" -gt 0 ]; then
+    notify-send "Displays" "Failed to turn on: ${failed_outputs[*]}" 2>/dev/null || true
+    printf 'Failed to turn on external screens: %s\n' "${failed_outputs[*]}" >&2
+    printf 'Check Niri logs: journalctl --user -b -u niri.service\n' >&2
+    return 1
+  fi
 
   notify-send "Displays" "External screens on: ${outputs[*]}" 2>/dev/null || true
 }

@@ -305,6 +305,12 @@
   programs.obs-studio.enableVirtualCamera = true;
   programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
     obs-backgroundremoval
+    (obs-shaderfilter.overrideAttrs (old: {
+      # OBS 32 deprecates the legacy button API used by shaderfilter 2.6.0.
+      # Upstream enables -Werror, so permit this compatibility warning.
+      NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "")
+        + " -Wno-error=deprecated-declarations";
+    }))
   ];
 
   # For npm install opencode from this comment https://github.com/sst/opencode/issues/462#issuecomment-3193740355
